@@ -1,9 +1,12 @@
 "use client";
 
-export function GlobalExpansionCard() {
-  return (
-    <section className="w-full bg-white py-12 px-4 md:px-8 lg:px-12 flex justify-center">
-      <div className="card relative grid w-[320px] min-h-[180px] auto-rows-[80px_1fr] overflow-hidden rounded-[10px] font-sans text-white shadow-[0_10px_20px_rgba(175,35,36,0.2)] border border-white/10">
+type Props = {
+  inline?: boolean;
+};
+
+export function GlobalExpansionCard({ inline = false }: Props) {
+  const CardContent = (
+    <div className="card relative grid w-[320px] min-h-[180px] auto-rows-[80px_1fr] overflow-hidden rounded-[10px] font-sans text-white shadow-[0_10px_20px_rgba(175,35,36,0.2)] border border-white/10">
         <style>{`
           .card:hover .img-section { transform: translateY(1em); }
         `}</style>
@@ -38,6 +41,15 @@ export function GlobalExpansionCard() {
           </div>
         </div>
       </div>
+  );
+
+  if (inline) {
+    return CardContent;
+  }
+
+  return (
+    <section className="w-full bg-white py-12 px-4 md:px-8 lg:px-12 flex justify-center">
+      {CardContent}
     </section>
   );
 }
