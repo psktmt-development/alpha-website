@@ -1,42 +1,25 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
+import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 
 export function FounderSection() {
   const founderImageUrl = "/founder.JPG";
   const sectionRef = useRef<HTMLElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
 
-  // More visible parallax effects
-  const textY = useTransform(scrollYProgress, [0, 1], [0, -200]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.6, 1], [1, 1, 0]);
+  // Subtle parallax for text; keep image mostly fixed
+  const textY = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const textOpacity = useTransform(scrollYProgress, [0, 0.7, 1], [1, 1, 0.9]);
   
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, -300]);
-  const imageOpacity = useTransform(scrollYProgress, [0, 0.7, 1], [1, 1, 0]);
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 0.7]);
-
-  useEffect(() => {
-    if (!textRef.current || !cardRef.current) return;
-    gsap.fromTo(
-      textRef.current,
-      { opacity: 0, y: 40 },
-      { opacity: 1, y: 0, duration: 0.9, ease: "power2.out" }
-    );
-    gsap.fromTo(
-      cardRef.current,
-      { opacity: 0, y: 60, scale: 0.92 },
-      { opacity: 1, y: 0, scale: 1, duration: 1, ease: "power2.out", delay: 0.1 }
-    );
-  }, []);
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, -10]);
+  const imageOpacity = useTransform(scrollYProgress, [0, 1], [1, 1]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1]);
 
   return (
     <section 
@@ -46,7 +29,6 @@ export function FounderSection() {
       <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
         {/* Left Section - Text Content */}
         <motion.div 
-          ref={textRef}
           className="flex flex-col space-y-6 -mt-8 lg:-mt-12"
           style={{ y: textY, opacity: textOpacity }}
         >
@@ -82,7 +64,6 @@ export function FounderSection() {
 
         {/* Right Section - 3D Card with Founder Image */}
         <motion.div 
-          ref={cardRef}
           className="flex justify-center lg:justify-start -mt-12 lg:-mt-8 lg:ml-24"
           style={{ y: imageY, opacity: imageOpacity, scale: imageScale }}
         >

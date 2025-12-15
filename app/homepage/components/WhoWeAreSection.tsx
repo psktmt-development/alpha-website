@@ -1,13 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useState } from "react";
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 
 export function WhoWeAreSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const leftRef = useRef<HTMLDivElement>(null);
-  const rightRef = useRef<HTMLDivElement>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -23,42 +21,47 @@ export function WhoWeAreSection() {
   const rightOpacity = useTransform(scrollYProgress, [0, 0.25, 0.5, 1], [0, 0.4, 1, 1]);
   const rightScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.75, 1, 1]);
 
-  useEffect(() => {
-    const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
-    if (leftRef.current) {
-      tl.fromTo(
-        leftRef.current,
-        { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 0.8 }
-      );
-    }
-    if (rightRef.current) {
-      tl.fromTo(
-        rightRef.current,
-        { opacity: 0, y: 50, scale: 0.95 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.9 },
-        "-=0.4"
-      );
-    }
-  }, []);
-
   const alphaItems = [
-    { letter: "A", text: "Authentic Relationships" },
-    { letter: "L", text: "Legacy & Influence" },
-    { letter: "P", text: "Purposeful Stimulations" },
-    { letter: "H", text: "Holistic Intergenerational Growth" },
-    { letter: "A", text: "Aspirations & Individualism" },
+    {
+      letter: "A",
+      title: "Authentic Relationships",
+      description:
+        "Genuine bonds rooted in trust, respect, and shared values.",
+    },
+    {
+      letter: "L",
+      title: "Legacy & Influence",
+      description:
+        "A platform to shape industries and inspire generations.",
+    },
+    {
+      letter: "P",
+      title: "Purposeful Stimulations",
+      description:
+        "Curated experiences and conversations that ignite curiosity and challenge perspectives.",
+    },
+    {
+      letter: "H",
+      title: "Holistic Intergenerational Growth",
+      description:
+        "Insights and exchanges that blend wisdom and fresh thinking across age groups.",
+    },
+    {
+      letter: "A",
+      title: "Aspirations & Individualism",
+      description:
+        "A space that honors your unique journey, ambitions, and identity.",
+    },
   ];
 
   return (
     <section
       ref={sectionRef}
-      className="w-full min-h-[70vh] bg-[#FAFAFA] py-16 px-4 md:px-8 lg:px-16"
+      className="w-full min-h-[70vh] bg-[#FAFAFA] py-6 md:py-8 lg:py-10 px-4 md:px-8 lg:px-16"
     >
       <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start">
         {/* Left Section - Who We Are */}
         <motion.div
-          ref={leftRef}
           className="flex flex-col space-y-3"
           style={{ y: leftY, opacity: leftOpacity, scale: leftScale }}
         >
@@ -74,7 +77,6 @@ export function WhoWeAreSection() {
 
         {/* Right Section - The Alpha Advantage */}
         <motion.div
-          ref={rightRef}
           className="flex flex-col space-y-2"
           style={{ y: rightY, opacity: rightOpacity, scale: rightScale }}
         >
@@ -90,14 +92,33 @@ export function WhoWeAreSection() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.4, delay: index * 0.08 }}
-                className="bg-gray-100 rounded-lg p-2.5 md:p-3 hover:bg-gray-200 transition-colors duration-300"
+                className="bg-gray-100 rounded-lg px-2.5 py-2 md:px-3 md:py-2.5 hover:bg-gray-200 transition-colors duration-300 cursor-pointer"
+                onClick={() =>
+                  setOpenIndex((current) => (current === index ? null : index))
+                }
               >
                 <div className="flex items-center gap-3">
-                  <span className="text-gray-900 font-bold text-base">►</span>
+                  <span className="text-gray-900 font-bold text-base">
+                    {openIndex === index ? "▼" : "►"}
+                  </span>
                   <span className="text-gray-900 font-semibold text-sm md:text-base">
-                    <span className="font-bold">{item.letter}</span> - {item.text}
+                    <span className="font-bold">{item.letter}</span> - {item.title}
                   </span>
                 </div>
+                <AnimatePresence initial={false}>
+                  {openIndex === index && (
+                    <motion.p
+                      key="content"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25 }}
+                      className="mt-2 pl-7 pr-1 text-xs md:text-sm text-gray-700 leading-relaxed overflow-hidden"
+                    >
+                      {item.description}
+                    </motion.p>
+                  )}
+                </AnimatePresence>
               </motion.div>
             ))}
           </div>
