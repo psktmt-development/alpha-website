@@ -4,6 +4,8 @@ import { WhoWeAreSection } from "./homepage/components/WhoWeAreSection";
 import { AlphaCircleMaskSection } from "./homepage/components/AlphaCircleMaskSection";
 import { AlphaAdvantageMarquee } from "./homepage/components/AlphaAdvantageMarquee";
 import { AlphaPillarsHover } from "./homepage/components/AlphaPillarsHover";
+import { GlobalExpansionCard } from "./homepage/components/GlobalExpansionCard";
+import { AlphaLogosMarquee } from "./homepage/components/AlphaLogosMarquee";
 
 export default function Home() {
   return (
@@ -14,6 +16,8 @@ export default function Home() {
       <AlphaCircleMaskSection />
       <AlphaAdvantageMarquee />
       <AlphaPillarsHover />
+      <GlobalExpansionCard />
+      <AlphaLogosMarquee />
     </main>
   );
 }

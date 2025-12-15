@@ -65,7 +65,7 @@ export function WhoWeAreSection() {
           className="flex flex-col space-y-3"
           style={{ y: leftY, opacity: leftOpacity, scale: leftScale }}
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#8B4513] leading-tight">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#af2324] leading-tight">
             Who We Are
           </h2>
           <p className="text-base md:text-lg text-gray-900 leading-relaxed font-sans">

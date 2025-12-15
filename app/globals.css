@@ -4,6 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --brand: #af2324;
+}
 @layer base {
   * {
     font-family: 'Bodoni Moda', serif;

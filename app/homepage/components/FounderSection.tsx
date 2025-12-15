@@ -33,7 +33,7 @@ export function FounderSection() {
           style={{ y: textY, opacity: textOpacity }}
         >
           {/* Small red heading */}
-          <h2 className="text-red-600 text-sm font-semibold tracking-wider uppercase">
+          <h2 className="text-[#af2324] text-sm font-semibold tracking-wider uppercase">
             THE ALPHA CIRCLE
           </h2>
 
@@ -56,9 +56,9 @@ export function FounderSection() {
           </div>
 
           {/* Founder attribution */}
-          <p className="text-amber-800 text-base font-medium mt-8">
+          <p className="text-[#af2324] text-base font-medium mt-8">
             — Dr. Pulluri Srikanth<br />
-            <span className="text-gray-600">Founder, The Alpha Circle</span>
+            <span className="text-[#af2324]">Founder, The Alpha Circle</span>
           </p>
         </motion.div>
 
