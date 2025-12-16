@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { Suspense, useRef, useState, useEffect } from "react";
 import { ParallaxSection } from "./ParallaxSection";
+import dynamic from "next/dynamic";
 
 type Difference = {
   id: string;
@@ -98,6 +99,19 @@ const DifferenceCard = React.memo(function DifferenceCard({
 });
 DifferenceCard.displayName = "DifferenceCard";
 
+// Dynamically import the 3D model component with SSR disabled
+const Model3D = dynamic(
+  () => import("./Model3D").then((mod) => mod.Model3D),
+  { 
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-full flex items-center justify-center">
+        <div className="text-gray-400">Loading 3D Model...</div>
+      </div>
+    )
+  }
+);
+
 export function AlphaAdvantageMarquee() {
   return (
     <ParallaxSection
@@ -138,9 +152,10 @@ export function AlphaAdvantageMarquee() {
           <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-white to-transparent" />
         </div>
 
-        {/* Embedded Instagram reel */}
-        <div className="mt-10 flex justify-center">
-          <div className="w-full max-w-3xl overflow-hidden rounded-xl border border-neutral-200 shadow-sm bg-white">
+        {/* Instagram reel and 3D Model side by side */}
+        <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          {/* Instagram reel - Left */}
+          <div className="w-full overflow-hidden rounded-xl border border-neutral-200 shadow-sm bg-white">
             <iframe
               src="https://www.instagram.com/reel/DIBx9-fSoIv/embed"
               allowtransparency="true"
@@ -148,6 +163,13 @@ export function AlphaAdvantageMarquee() {
               scrolling="no"
               className="w-full h-[700px]"
             />
+          </div>
+
+          {/* 3D Model - Right */}
+          <div className="w-full h-[700px] flex items-center justify-center">
+            <div className="w-full h-full max-w-[600px] max-h-[600px] min-h-[400px]">
+              <Model3D stlUrl="/The_Alpha_Circle (1).stl" color="#D85A5B" />
+            </div>
           </div>
         </div>
       </div>

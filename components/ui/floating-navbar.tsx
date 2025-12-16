@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Link from "next/link";
 import {
   motion,
@@ -21,85 +21,58 @@ export const FloatingNav = ({
   }[];
   className?: string;
 }) => {
+  const { scrollY } = useScroll();
   const [visible, setVisible] = useState(true);
-  const lastScrollY = React.useRef(0);
-  const ticking = React.useRef(false);
+  const lastScrollY = useRef(0);
 
-  // Initialize visibility based on scroll position
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const currentScroll = window.scrollY;
-      lastScrollY.current = currentScroll;
-      setVisible(currentScroll < 50);
+  useMotionValueEvent(scrollY, "change", (current) => {
+    // Calculate direction: positive is down, negative is up
+    const direction = current - lastScrollY.current;
+
+    if (current < 50) {
+      // Always show at the top
+      setVisible(true);
+    } else if (direction > 10) {
+      // Scrolling down significantly
+      setVisible(false);
+    } else if (direction < -10) {
+      // Scrolling up significantly
+      setVisible(true);
     }
 
-    // Direct scroll event listener with throttling
-    const handleScroll = () => {
-      if (!ticking.current) {
-        window.requestAnimationFrame(() => {
-          const currentScroll = window.scrollY;
-          const previous = lastScrollY.current;
-          
-          // Always show at the top (first 50px)
-          if (currentScroll < 50) {
-            setVisible(true);
-          } else {
-            // Determine scroll direction - be more aggressive about hiding
-            if (currentScroll > previous) {
-              // Scrolling DOWN - hide navbar immediately
-              setVisible(false);
-            } else if (currentScroll < previous) {
-              // Scrolling UP - show navbar immediately
-              setVisible(true);
-            } else {
-              // If scroll position hasn't changed, keep it hidden if we were scrolling down
-              // This ensures it stays hidden when scroll stops after scrolling down
-              if (currentScroll > 50) {
-                setVisible(false);
-              }
-            }
-          }
-          
-          lastScrollY.current = currentScroll;
-          ticking.current = false;
-        });
-        ticking.current = true;
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    lastScrollY.current = current;
+  });
 
   return (
-    <motion.div
-      initial={false}
-      animate={{
-        y: visible ? 0 : -100,
-        opacity: visible ? 1 : 0,
-      }}
-      transition={{
-        duration: 0.3,
-        ease: "easeInOut",
-      }}
-      style={{
-        pointerEvents: visible ? "auto" : "none",
-      }}
-      className={cn(
-        "flex max-w-fit fixed top-10 inset-x-0 mx-auto border-0 rounded-full bg-transparent pr-2 pl-8 py-2 items-center justify-center space-x-4 z-[9999]",
-        className
-      )}
-    >
+    <AnimatePresence mode="wait">
+      <motion.div
+        initial={{
+          opacity: 1,
+          y: 0,
+        }}
+        animate={{
+          y: visible ? 0 : -100,
+          opacity: visible ? 1 : 0,
+        }}
+        transition={{
+          duration: 0.2,
+          ease: "easeInOut",
+        }}
+        className={cn(
+          "flex max-w-fit fixed top-10 inset-x-0 mx-auto border border-gray-200 rounded-full bg-white/90 backdrop-blur-md shadow-lg pr-2 pl-8 py-2 items-center justify-center space-x-4 z-[9999]",
+          className
+        )}
+      >
         {navItems.map((navItem: any, idx: number) => (
           <Link
             key={`link=${idx}`}
             href={navItem.link}
-            className={cn(
-              "relative items-center flex space-x-1 text-black font-sans uppercase hover:text-[#af2324] transition-colors"
-            )}
+            className="relative items-center flex space-x-1 text-black font-sans uppercase hover:text-[#af2324] transition-colors"
           >
             <span className="block sm:hidden">{navItem.icon}</span>
-            <span className="hidden sm:block text-sm font-sans uppercase tracking-wide">{navItem.name.toUpperCase()}</span>
+            <span className="hidden sm:block text-sm font-sans uppercase tracking-wide">
+              {navItem.name.toUpperCase()}
+            </span>
           </Link>
         ))}
         <Link
@@ -109,7 +82,7 @@ export const FloatingNav = ({
           <span>Join the Circle</span>
           <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-[#af2324] to-transparent h-px" />
         </Link>
-    </motion.div>
+      </motion.div>
+    </AnimatePresence>
   );
 };
-

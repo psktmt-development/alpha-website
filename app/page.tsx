@@ -7,7 +7,6 @@ import { AlphaPillarsHover } from "./homepage/components/AlphaPillarsHover";
 import { AlphaLogosMarquee } from "./homepage/components/AlphaLogosMarquee";
 import { GlobalExpansionBento } from "./homepage/components/GlobalExpansionBento";
 import { ContactSection } from "./homepage/components/ContactSection";
-import { GalleryParallax } from "./gallery/components/GalleryParallax";
 
 
 export default function Home() {
@@ -16,10 +15,6 @@ export default function Home() {
       <DirectionAwareHoverDemo />
       <FounderSection />
       <WhoWeAreSection />
-
-      {/* Parallax Gallery Section */}
-      <GalleryParallax />
-
       <AlphaCircleMaskSection />
       <AlphaAdvantageMarquee />
       <AlphaPillarsHover />
