@@ -24,7 +24,7 @@ export default function Home() {
       <AlphaAdvantageMarquee />
       <AlphaPillarsHover />
       <GlobalExpansionBento />
-      <AlphaLogosMarquee />
+      {/* <AlphaLogosMarquee /> */}
       <ContactSection />
     </main>
   );

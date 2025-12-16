@@ -1,216 +1,130 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const alphaData = [
+  {
+    letter: "A",
+    title: "Authentic Relationships",
+    description: "Genuine bonds rooted in trust. We move beyond transaction to build a brotherhood of integrity.",
+  },
+  {
+    letter: "L",
+    title: "Legacy & Influence",
+    description: "A platform to shape industries. Your work today is the foundation for the empires of tomorrow.",
+  },
+  {
+    letter: "P",
+    title: "Purposeful Stimulations",
+    description: "Curated experiences that ignite curiosity and challenge perspectives to unlock potential.",
+  },
+  {
+    letter: "H",
+    title: "Holistic Growth",
+    description: "Bridging the gap between tradition and innovation through intergenerational wisdom exchange.",
+  },
+  {
+    letter: "A",
+    title: "Aspirations",
+    description: "Celebrating individualism while fostering a collective ambition for greatness.",
+  },
+];
 
 export function WhoWeAreSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-  const [hasScrollLocked, setHasScrollLocked] = useState(false);
-  const [autoOpenUntil, setAutoOpenUntil] = useState<number>(-1);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  // Subtle parallax without hiding content
-  const leftY = useTransform(scrollYProgress, [0, 1], [120, 0]);
-  const leftOpacity = 1;
-  const leftScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 1]);
-  
-  const rightY = useTransform(scrollYProgress, [0, 1], [140, 0]);
-  const rightOpacity = 1;
-  const rightScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 1]);
-
-  // Scroll lock + scroll-controlled auto-open:
-  // When this section is mostly in view, lock body scroll and
-  // use the user's scroll wheel to step through each dropdown.
-  // After all are open, unlock scroll and move to the next section.
+  // Auto-rotate every 3 seconds
+  // The dependency array [activeIndex] ensures the timer resets if a user manually clicks a card,
+  // giving them time to read before it switches again.
   useEffect(() => {
-    const sectionEl = sectionRef.current;
-    if (!sectionEl || hasScrollLocked) return;
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % alphaData.length);
+    }, 3000);
 
-    let previousOverflow = document.body.style.overflow;
-    let wheelAttached = false;
-    let completed = false;
-
-    const handleWheel = (event: WheelEvent) => {
-      if (!sectionRef.current) return;
-      if (event.deltaY === 0) return;
-
-      // While locked, prevent page scroll
-      event.preventDefault();
-
-      // Scroll down: open next
-      if (event.deltaY > 0) {
-        setAutoOpenUntil((prev) => {
-          const total = alphaItems.length;
-          if (prev < total - 1) {
-            return prev + 1;
-          }
-
-          // All open, allow transition to next section once
-          if (!completed) {
-            completed = true;
-            const nextSection = sectionEl.nextElementSibling as HTMLElement | null;
-            document.body.style.overflow = previousOverflow;
-            if (wheelAttached) {
-              window.removeEventListener("wheel", handleWheel);
-              wheelAttached = false;
-            }
-            if (nextSection) {
-              nextSection.scrollIntoView({ behavior: "smooth", block: "start" });
-            }
-          }
-          return prev;
-        });
-      } else if (event.deltaY < 0) {
-        // Scroll up: optionally allow closing steps, but don't go below 0
-        setAutoOpenUntil((prev) => Math.max(0, prev - 1));
-      }
-    };
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (!entry.isIntersecting || entry.intersectionRatio < 0.85) return;
-
-        setHasScrollLocked(true);
-        previousOverflow = document.body.style.overflow;
-        document.body.style.overflow = "hidden";
-
-        // Start with first item open
-        setAutoOpenUntil(0);
-
-        window.addEventListener("wheel", handleWheel, { passive: false });
-        wheelAttached = true;
-      },
-      {
-        threshold: 0.85,
-      }
-    );
-
-    observer.observe(sectionEl);
-
-    return () => {
-      observer.disconnect();
-      if (wheelAttached) {
-        window.removeEventListener("wheel", handleWheel);
-      }
-      document.body.style.overflow = previousOverflow;
-    };
-  }, [hasScrollLocked]);
-
-  const alphaItems = [
-    {
-      letter: "A",
-      title: "Authentic Relationships",
-      description:
-        "Genuine bonds rooted in trust, respect, and shared values.",
-    },
-    {
-      letter: "L",
-      title: "Legacy & Influence",
-      description:
-        "A platform to shape industries and inspire generations.",
-    },
-    {
-      letter: "P",
-      title: "Purposeful Stimulations",
-      description:
-        "Curated experiences and conversations that ignite curiosity and challenge perspectives.",
-    },
-    {
-      letter: "H",
-      title: "Holistic Intergenerational Growth",
-      description:
-        "Insights and exchanges that blend wisdom and fresh thinking across age groups.",
-    },
-    {
-      letter: "A",
-      title: "Aspirations & Individualism",
-      description:
-        "A space that honors your unique journey, ambitions, and identity.",
-    },
-  ];
+    return () => clearInterval(timer);
+  }, [activeIndex]);
 
   return (
-    <section
-      id="about"
-      ref={sectionRef}
-      className="w-full min-h-[70vh] bg-[#FAFAFA] py-6 md:py-8 lg:py-10 px-4 md:px-8 lg:px-16 scroll-mt-24"
-    >
-      <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start">
-        {/* Left Section - Who We Are */}
-        <motion.div
-          className="flex flex-col space-y-3"
-          style={{ y: leftY, opacity: leftOpacity, scale: leftScale }}
-        >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#af2324] leading-tight">
-            Who We Are
-          </h2>
-          <p className="text-base md:text-lg text-gray-900 leading-relaxed font-sans">
-            A Global Collective of Leaders and Legacy Builders. The Alpha Circle connects
-            high-impact individuals from family businesses, emerging ventures, and top
-            industrial circles — across sectors and borders.
-          </p>
-        </motion.div>
-
-        {/* Right Section - The Alpha Advantage */}
-        <motion.div
-          className="flex flex-col space-y-2"
-          style={{ y: rightY, opacity: rightOpacity, scale: rightScale }}
-        >
-          <h3 className="text-2xl md:text-3xl font-sans font-bold text-gray-900 mb-2">
-            The Alpha Advantage
-          </h3>
-
-          <div className="flex flex-col space-y-1.5">
-            {alphaItems.map((item, index) => {
-              const isOpen = index <= autoOpenUntil || openIndex === index;
-
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.4, delay: index * 0.08 }}
-                  className="bg-gray-100 rounded-lg px-2.5 py-2 md:px-3 md:py-2.5 hover:bg-gray-200 transition-colors duration-300 cursor-pointer"
-                  onClick={() =>
-                    setOpenIndex((current) => (current === index ? null : index))
-                  }
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="text-gray-900 font-bold text-base">
-                      {isOpen ? "▼" : "►"}
-                    </span>
-                    <span className="text-gray-900 font-semibold text-sm md:text-base">
-                      <span className="font-bold">{item.letter}</span> - {item.title}
-                    </span>
-                  </div>
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.p
-                        key="content"
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25 }}
-                        className="mt-2 pl-7 pr-1 text-xs md:text-sm text-gray-700 leading-relaxed overflow-hidden"
-                      >
-                        {item.description}
-                      </motion.p>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              );
-            })}
+    <section className="w-full bg-white py-16 px-4 md:px-8 lg:px-12 flex flex-col justify-center">
+      <div className="max-w-7xl w-full mx-auto space-y-8">
+        {/* Header - Compact */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b-2 border-[#af2324]/10 pb-6">
+          <div>
+            <h2 className="text-4xl md:text-5xl font-serif text-[#000000] leading-tight">
+              Who We Are
+            </h2>
+            <p className="mt-2 text-[#af2324]/80 font-medium tracking-wide uppercase text-sm">
+              The Alpha Collective
+            </p>
           </div>
-        </motion.div>
+          <p className="max-w-md text-gray-600 text-sm md:text-base leading-relaxed text-right md:text-right text-left">
+            Connecting high-impact individuals from family businesses and emerging ventures.
+          </p>
+        </div>
+
+        {/* Interactive Deck Layout */}
+        <div className="h-[500px] md:h-[400px] w-full flex flex-col md:flex-row gap-2">
+          {alphaData.map((item, index) => {
+            const isActive = activeIndex === index;
+
+            return (
+              <motion.div
+                key={index}
+                layout
+                onClick={() => setActiveIndex(index)}
+                className={`relative overflow-hidden cursor-pointer rounded-lg transition-colors duration-500 ease-in-out ${
+                  isActive
+                    ? "flex-[3] bg-white border-2 border-[#af2324]"
+                    : "flex-[1] bg-[#af2324] border-2 border-transparent hover:border-[#961e1f]"
+                }`}
+                transition={{ type: "spring", stiffness: 200, damping: 25 }}
+              >
+                {/* Active State Content */}
+                {isActive && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.2, duration: 0.3 }}
+                    className="absolute inset-0 p-6 md:p-10 flex flex-col justify-between"
+                  >
+                    <div className="flex justify-between items-start">
+                      <span className="text-8xl font-serif font-bold text-[#af2324]/5 select-none absolute top-4 right-4 leading-none">
+                        {item.letter}
+                      </span>
+                      <div className="z-10 bg-[#af2324] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">
+                        0{index + 1}
+                      </div>
+                    </div>
+                    
+                    <div className="relative z-10 max-w-lg mt-auto">
+                    <h3 className="text-2xl md:text-3xl font-serif text-[#af2324] mb-3">
+                      {item.title}
+                    </h3>
+                      <p className="text-gray-700 text-sm md:text-base leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* Inactive State Content */}
+                {!isActive && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <motion.span
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      className="text-4xl md:text-5xl font-serif font-bold text-black"
+                    >
+                      {item.letter}
+                    </motion.span>
+                  </div>
+                )}
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
 }
-
