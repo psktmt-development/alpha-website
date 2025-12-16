@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { ParallaxSection } from "./ParallaxSection";
 
 const logos: string[] = [
   "/all/The-Alpha-Circle-01.png",
@@ -87,7 +88,10 @@ export function AlphaLogosMarquee() {
   const prev = () => setStart((prev) => (prev - 1 + logos.length) % logos.length);
 
   return (
-    <section className="w-full bg-white py-12 px-4 md:px-8 lg:px-12">
+    <ParallaxSection
+      id="gallery"
+      className="w-full bg-white py-12 px-4 md:px-8 lg:px-12"
+    >
       <div className="max-w-7xl mx-auto space-y-4">
         <div className="flex items-center justify-between">
           <div>
@@ -137,7 +141,7 @@ export function AlphaLogosMarquee() {
           </div>
         </div>
       </div>
-    </section>
+    </ParallaxSection>
   );
 }
 

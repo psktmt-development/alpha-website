@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { ParallaxSection } from "./ParallaxSection";
 
 type Difference = {
   id: string;
@@ -88,10 +89,10 @@ const DifferenceCard = React.memo(function DifferenceCard({
   body,
 }: Pick<Difference, "title" | "body">) {
   return (
-    <div className="w-56 h-full flex flex-col rounded-xl border border-neutral-200 bg-white p-4 transition-all hover:border-red-600 hover:shadow-lg">
+    <div className="w-64 h-full flex flex-col rounded-xl border border-neutral-200 bg-white p-5 transition-all hover:border-red-600 hover:shadow-lg">
       <div className="h-1 w-8 rounded-full bg-red-600" />
-      <h3 className="mt-4 text-sm font-semibold text-black">{title}</h3>
-      <p className="mt-2 text-xs leading-relaxed text-neutral-600">{body}</p>
+      <h3 className="mt-4 text-base font-semibold text-black">{title}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-neutral-600">{body}</p>
     </div>
   );
 });
@@ -99,7 +100,10 @@ DifferenceCard.displayName = "DifferenceCard";
 
 export function AlphaAdvantageMarquee() {
   return (
-    <section className="w-full bg-white py-10 px-4 md:px-8 lg:px-12">
+    <ParallaxSection
+      id="blog"
+      className="w-full bg-white py-10 px-4 md:px-8 lg:px-12"
+    >
       <style>{`
         @keyframes marquee {
           from { transform: translateX(0); }
@@ -119,8 +123,8 @@ export function AlphaAdvantageMarquee() {
 
       <div className="w-full max-w-6xl mx-auto space-y-6">
         <div className="text-center space-y-2">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900">The Alpha Advantage</h2>
-          <p className="text-neutral-500 text-sm md:text-base">Where Visionaries Align. Globally.</p>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900">The Alpha Advantage</h2>
+          <p className="text-neutral-500 text-base md:text-lg">Where Visionaries Align. Globally.</p>
         </div>
 
         <div className="relative mx-auto w-full max-w-5xl overflow-hidden py-6">
@@ -147,7 +151,7 @@ export function AlphaAdvantageMarquee() {
           </div>
         </div>
       </div>
-    </section>
+    </ParallaxSection>
   );
 }
 

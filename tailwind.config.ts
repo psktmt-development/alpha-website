@@ -11,6 +11,9 @@ const config: Config = {
       fontFamily: {
         'bodoni': ['Bodoni Moda', 'serif'],
       },
+      colors: {
+        brand: "#af2324",
+      },
     },
   },
   plugins: [],

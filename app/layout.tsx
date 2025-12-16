@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Navbar } from "./homepage/components/Navbar";
 
 export const metadata: Metadata = {
   title: "Alpha Web",
@@ -13,7 +14,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full">
-      <body className="h-full m-0 p-0">{children}</body>
+      <body className="h-full m-0 p-0 bg-white text-gray-900 antialiased">
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }

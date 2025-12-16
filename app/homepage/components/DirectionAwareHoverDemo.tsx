@@ -36,7 +36,11 @@ export function DirectionAwareHoverDemo() {
   }, [images.length]);
 
   return (
-    <div ref={containerRef} className="h-screen w-screen relative overflow-hidden">
+    <div
+      id="home"
+      ref={containerRef}
+      className="h-screen w-screen relative overflow-hidden scroll-mt-24"
+    >
       <AnimatePresence mode="wait">
         <motion.div
           key={currentImage}

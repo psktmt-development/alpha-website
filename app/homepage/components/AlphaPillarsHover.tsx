@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { GlobalExpansionCard } from "./GlobalExpansionCard";
+import { ParallaxSection } from "./ParallaxSection";
 
 type Pillar = {
   title: string;
@@ -52,14 +53,14 @@ function PillarCard({
   return (
     <div
       className={cn(
-        "relative h-full w-full rounded-2xl border border-neutral-200 bg-white p-4 transition-all duration-300",
+        "relative h-full w-full rounded-2xl border border-neutral-200 bg-white p-5 transition-all duration-300",
         "group-hover:border-[#af2324] group-hover:shadow-lg",
         className
       )}
     >
       <div className="h-1 w-8 rounded-full bg-[#af2324]" />
-      <h3 className="mt-4 text-sm font-semibold text-gray-900">{title}</h3>
-      <p className="mt-2 text-xs leading-relaxed text-neutral-600">{description}</p>
+      <h3 className="mt-4 text-base font-semibold text-gray-900">{title}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-neutral-600">{description}</p>
     </div>
   );
 }
@@ -68,13 +69,16 @@ export function AlphaPillarsHover() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section className="w-full bg-white py-12 px-4 md:px-8 lg:px-12">
+    <ParallaxSection
+      id="membership"
+      className="w-full bg-white py-12 px-4 md:px-8 lg:px-12"
+    >
       <div className="max-w-6xl mx-auto space-y-8">
         <div className="text-center space-y-2">
-          <h2 className="text-3xl md:text-5xl font-serif font-bold text-gray-900">
+          <h2 className="text-4xl md:text-6xl font-serif font-bold text-gray-900">
             The Alpha Circle
           </h2>
-          <p className="text-[#af2324] text-lg md:text-xl font-semibold">Our Pillars</p>
+          <p className="text-[#af2324] text-xl md:text-2xl font-semibold">Our Pillars</p>
         </div>
 
         <div className="grid grid-cols-1 xl:grid-cols-[2fr_1fr] gap-8 items-start">
@@ -113,7 +117,7 @@ export function AlphaPillarsHover() {
           </div>
         </div>
       </div>
-    </section>
+    </ParallaxSection>
   );
 }
 

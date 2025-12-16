@@ -5,6 +5,8 @@ import { AlphaCircleMaskSection } from "./homepage/components/AlphaCircleMaskSec
 import { AlphaAdvantageMarquee } from "./homepage/components/AlphaAdvantageMarquee";
 import { AlphaPillarsHover } from "./homepage/components/AlphaPillarsHover";
 import { AlphaLogosMarquee } from "./homepage/components/AlphaLogosMarquee";
+import { GlobalExpansionBento } from "./homepage/components/GlobalExpansionBento";
+import { ContactSection } from "./homepage/components/ContactSection";
 
 export default function Home() {
   return (
@@ -15,7 +17,9 @@ export default function Home() {
       <AlphaCircleMaskSection />
       <AlphaAdvantageMarquee />
       <AlphaPillarsHover />
+      <GlobalExpansionBento />
       <AlphaLogosMarquee />
+      <ContactSection />
     </main>
   );
 }
