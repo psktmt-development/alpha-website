@@ -30,7 +30,7 @@ export const FloatingNav = ({
     if (typeof window !== "undefined") {
       const currentScroll = window.scrollY;
       lastScrollY.current = currentScroll;
-      setVisible(currentScroll < 50);
+      setVisible(currentScroll < 10);
     }
 
     // Direct scroll event listener with throttling
@@ -40,24 +40,19 @@ export const FloatingNav = ({
           const currentScroll = window.scrollY;
           const previous = lastScrollY.current;
           
-          // Always show at the top (first 50px)
-          if (currentScroll < 50) {
+          // Always show at the very top (first 10px)
+          if (currentScroll < 10) {
             setVisible(true);
           } else {
-            // Determine scroll direction - be more aggressive about hiding
+            // Determine scroll direction
             if (currentScroll > previous) {
-              // Scrolling DOWN - hide navbar immediately
+              // Scrolling DOWN - hide navbar
               setVisible(false);
             } else if (currentScroll < previous) {
-              // Scrolling UP - show navbar immediately
+              // Scrolling UP - show navbar
               setVisible(true);
-            } else {
-              // If scroll position hasn't changed, keep it hidden if we were scrolling down
-              // This ensures it stays hidden when scroll stops after scrolling down
-              if (currentScroll > 50) {
-                setVisible(false);
-              }
             }
+            // If equal (no scroll change), maintain current state
           }
           
           lastScrollY.current = currentScroll;
@@ -86,7 +81,7 @@ export const FloatingNav = ({
         pointerEvents: visible ? "auto" : "none",
       }}
       className={cn(
-        "flex max-w-fit fixed top-10 inset-x-0 mx-auto border-0 rounded-full bg-transparent pr-2 pl-8 py-2 items-center justify-center space-x-4 z-[9999]",
+        "flex max-w-fit fixed top-10 inset-x-0 mx-auto border border-black/10 rounded-full bg-white/80 backdrop-blur-md shadow-lg pr-2 pl-8 py-2 items-center justify-center space-x-4 z-[9999]",
         className
       )}
     >

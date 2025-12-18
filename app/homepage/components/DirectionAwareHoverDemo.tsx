@@ -59,12 +59,20 @@ export function DirectionAwareHoverDemo() {
             <motion.div 
               className="flex flex-col items-center justify-center text-center w-full max-w-full px-4"
               style={{ y: textY, opacity: textOpacity }}
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             >
-              <p className="font-bodoni font-bold text-4xl md:text-6xl lg:text-7xl leading-tight text-center">
+              <motion.p 
+                className="font-bodoni font-bold text-4xl md:text-6xl lg:text-7xl leading-tight text-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              >
                 {captions[currentImage].line1}
                 <br />
                 {captions[currentImage].line2}
-              </p>
+              </motion.p>
             </motion.div>
           </DirectionAwareHover>
         </motion.div>

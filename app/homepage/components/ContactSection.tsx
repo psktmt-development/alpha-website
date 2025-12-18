@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { ParallaxSection } from "./ParallaxSection";
 
 export function ContactSection() {
@@ -7,7 +10,13 @@ export function ContactSection() {
       id="contact"
       className="w-full bg-[#0f0f0f] text-white py-14 px-4 md:px-8 lg:px-12"
     >
-      <div className="mx-auto flex max-w-6xl flex-col gap-6 rounded-2xl border border-white/10 bg-white/5 p-8 shadow-lg backdrop-blur">
+      <motion.div 
+        className="mx-auto flex max-w-6xl flex-col gap-6 rounded-2xl border border-white/10 bg-white/5 p-8 shadow-lg backdrop-blur"
+        initial={{ opacity: 0, y: 40, scale: 0.95 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      >
         <div className="flex flex-col gap-3">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#ffb3b3]">
             Contact Us
@@ -40,7 +49,7 @@ export function ContactSection() {
             Explore Membership
           </Link>
         </div>
-      </div>
+      </motion.div>
     </ParallaxSection>
   );
 }

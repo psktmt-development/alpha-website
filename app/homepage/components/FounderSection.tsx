@@ -45,8 +45,18 @@ export function FounderSection() {
         <motion.div 
           className="md:col-span-7 flex flex-col space-y-8 relative z-10"
           style={{ y: textY, opacity: textOpacity }}
+          initial={{ opacity: 0, x: -40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="space-y-4">
+          <motion.div 
+            className="space-y-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
             <h2 className="font-dm-serif text-[#af2324] text-sm font-bold tracking-[0.2em] uppercase">
               THE ALPHA CIRCLE
             </h2>
@@ -54,8 +64,14 @@ export function FounderSection() {
               Empowering <br className="hidden md:block"/>
               <span className="italic text-gray-500 font-normal text-[1em] leading-[0.9]">Visionaries</span> Everywhere.
             </h1>
-          </div>
-          <div className="font-dm-serif space-y-6 text-gray-600 text-lg leading-relaxed max-w-2xl border-l-2 border-[#af2324]/20 pl-6">
+          </motion.div>
+          <motion.div 
+            className="font-dm-serif space-y-6 text-gray-600 text-lg leading-relaxed max-w-2xl border-l-2 border-[#af2324]/20 pl-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             <p className="font-dm-serif">
               The Alpha Circle is an invite-only global industry leaders collective founded by Dr. Pulluri Srikanth. 
               We unite industrialists, business pioneers, and generational entrepreneurs who share a vision for 
@@ -65,20 +81,32 @@ export function FounderSection() {
               With a strong presence across India and our international launch in Dubai, The Alpha Circle serves 
               as a platform for collaboration, innovation, and meaningful impact across industries and borders.
             </p>
-          </div>
+          </motion.div>
           {/* Founder Signature Block */}
-          <div className="pt-4">
+          <motion.div 
+            className="pt-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
             <p className="font-dm-serif text-gray-900 text-xl font-normal">
               Dr. Pulluri Srikanth
             </p>
             <p className="font-dm-serif text-[#af2324] text-sm font-normal uppercase tracking-wide mt-1">
               FOUNDER, THE ALPHA CIRCLE
             </p>
-          </div>
+          </motion.div>
         </motion.div>
 
         {/* Right Section - Framed Image (Spans 5 columns on tablet+) */}
-        <div className="md:col-span-5 relative flex justify-center md:justify-end mt-12 md:mt-0">
+        <motion.div 
+          className="md:col-span-5 relative flex justify-center md:justify-end mt-12 md:mt-0"
+          initial={{ opacity: 0, x: 40 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+        >
           
           {/* THE FRAME CONTAINER */}
           <div className="relative w-full max-w-md aspect-[3/4]">
@@ -123,7 +151,7 @@ export function FounderSection() {
               </svg>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

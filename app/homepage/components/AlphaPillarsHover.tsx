@@ -74,22 +74,32 @@ export function AlphaPillarsHover() {
       className="w-full bg-white py-12 px-4 md:px-8 lg:px-12"
     >
       <div className="max-w-6xl mx-auto space-y-8">
-        <div className="text-center space-y-2">
+        <motion.div 
+          className="text-center space-y-2"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
           <h2 className="text-4xl md:text-6xl font-serif font-bold text-gray-900">
             The Alpha Circle
           </h2>
           <p className="text-[#af2324] text-xl md:text-2xl font-semibold">Our Pillars</p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 xl:grid-cols-[2fr_1fr] gap-8 items-start">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             {alphaPillars.map((item, idx) => (
-              <a
+              <motion.a
                 key={item.title + idx}
                 href={item.link}
                 className="relative block h-full w-full p-2 group"
                 onMouseEnter={() => setHoveredIndex(idx)}
                 onMouseLeave={() => setHoveredIndex(null)}
+                initial={{ opacity: 0, y: 40, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
               >
                 <AnimatePresence>
                   {hoveredIndex === idx && (
@@ -108,13 +118,19 @@ export function AlphaPillarsHover() {
                   description={item.description}
                   className="relative z-10"
                 />
-              </a>
+              </motion.a>
             ))}
           </div>
 
-          <div className="flex justify-center">
+          <motion.div 
+            className="flex justify-center"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          >
             <GlobalExpansionCard inline />
-          </div>
+          </motion.div>
         </div>
       </div>
     </ParallaxSection>

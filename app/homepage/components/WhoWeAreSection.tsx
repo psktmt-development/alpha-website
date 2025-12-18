@@ -46,10 +46,16 @@ export function WhoWeAreSection() {
   }, [activeIndex]);
 
   return (
-    <section className="w-full bg-white py-16 px-4 md:px-8 lg:px-12 flex flex-col justify-center">
+    <section id="about" className="w-full bg-white py-16 px-4 md:px-8 lg:px-12 flex flex-col justify-center scroll-mt-24">
       <div className="max-w-7xl w-full mx-auto space-y-8">
         {/* Header - Compact */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b-2 border-[#af2324]/10 pb-6">
+        <motion.div 
+          className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b-2 border-[#af2324]/10 pb-6"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
           <div>
             <h2 className="text-4xl md:text-5xl font-serif text-[#000000] leading-tight">
               Who We Are
@@ -61,7 +67,7 @@ export function WhoWeAreSection() {
           <p className="max-w-md text-gray-600 text-sm md:text-base leading-relaxed text-right md:text-right text-left">
             Connecting high-impact individuals from family businesses and emerging ventures.
           </p>
-        </div>
+        </motion.div>
 
         {/* Interactive Deck Layout */}
         <div className="h-[500px] md:h-[400px] w-full flex flex-col md:flex-row gap-2">
@@ -78,7 +84,15 @@ export function WhoWeAreSection() {
                     ? "flex-[3] bg-white border-2 border-[#af2324]"
                     : "flex-[1] bg-[#af2324] border-2 border-transparent hover:border-[#961e1f]"
                 }`}
-                transition={{ type: "spring", stiffness: 200, damping: 25 }}
+                initial={{ opacity: 0, y: 40, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ 
+                  layout: { type: "spring", stiffness: 200, damping: 25 },
+                  duration: 0.5, 
+                  delay: index * 0.1,
+                  ease: [0.22, 1, 0.36, 1]
+                }}
               >
                 {/* Active State Content */}
                 {isActive && (

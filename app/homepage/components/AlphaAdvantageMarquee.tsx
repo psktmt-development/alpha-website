@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
 import { ParallaxSection } from "./ParallaxSection";
 
 type Difference = {
@@ -122,10 +123,16 @@ export function AlphaAdvantageMarquee() {
       `}</style>
 
       <div className="w-full max-w-6xl mx-auto space-y-6">
-        <div className="text-center space-y-2">
+        <motion.div 
+          className="text-center space-y-2"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900">The Alpha Advantage</h2>
           <p className="text-neutral-500 text-base md:text-lg">Where Visionaries Align. Globally.</p>
-        </div>
+        </motion.div>
 
         <div className="relative mx-auto w-full max-w-5xl overflow-hidden py-6">
           <Marquee pauseOnHover className="[--duration:28s]">
@@ -139,7 +146,13 @@ export function AlphaAdvantageMarquee() {
         </div>
 
         {/* Embedded Instagram reel */}
-        <div className="mt-10 flex justify-center">
+        <motion.div 
+          className="mt-10 flex justify-center"
+          initial={{ opacity: 0, y: 40, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        >
           <div className="w-full max-w-3xl overflow-hidden rounded-xl border border-neutral-200 shadow-sm bg-white">
             <iframe
               src="https://www.instagram.com/reel/DIBx9-fSoIv/embed"
@@ -149,7 +162,7 @@ export function AlphaAdvantageMarquee() {
               className="w-full h-[700px]"
             />
           </div>
-        </div>
+        </motion.div>
       </div>
     </ParallaxSection>
   );

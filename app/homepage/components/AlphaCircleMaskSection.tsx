@@ -44,6 +44,14 @@ export function AlphaCircleMaskSection() {
         transition={{ duration: 0.35, ease: "easeInOut" }}
         className="relative w-full overflow-hidden rounded-xl border bg-white py-16"
         style={{ minHeight: "40rem" }}
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ 
+          backgroundColor: { duration: 0.35, ease: "easeInOut" },
+          opacity: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+          y: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
+        }}
       >
         <svg className="absolute inset-0 h-full w-full pointer-events-none">
           <defs>

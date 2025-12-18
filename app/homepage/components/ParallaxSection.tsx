@@ -13,6 +13,7 @@ type ParallaxSectionProps = {
 /**
  * Lightweight parallax + fade-in wrapper for sections.
  * Uses scroll position of the section to animate translateY/opacity.
+ * Now includes pop-up animation when section comes into view.
  */
 export function ParallaxSection({ id, className, children }: ParallaxSectionProps) {
   const ref = useRef<HTMLElement | null>(null);
@@ -31,6 +32,10 @@ export function ParallaxSection({ id, className, children }: ParallaxSectionProp
       ref={ref}
       className={cn("scroll-mt-24", className)}
       style={{ y }}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
     </motion.section>
