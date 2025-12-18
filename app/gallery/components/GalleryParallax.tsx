@@ -1,7 +1,6 @@
 "use client";
 
 import { ParallaxScroll } from "@/components/ui/parallax-scroll";
-import { cn } from "@/lib/utils";
 
 const images = [
   "/gallery/0Z0A3048.JPG",
@@ -13,21 +12,14 @@ const images = [
   "/gallery/0B4A0565.JPG",
   "/gallery/0B4A0365.JPG",
   "/gallery/0B4A0194.JPG",
+  "/gallery scroll images/DSC01118.JPG",
+  "/gallery scroll images/8K6A1522.JPG",
+  "/gallery scroll images/0Z0A3082.JPG",
+  "/gallery scroll images/0Z0A2873.JPG",
+  "/gallery scroll images/gallery-1.JPG",
+  "/gallery scroll images/gallery-2.jpg",
 ];
 
-export function GalleryParallax({ className }: { className?: string }) {
-  return (
-    <section className={cn("bg-white py-16 px-4", className)}>
-      <div className="mx-auto mb-10 max-w-6xl space-y-3 text-center">
-        <p className="text-xs uppercase tracking-[0.2em] text-[#af2324]">Parallax Gallery</p>
-        <h2 className="text-3xl font-serif font-bold text-gray-900">Layered Motion Grid</h2>
-        <p className="text-sm text-gray-600">
-          Scroll to see columns drift at different speeds for a subtle depth effect.
-        </p>
-      </div>
-      <ParallaxScroll images={images} />
-    </section>
-  );
+export function GalleryParallax() {
+  return <ParallaxScroll images={images} />;
 }
-
-

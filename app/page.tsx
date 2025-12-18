@@ -8,9 +8,10 @@ import { AlphaLogosMarquee } from "./homepage/components/AlphaLogosMarquee";
 import { GlobalExpansionBento } from "./homepage/components/GlobalExpansionBento";
 import { ContactSection } from "./homepage/components/ContactSection";
 
+
 export default function Home() {
   return (
-    <main className="p-0 m-0 overflow-hidden">
+    <main className="p-0 m-0 overflow-hidden bg-black">
       <DirectionAwareHoverDemo />
       <FounderSection />
       <WhoWeAreSection />
@@ -23,4 +24,3 @@ export default function Home() {
     </main>
   );
 }
-

@@ -9,21 +9,26 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-three/drei": "^9.92.7",
+    "@react-three/fiber": "^8.15.19",
     "@tabler/icons-react": "^3.36.0",
     "clsx": "^2.1.0",
-    "framer-motion": "^11.0.0",
+    "framer-motion": "^11.18.2",
     "gsap": "^3.14.2",
     "lucide-react": "^0.561.0",
     "motion": "^12.23.26",
     "next": "^14.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "tailwind-merge": "^2.2.0"
+    "tailwind-merge": "^2.2.0",
+    "three": "^0.182.0",
+    "three-stdlib": "^2.36.1"
   },
   "devDependencies": {
     "@types/node": "^20.14.0",
     "@types/react": "^18.3.0",
     "@types/react-dom": "^18.3.0",
+    "@types/three": "^0.182.0",
     "autoprefixer": "^10.4.0",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.0",

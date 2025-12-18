@@ -38,13 +38,17 @@
   }
 }
 
-html,
-body {
+html {
   height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh; /* Changed from height: 100% */
   margin: 0;
   padding: 0;
-  scroll-behavior: smooth;
   overflow-x: hidden;
+  position: relative; /* Ensures coordinates are calculated correctly */
 }
 
 /* Hide scrollbars across the site while preserving scroll functionality */

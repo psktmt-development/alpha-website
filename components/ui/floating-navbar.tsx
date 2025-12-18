@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import {
   motion,
@@ -22,8 +22,8 @@ export const FloatingNav = ({
   className?: string;
 }) => {
   const [visible, setVisible] = useState(true);
-  const lastScrollY = React.useRef(0);
-  const ticking = React.useRef(false);
+  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
 
   // Initialize visibility based on scroll position
   useEffect(() => {
@@ -89,12 +89,12 @@ export const FloatingNav = ({
           <Link
             key={`link=${idx}`}
             href={navItem.link}
-            className={cn(
-              "relative items-center flex space-x-1 text-black font-sans uppercase hover:text-[#af2324] transition-colors"
-            )}
+            className="relative items-center flex space-x-1 text-black font-sans uppercase hover:text-[#af2324] transition-colors"
           >
             <span className="block sm:hidden">{navItem.icon}</span>
-            <span className="hidden sm:block text-sm font-sans uppercase tracking-wide">{navItem.name.toUpperCase()}</span>
+            <span className="hidden sm:block text-sm font-sans uppercase tracking-wide">
+              {navItem.name.toUpperCase()}
+            </span>
           </Link>
         ))}
         <Link
@@ -107,4 +107,3 @@ export const FloatingNav = ({
     </motion.div>
   );
 };
-
