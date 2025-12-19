@@ -86,3 +86,74 @@ nav {
   }
 }
 
+/* Blog post content styling - Medium-style typography */
+.prose {
+  font-family: "Lato", sans-serif;
+}
+
+.prose p {
+  margin-bottom: 1.75rem;
+  font-size: 21px;
+  line-height: 1.58;
+  color: rgba(0, 0, 0, 0.84);
+  font-weight: 400;
+}
+
+.prose h2 {
+  font-family: "DM Serif Display", serif;
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.84);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+}
+
+.prose h3 {
+  font-family: "DM Serif Display", serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.84);
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+
+.prose blockquote {
+  border-left: 3px solid #af2324;
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  font-style: italic;
+  color: rgba(0, 0, 0, 0.68);
+  font-size: 21px;
+  line-height: 1.58;
+}
+
+.prose ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.prose li {
+  margin-bottom: 0.5rem;
+  font-size: 21px;
+  line-height: 1.58;
+}
+
+.prose strong {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.84);
+}
+
+.prose a {
+  color: #af2324;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.prose a:hover {
+  color: #d12e2f;
+}
+
