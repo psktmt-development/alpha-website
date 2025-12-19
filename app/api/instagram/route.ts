@@ -11,11 +11,12 @@ export async function GET() {
     const INSTAGRAM_USER_ID = process.env.INSTAGRAM_USER_ID || 'the_alphacircle';
     
     if (!INSTAGRAM_ACCESS_TOKEN) {
-      // Fallback: Return mock data or use alternative method
+      // Fallback: Return empty data so component can use embed fallback
       return NextResponse.json({ 
+        data: [],
         error: 'Instagram access token not configured',
-        message: 'Please set INSTAGRAM_ACCESS_TOKEN in environment variables'
-      }, { status: 500 });
+        message: 'Using embed fallback'
+      }, { status: 200 });
     }
 
     // Fetch user media from Instagram Basic Display API

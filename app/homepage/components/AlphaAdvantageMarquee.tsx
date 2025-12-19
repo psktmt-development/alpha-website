@@ -3,7 +3,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ParallaxSection } from "./ParallaxSection";
-import dynamic from "next/dynamic";
 import { InstagramFeed } from "./InstagramFeed";
 
 type Difference = {
@@ -101,18 +100,6 @@ const DifferenceCard = React.memo(function DifferenceCard({
 });
 DifferenceCard.displayName = "DifferenceCard";
 
-// Dynamically import the 3D model component with SSR disabled
-const Model3D = dynamic(
-  () => import("./Model3D").then((mod) => mod.Model3D),
-  { 
-    ssr: false,
-    loading: () => (
-      <div className="w-full h-full flex items-center justify-center">
-        <div className="text-gray-400">Loading 3D Model...</div>
-      </div>
-    )
-  }
-);
 
 export function AlphaAdvantageMarquee() {
   return (
@@ -160,29 +147,17 @@ export function AlphaAdvantageMarquee() {
           <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-white to-transparent" />
         </div>
 
-        {/* Instagram feed and 3D Model side by side */}
+        {/* Instagram feed - Centered */}
         <motion.div 
-          className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center"
+          className="mt-10 flex justify-center items-center"
           initial={{ opacity: 0, y: 40, scale: 0.95 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
         >
-          {/* Instagram Feed - Left */}
-          <InstagramFeed />
-
-          {/* 3D Model - Right */}
-          <motion.div 
-            className="w-full h-[700px] flex items-center justify-center"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="w-full h-full max-w-[600px] max-h-[600px] min-h-[400px]">
-              <Model3D stlUrl="/The_Alpha_Circle (1).stl" color="#D85A5B" />
-            </div>
-          </motion.div>
+          <div className="w-full max-w-2xl">
+            <InstagramFeed />
+          </div>
         </motion.div>
       </div>
     </ParallaxSection>

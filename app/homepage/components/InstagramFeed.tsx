@@ -24,10 +24,10 @@ export function InstagramFeed() {
         const response = await fetch('/api/instagram');
         const data = await response.json();
         
-        if (data.data && Array.isArray(data.data)) {
+        if (data.data && Array.isArray(data.data) && data.data.length > 0) {
           setPosts(data.data);
-        } else if (data.error) {
-          // If API fails, use embed method as fallback
+        } else {
+          // If API fails or returns empty data, use embed method as fallback
           setError('Using embed fallback');
           setPosts([]);
         }
@@ -45,13 +45,14 @@ export function InstagramFeed() {
 
   if (loading) {
     return (
-      <div className="w-full h-[700px] flex items-center justify-center bg-white rounded-xl border border-neutral-200">
+      <div className="w-full h-[550px] flex items-center justify-center bg-white rounded-xl border border-neutral-200">
         <div className="text-gray-400">Loading Instagram feed...</div>
       </div>
     );
   }
 
-  if (error && posts.length === 0) {
+  // Use embed fallback if no posts or error occurred
+  if (posts.length === 0) {
     // Fallback: Use Instagram embed widget for @the_alphacircle
     return (
       <div className="w-full overflow-hidden rounded-xl border border-neutral-200 shadow-sm bg-white">
@@ -59,18 +60,10 @@ export function InstagramFeed() {
           src="https://www.instagram.com/the_alphacircle/embed"
           allowTransparency={true}
           allow="encrypted-media"
-          scrolling="yes"
-          className="w-full h-[700px] border-0"
+          scrolling="no"
+          className="w-full h-[550px] border-0"
           title="Instagram Feed - The Alpha Circle"
         />
-      </div>
-    );
-  }
-
-  if (posts.length === 0) {
-    return (
-      <div className="w-full h-[700px] flex items-center justify-center bg-white rounded-xl border border-neutral-200">
-        <div className="text-gray-400">No posts available</div>
       </div>
     );
   }
