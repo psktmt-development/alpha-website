@@ -74,7 +74,7 @@ export function AlphaFooter() {
                   Blogs
                 </Link>
                 <Link 
-                  href="/#contact" 
+                  href="/contact" 
                   className="block text-gray-400 hover:text-[#af2324] transition-colors duration-300"
                 >
                   Contact Us

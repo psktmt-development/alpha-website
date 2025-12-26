@@ -42,15 +42,6 @@ export default function AlphaHeroSection() {
           <div className="max-w-lg relative">
             {/* Decorative Red Dot */}
             <div className="absolute -left-8 top-2 w-3 h-3 rounded-full bg-[#af2324] hidden md:block" />
-
-            <motion.span 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="inline-block text-[#af2324] font-bold tracking-widest text-xs uppercase mb-4"
-            >
-              The Alpha Circle
-            </motion.span>
             
             <h1 className="font-dm-serif text-5xl md:text-7xl lg:text-8xl leading-[0.9] text-gray-900 mb-8 tracking-tight">
               Where Visionaries<br />

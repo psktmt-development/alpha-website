@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -14,11 +15,11 @@ interface NavItem {
 const navItems: NavItem[] = [
   { name: "Home", link: "/" },
   { name: "About Us", link: "/about-us" },
-  { name: "Events", link: "/#events" },
+  { name: "Events", link: "/events" },
   { name: "Gallery", link: "/gallery" },
   { name: "Membership", link: "/members" },
   { name: "Blog", link: "/blog" },
-  { name: "Contact Us", link: "/#contact" },
+  { name: "Contact Us", link: "/contact" },
 ];
 
 export function AlphaNavbar() {
@@ -91,10 +92,15 @@ export function AlphaNavbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo/Brand */}
-            <Link href="/" className="flex items-center space-x-2">
-              <span className="font-dm-serif text-xl md:text-2xl font-bold text-gray-900">
-                ALPHA <span className="text-[#af2324]">CIRCLE</span>
-              </span>
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/xAlpha-Circle.png.pagespeed.ic.iNmpDHM9GE.png"
+                alt="The Alpha Circle Logo"
+                width={200}
+                height={60}
+                className="h-8 md:h-10 w-auto object-contain"
+                priority
+              />
             </Link>
 
             {/* Desktop Navigation */}
