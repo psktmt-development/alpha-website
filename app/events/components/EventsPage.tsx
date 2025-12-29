@@ -239,6 +239,58 @@ function TimelineDemo() {
         </div>
       ),
     },
+    {
+      title: "Speaker Sessions",
+      content: (
+        <div>
+          <p className="mb-8 text-sm font-semibold text-neutral-800 md:text-base lg:text-lg dark:text-neutral-200">
+            Sessions featuring accomplished leaders sharing experience-driven insights, lessons, and perspectives shaped by long-term success.
+          </p>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="relative h-20 md:h-44 lg:h-60 w-full rounded-lg overflow-hidden border-2 border-[#BB2324] shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]">
+              <Image
+                src="/speaker sessions /DSCF6433.JPG"
+                alt="Alpha Circle Speaker Session"
+                fill
+                loading="lazy"
+                className="object-cover"
+                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 50vw, 33vw"
+              />
+            </div>
+            <div className="relative h-20 md:h-44 lg:h-60 w-full rounded-lg overflow-hidden border-2 border-[#BB2324] shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]">
+              <Image
+                src="/speaker sessions /DSCF6411.JPG"
+                alt="Alpha Circle Speaker Session"
+                fill
+                loading="lazy"
+                className="object-cover"
+                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 50vw, 33vw"
+              />
+            </div>
+            <div className="relative h-20 md:h-44 lg:h-60 w-full rounded-lg overflow-hidden border-2 border-[#BB2324] shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]">
+              <Image
+                src="/speaker sessions /DSCF6379.JPG"
+                alt="Alpha Circle Speaker Session"
+                fill
+                loading="lazy"
+                className="object-cover"
+                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 50vw, 33vw"
+              />
+            </div>
+            <div className="relative h-20 md:h-44 lg:h-60 w-full rounded-lg overflow-hidden border-2 border-[#BB2324] shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]">
+              <Image
+                src="/speaker sessions /DSC06503.jpeg"
+                alt="Alpha Circle Speaker Session"
+                fill
+                loading="lazy"
+                className="object-cover"
+                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 50vw, 33vw"
+              />
+            </div>
+          </div>
+        </div>
+      ),
+    },
   ];
   return (
     <div className="relative w-full overflow-clip">

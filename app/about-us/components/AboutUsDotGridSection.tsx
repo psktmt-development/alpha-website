@@ -450,7 +450,10 @@ export default function AboutUsDotGridSection() {
                <div className="relative z-10 flex flex-col md:flex-row gap-12 items-center justify-between">
                   <div className="space-y-8 max-w-2xl flex-1 min-w-0">
                     <h2 className="text-4xl md:text-7xl tracking-tight leading-tight" style={{ fontFamily: 'DM Serif Display, serif' }}>
-                        Join the <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#af2324] to-[#ff4d4d]">Legacy</span>.
+                        <span className="inline-block px-0.5 md:px-1 py-2 md:py-3 border-l-4 border-r-4 border-transparent -mr-1 md:-mr-2">Join</span>
+                        <span className="inline-block px-0.5 md:px-1 py-2 md:py-3 border-l-4 border-r-4 border-transparent -mr-1 md:-mr-2">the</span>
+                        <span className="inline-block px-0.5 md:px-1 py-2 md:py-3 border-l-4 border-r-4 border-transparent -mr-1 md:-mr-2 text-transparent bg-clip-text bg-gradient-to-r from-[#af2324] to-[#ff4d4d]">Legacy</span>
+                        <span className="inline-block px-0.5 md:px-1 py-2 md:py-3 border-l-4 border-r-4 border-transparent">.</span>
                     </h2>
                     <div className="space-y-4 text-gray-400 text-xl font-light">
                       <p className="break-words">

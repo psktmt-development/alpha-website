@@ -311,13 +311,19 @@ const FounderMessage = () => {
               style={{ fontFamily: 'DM Serif Display, serif', fontSize: 'clamp(1.75rem, 4.5vw, 7rem)' }}
             >
               <RevealText>
-                "Legacy is not what we
+                <span className="inline-block px-4 md:px-6 lg:px-8 py-2 md:py-3 border-l-4 border-r-4 border-transparent">
+                  "Legacy is not what we
+                </span>
               </RevealText>
               <RevealText delay={0.15}>
-                leave behind — it's what
+                <span className="inline-block px-4 md:px-6 lg:px-8 py-2 md:py-3 border-l-4 border-r-4 border-transparent">
+                  leave behind — it's what
+                </span>
               </RevealText>
               <RevealText delay={0.3} className="text-[#af2324]">
-                we build together."
+                <span className="inline-block px-4 md:px-6 lg:px-8 py-2 md:py-3 border-l-4 border-r-4 border-transparent">
+                  we build together."
+                </span>
               </RevealText>
             </h2>
         </div>
