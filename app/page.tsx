@@ -7,7 +7,7 @@ import { AlphaAdvantageMarquee } from "./homepage/components/AlphaAdvantageMarqu
 import { AlphaPillarsHover } from "./homepage/components/AlphaPillarsHover";
 import { AlphaLogosMarquee } from "./homepage/components/AlphaLogosMarquee";
 import { GlobalExpansionBento } from "./homepage/components/GlobalExpansionBento";
-import { ContactSection } from "./homepage/components/ContactSection";
+import { GlobalExpansionCard } from "./homepage/components/GlobalExpansionCard";
 
 
 export default function Home() {
@@ -20,9 +20,9 @@ export default function Home() {
       <AlphaCircleMaskSection />
       <AlphaAdvantageMarquee />
       <AlphaPillarsHover />
+      <GlobalExpansionCard />
       <GlobalExpansionBento />
       {/* <AlphaLogosMarquee /> */}
-      <ContactSection />
     </main>
   );
 }

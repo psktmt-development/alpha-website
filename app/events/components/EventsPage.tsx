@@ -198,34 +198,17 @@ function TimelineDemo() {
       ),
     },
     {
-      title: "Changelog",
+      title: "Social Events",
       content: (
         <div>
-          <p className="mb-4 text-sm font-semibold text-neutral-800 md:text-base lg:text-lg dark:text-neutral-200">
-            Deployed 5 new components on Aceternity today
+          <p className="mb-8 text-sm font-semibold text-neutral-800 md:text-base lg:text-lg dark:text-neutral-200">
+            Intimate, private gatherings where relationships grew naturally beyond structure, agendas, and formal discussion.
           </p>
-          <div className="mb-8">
-            <div className="flex items-center gap-2 text-sm font-semibold text-neutral-700 md:text-base dark:text-neutral-300">
-              ✅ Card grid component
-            </div>
-            <div className="flex items-center gap-2 text-sm font-semibold text-neutral-700 md:text-base dark:text-neutral-300">
-              ✅ Startup template Aceternity
-            </div>
-            <div className="flex items-center gap-2 text-sm font-semibold text-neutral-700 md:text-base dark:text-neutral-300">
-              ✅ Random file upload lol
-            </div>
-            <div className="flex items-center gap-2 text-sm font-semibold text-neutral-700 md:text-base dark:text-neutral-300">
-              ✅ Himesh Reshammiya Music CD
-            </div>
-            <div className="flex items-center gap-2 text-sm font-semibold text-neutral-700 md:text-base dark:text-neutral-300">
-              ✅ Salman Bhai Fan Club registrations open
-            </div>
-          </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="relative h-20 md:h-44 lg:h-60 w-full rounded-lg overflow-hidden border-2 border-[#BB2324] shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]">
               <Image
-                src="https://assets.aceternity.com/pro/hero-sections.png"
-                alt="hero template"
+                src="/social events/Alpha Circle-229.JPG"
+                alt="Alpha Circle Social Event"
                 fill
                 loading="lazy"
                 className="object-cover"
@@ -234,32 +217,22 @@ function TimelineDemo() {
             </div>
             <div className="relative h-20 md:h-44 lg:h-60 w-full rounded-lg overflow-hidden border-2 border-[#BB2324] shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]">
               <Image
-                src="https://assets.aceternity.com/features-section.png"
-                alt="feature template"
+                src="/social events/Alpha Circle-279.JPG"
+                alt="Alpha Circle Social Event"
                 fill
                 loading="lazy"
                 className="object-cover"
                 sizes="(max-width: 768px) 50vw, (max-width: 1024px) 50vw, 33vw"
               />
             </div>
-            <div className="relative h-20 md:h-44 lg:h-60 w-full rounded-lg overflow-hidden border-2 border-[#BB2324] shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]">
+            <div className="relative h-20 md:h-44 lg:h-60 w-full rounded-lg overflow-hidden border-2 border-[#BB2324] shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] col-span-2">
               <Image
-                src="https://assets.aceternity.com/pro/bento-grids.png"
-                alt="bento template"
+                src="/social events/Alpha Circle-511.JPG"
+                alt="Alpha Circle Social Event"
                 fill
                 loading="lazy"
                 className="object-cover"
-                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 50vw, 33vw"
-              />
-            </div>
-            <div className="relative h-20 md:h-44 lg:h-60 w-full rounded-lg overflow-hidden border-2 border-[#BB2324] shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset]">
-              <Image
-                src="https://assets.aceternity.com/cards.png"
-                alt="cards template"
-                fill
-                loading="lazy"
-                className="object-cover"
-                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 50vw, 33vw"
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 66vw"
               />
             </div>
           </div>
@@ -444,13 +417,13 @@ export function EventsPage() {
                   perspective: "1000px",
                 }}
               >
-                <Image
-                  src="/image copy.png"
-                  alt="Alpha Circle Event"
-                  width={800}
-                  height={600}
+              <Image
+                src="/image copy.png"
+                alt="Alpha Circle Event"
+                width={800}
+                height={600}
                   className="w-full h-auto rounded-lg transition-transform duration-400 group-hover:brightness-110"
-                />
+              />
                 {/* Glow effect on hover */}
                 <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-400 bg-gradient-to-br from-[#BB2324]/20 via-transparent to-transparent pointer-events-none" />
               </motion.div>
@@ -470,13 +443,6 @@ export function EventsPage() {
           </div>
         </section>
       </main>
-
-      {/* Footer Space */}
-      <footer className="py-20 border-t border-[#BB2324] text-center">
-        <p className="text-xs text-[#BB2324] uppercase tracking-widest">
-          © 2024 NC Education. All rights reserved.
-        </p>
-      </footer>
     </>
   );
 }

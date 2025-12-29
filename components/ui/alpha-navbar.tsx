@@ -6,6 +6,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useJoinCircle } from "./join-circle-provider";
 
 interface NavItem {
   name: string;
@@ -27,6 +28,7 @@ export function AlphaNavbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
+  const { openModal } = useJoinCircle();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -114,12 +116,12 @@ export function AlphaNavbar() {
                   {item.name}
                 </Link>
               ))}
-              <Link
-                href="#contact"
+              <button
+                onClick={openModal}
                 className="ml-2 lg:ml-4 px-4 lg:px-6 py-2 text-sm lg:text-base font-sans font-semibold uppercase tracking-wide bg-[#af2324] text-white rounded-full hover:bg-[#d12e2f] transition-colors duration-200"
               >
                 Join the Circle
-              </Link>
+              </button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -158,13 +160,15 @@ export function AlphaNavbar() {
                     {item.name}
                   </Link>
                 ))}
-                <Link
-                  href="#contact"
-                  onClick={handleLinkClick}
-                  className="block mt-4 px-4 py-3 text-center text-base font-sans font-semibold uppercase tracking-wide bg-[#af2324] text-white rounded-full hover:bg-[#d12e2f] transition-colors duration-200"
+                <button
+                  onClick={() => {
+                    openModal();
+                    handleLinkClick();
+                  }}
+                  className="block w-full mt-4 px-4 py-3 text-center text-base font-sans font-semibold uppercase tracking-wide bg-[#af2324] text-white rounded-full hover:bg-[#d12e2f] transition-colors duration-200"
                 >
                   Join the Circle
-                </Link>
+                </button>
               </div>
             </motion.div>
           )}

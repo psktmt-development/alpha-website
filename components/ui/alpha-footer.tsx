@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, Instagram, Youtube, Linkedin } from "lucide-react";
 import { motion } from "framer-motion";
 
 export function AlphaFooter() {
@@ -122,6 +122,47 @@ export function AlphaFooter() {
             </motion.div>
           </div>
         </div>
+
+        {/* Social Media Links */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.25 }}
+          className="mt-8 pt-6 border-t border-gray-800"
+        >
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="flex items-center gap-4">
+              <a
+                href="https://www.instagram.com/the_alphacircle/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-[#af2324] transition-colors duration-300"
+                aria-label="Instagram"
+              >
+                <Instagram size={22} />
+              </a>
+              <a
+                href="https://www.youtube.com/@thealphacircle"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-[#af2324] transition-colors duration-300"
+                aria-label="YouTube"
+              >
+                <Youtube size={22} />
+              </a>
+              <a
+                href="https://www.linkedin.com/company/thealphacircle/posts/?feedView=all"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-[#af2324] transition-colors duration-300"
+                aria-label="LinkedIn"
+              >
+                <Linkedin size={22} />
+              </a>
+            </div>
+          </div>
+        </motion.div>
 
         {/* Bottom Bar */}
         <motion.div

@@ -2,8 +2,9 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Instagram, Twitter, Facebook, Linkedin } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import dynamic from "next/dynamic";
+import { useJoinCircle } from "@/components/ui/join-circle-provider";
 
 // Dynamically import the bright 3D model component with SSR disabled
 const BrightModel3D = dynamic(
@@ -27,6 +28,8 @@ const BrightModel3D = dynamic(
  * - Tailored for The Alpha Circle branding
  */
 export default function AlphaHeroSection() {
+  const { openModal } = useJoinCircle();
+  
   return (
     <section className="relative w-full min-h-screen overflow-hidden bg-white selection:bg-[#af2324] selection:text-white">
       {/* HERO CONTAINER */}
@@ -54,6 +57,7 @@ export default function AlphaHeroSection() {
               and generational entrepreneurs united by a vision for transformative leadership.
             </p>
             <motion.button
+              onClick={openModal}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="group inline-flex items-center gap-3 rounded-full bg-[#af2324] px-10 py-5 font-semibold text-white shadow-xl shadow-red-900/20 hover:bg-black transition-all duration-300"
@@ -61,22 +65,6 @@ export default function AlphaHeroSection() {
               Join The Circle
               <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
             </motion.button>
-            {/* SOCIAL */}
-            <div className="mt-20 flex items-center gap-8 text-gray-400">
-              <a href="#" className="hover:text-[#af2324] hover:scale-110 transition-all" aria-label="Instagram">
-                <Instagram size={22} />
-              </a>
-              <a href="#" className="hover:text-[#af2324] hover:scale-110 transition-all" aria-label="Twitter">
-                <Twitter size={22} />
-              </a>
-              <a href="#" className="hover:text-[#af2324] hover:scale-110 transition-all" aria-label="Facebook">
-                <Facebook size={22} />
-              </a>
-              <a href="#" className="hover:text-[#af2324] hover:scale-110 transition-all" aria-label="LinkedIn">
-                <Linkedin size={22} />
-              </a>
-              <div className="h-px flex-1 bg-gradient-to-r from-gray-200 to-transparent ml-4" />
-            </div>
           </div>
         </motion.div>
 

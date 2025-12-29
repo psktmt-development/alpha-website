@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { AlphaNavbar } from "@/components/ui/alpha-navbar";
 import { AlphaFooter } from "@/components/ui/alpha-footer";
+import { JoinCircleProvider } from "@/components/ui/join-circle-provider";
 
 export const metadata: Metadata = {
   title: "Alpha Web",
@@ -33,11 +34,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body className="min-h-screen flex flex-col m-0 p-0 bg-white text-gray-900 antialiased">
-        <AlphaNavbar />
-        <div className="flex-1">
-          {children}
-        </div>
-        <AlphaFooter />
+        <JoinCircleProvider>
+          <AlphaNavbar />
+          <div className="flex-1">
+            {children}
+          </div>
+          <AlphaFooter />
+        </JoinCircleProvider>
       </body>
     </html>
   );

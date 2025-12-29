@@ -462,7 +462,7 @@ export default function ContactPage() {
             <motion.div
               style={{ 
                 opacity: mapOpacity,
-                y: mapY,
+                y: mapY, 
                 scale: mapScale
               }}
               className="relative z-10"
@@ -503,12 +503,12 @@ export default function ContactPage() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.2 }}
                   className="inline-block px-4 py-1.5 rounded-full bg-[#BB2324]/10 text-[#BB2324] text-xs font-bold uppercase tracking-widest mb-6"
-                >
+          >
                   Connect With Us
                 </motion.span>
                 <h2 className="text-4xl md:text-6xl font-serif font-medium tracking-tight text-neutral-900 mb-6 leading-[1.1]">
                   Request a <span className="italic text-[#BB2324]">Personalized</span> Demo
-                </h2>
+              </h2>
                 <p className="text-lg md:text-xl text-neutral-500 max-w-2xl leading-relaxed">
                   Experience the power of Alpha Circle. Our specialists will reach out to provide a 
                   tailored walkthrough of our ecosystem.
@@ -520,11 +520,11 @@ export default function ContactPage() {
               <div className="w-full">
 
               <AnimatePresence mode="wait">
-                {isSubmitted ? (
-                  <motion.div
+              {isSubmitted ? (
+                <motion.div
                     key="success"
                     initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
+                  animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.9 }}
                     className="flex flex-col items-center justify-center py-20 text-center"
                   >
@@ -534,7 +534,7 @@ export default function ContactPage() {
                         animate={{ scale: 1 }}
                         transition={{ type: "spring", damping: 12, stiffness: 200 }}
                         className="w-24 h-24 bg-green-50 rounded-full flex items-center justify-center"
-                      >
+                >
                         <CheckCircle2 className="w-12 h-12 text-green-500" />
                       </motion.div>
                       <motion.div 
@@ -545,18 +545,18 @@ export default function ContactPage() {
                     </div>
                     <h3 className="text-3xl font-semibold text-neutral-900 mb-3">
                       Request Received
-                    </h3>
+                  </h3>
                     <p className="text-neutral-500 text-lg max-w-sm">
                       Thank you for your interest. A member of our concierge team will contact you within 24 hours.
-                    </p>
+                  </p>
                     <button 
                       onClick={() => setIsSubmitted(false)}
                       className="mt-10 text-neutral-400 hover:text-neutral-900 transition-colors text-sm font-medium underline underline-offset-4"
                     >
                       Send another message
                     </button>
-                  </motion.div>
-                ) : (
+                </motion.div>
+              ) : (
                   <motion.form
                     key="form"
                     initial={{ opacity: 0 }}
@@ -565,75 +565,75 @@ export default function ContactPage() {
                     onSubmit={handleSubmit}
                     className="space-y-6"
                   >
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <FloatingInput 
                         label="Full Name" 
-                        name="name" 
+                        name="name"
                         icon={<User size={18} />}
-                        value={formData.name} 
-                        onChange={handleChange} 
-                        required 
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
                       />
                       <FloatingInput 
                         label="Email Address" 
                         name="email" 
-                        type="email" 
+                        type="email"
                         icon={<Mail size={18} />}
-                        value={formData.email} 
-                        onChange={handleChange} 
-                        required 
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
                       />
-                    </div>
+                  </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <FloatingInput 
                         label="Phone Number" 
-                        name="phone" 
+                        name="phone"
                         icon={<Phone size={18} />}
-                        value={formData.phone} 
-                        onChange={handleChange} 
+                        value={formData.phone}
+                        onChange={handleChange}
                       />
                       <FloatingSelect 
                         label="Inquiry Type" 
-                        name="subject" 
+                        name="subject"
                         icon={<Info size={18} />}
-                        value={formData.subject} 
-                        onChange={handleChange} 
+                        value={formData.subject}
+                        onChange={handleChange}
                       />
-                    </div>
+                  </div>
 
                     <FloatingTextarea 
                       label="Message" 
-                      name="message" 
+                      name="message"
                       icon={<MessageSquare size={18} />}
-                      value={formData.message} 
-                      onChange={handleChange} 
+                      value={formData.message}
+                      onChange={handleChange}
                     />
 
                     <div className="pt-6">
                       <motion.button
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        type="submit"
-                        disabled={isSubmitting}
+                    type="submit"
+                    disabled={isSubmitting}
                         className="group relative w-full md:w-auto inline-flex items-center justify-center gap-3 px-12 py-5 bg-[#BB2324] text-white font-bold rounded-2xl overflow-hidden shadow-lg shadow-[#BB2324]/20 transition-all disabled:opacity-70 disabled:cursor-not-allowed"
-                      >
+                  >
                         <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                        {isSubmitting ? (
+                    {isSubmitting ? (
                           <div className="flex items-center gap-3">
                             <span className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin" />
                             <span className="relative">Processing...</span>
                           </div>
-                        ) : (
-                          <>
+                    ) : (
+                      <>
                             <span className="relative">Send Request</span>
                             <Send className="w-5 h-5 relative transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                          </>
-                        )}
+                      </>
+                    )}
                       </motion.button>
                     </div>
                   </motion.form>
-                )}
+              )}
               </AnimatePresence>
               </div>
             </div>

@@ -155,18 +155,18 @@ export default function BlogPage() {
                   <div className="mb-4">
                     <svg
                       className="w-16 h-16 mx-auto text-gray-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
                         d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </div>
+                  />
+                </svg>
+              </div>
                   <h3 className="text-2xl font-semibold text-gray-900 mb-2">
                     No blogs found
                   </h3>
@@ -184,58 +184,58 @@ export default function BlogPage() {
                       className="px-6 py-2 bg-[#af2324] text-white rounded-lg hover:bg-[#af2324]/90 transition-colors"
                     >
                       Clear all filters
-                    </button>
+              </button>
                   )}
-                </div>
+            </div>
               ) : (
                 <>
-                  {/* Featured First Post - Larger */}
-                  <article className="border-b border-gray-200 pb-8">
-                    <Link href={`/blog/${filteredPosts[0].slug}`}>
-                      <div className="group cursor-pointer">
-                        {/* Category/Publication */}
-                        <div className="mb-4 flex items-center gap-2">
-                          <div className="w-6 h-6 rounded-full bg-[#af2324] flex items-center justify-center">
-                            <span className="text-white text-xs font-bold">A</span>
-                          </div>
-                          <span className="text-base text-gray-600">
+              {/* Featured First Post - Larger */}
+                <article className="border-b border-gray-200 pb-8">
+                  <Link href={`/blog/${filteredPosts[0].slug}`}>
+                    <div className="group cursor-pointer">
+                      {/* Category/Publication */}
+                      <div className="mb-4 flex items-center gap-2">
+                        <div className="w-6 h-6 rounded-full bg-[#af2324] flex items-center justify-center">
+                          <span className="text-white text-xs font-bold">A</span>
+                        </div>
+                        <span className="text-base text-gray-600">
                                 In <span className="font-medium">{filteredPosts[0].category}</span>
-                          </span>
-                        </div>
+                        </span>
+                      </div>
 
-                        {/* Large Image */}
-                        <div className="mb-6 rounded-lg overflow-hidden">
-                          <div className="relative w-full h-64 md:h-96 lg:h-[500px]">
-                            <Image
-                              src={filteredPosts[0].image}
-                              alt={filteredPosts[0].title}
-                              fill
-                              className="object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
-                          </div>
-                        </div>
-
-                        {/* Title */}
-                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium text-gray-900 mb-4 group-hover:text-[#af2324] transition-colors leading-tight">
-                          {filteredPosts[0].title}
-                        </h2>
-
-                        {/* Excerpt */}
-                        <p className="text-base md:text-lg text-gray-600 mb-4 leading-relaxed">
-                          {filteredPosts[0].excerpt}
-                        </p>
-
-                        {/* Metadata */}
-                        <div className="flex items-center gap-6 text-base text-gray-500">
-                          <span>{filteredPosts[0].date}</span>
-                          <span>{filteredPosts[0].readTime}</span>
+                      {/* Large Image */}
+                      <div className="mb-6 rounded-lg overflow-hidden">
+                        <div className="relative w-full h-64 md:h-96 lg:h-[500px]">
+                          <Image
+                            src={filteredPosts[0].image}
+                            alt={filteredPosts[0].title}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
                         </div>
                       </div>
-                    </Link>
-                  </article>
 
-                  {/* Rest of the Posts - Regular Size */}
-                  {filteredPosts.slice(1).map((post) => (
+                      {/* Title */}
+                      <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium text-gray-900 mb-4 group-hover:text-[#af2324] transition-colors leading-tight">
+                        {filteredPosts[0].title}
+                      </h2>
+
+                      {/* Excerpt */}
+                      <p className="text-base md:text-lg text-gray-600 mb-4 leading-relaxed">
+                        {filteredPosts[0].excerpt}
+                      </p>
+
+                      {/* Metadata */}
+                      <div className="flex items-center gap-6 text-base text-gray-500">
+                        <span>{filteredPosts[0].date}</span>
+                        <span>{filteredPosts[0].readTime}</span>
+                      </div>
+                    </div>
+                  </Link>
+                </article>
+
+              {/* Rest of the Posts - Regular Size */}
+              {filteredPosts.slice(1).map((post) => (
                 <article
                   key={post.slug}
                   className="border-b border-gray-200 pb-8 last:border-b-0"
@@ -321,7 +321,7 @@ export default function BlogPage() {
                     </div>
                   </Link>
                 </article>
-                  ))}
+              ))}
                 </>
               )}
             </div>
@@ -369,15 +369,15 @@ export default function BlogPage() {
                     const isActive = selectedCategory === topic.toLowerCase();
                     return (
                       <button
-                        key={topic}
+                      key={topic}
                         onClick={() => handleCategoryClick(topic)}
                         className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                           isActive
                             ? "bg-[#af2324] text-white hover:bg-[#af2324]/90"
                             : "bg-gray-100 hover:bg-gray-200 text-gray-700"
                         }`}
-                      >
-                        {topic}
+                    >
+                      {topic}
                       </button>
                     );
                   })}

@@ -9,6 +9,7 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useJoinCircle } from "./join-circle-provider";
 
 export const FloatingNav = ({
   navItems,
@@ -24,6 +25,7 @@ export const FloatingNav = ({
   const [visible, setVisible] = useState(true);
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
+  const { openModal } = useJoinCircle();
 
   // Initialize visibility based on scroll position
   useEffect(() => {
@@ -97,13 +99,13 @@ export const FloatingNav = ({
             </span>
           </Link>
         ))}
-        <Link
-          href="#contact"
+        <button
+          onClick={openModal}
           className="border text-sm font-sans font-medium uppercase tracking-wide relative border-black text-black px-4 py-2 rounded-full hover:bg-[#af2324] hover:text-white hover:border-[#af2324] transition-colors"
         >
           <span>Join the Circle</span>
           <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-[#af2324] to-transparent h-px" />
-        </Link>
+        </button>
     </motion.div>
   );
 };

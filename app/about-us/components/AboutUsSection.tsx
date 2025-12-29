@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
 import { Quote, Sparkles, Network, TrendingUp, Globe, ArrowRight } from "lucide-react";
+import { useJoinCircle } from "@/components/ui/join-circle-provider";
 
 // --- Utility Helper ---
 function cn(...classes: (string | undefined | null | false)[]) {
@@ -383,24 +384,10 @@ const FounderMessage = () => {
                      <div className="relative w-full h-full bg-gray-50 overflow-hidden group z-20 border border-black/5 shadow-2xl rounded-sm">
                          {/* Founder Image */}
                          <img 
-                           src="/xAlpha-Circle-World-Founder.jpg"
+                           src="/Alpha Circle-67.jpg"
                            alt="Dr. Pulluri Srikanth - Founder, The Alpha Circle"
-                           className="absolute inset-0 w-full h-full object-cover"
-                           style={{ zIndex: 1, opacity: 1 }}
+                           className="w-full h-full object-cover"
                            loading="eager"
-                           onError={(e) => {
-                             console.error('Image failed to load:', e);
-                             const target = e.target as HTMLImageElement;
-                             target.style.display = 'none';
-                           }}
-                           onLoad={() => {
-                             console.log('Image loaded successfully');
-                             const img = document.querySelector('img[alt*="Dr. Pulluri Srikanth"]') as HTMLImageElement;
-                             if (img) {
-                               img.style.opacity = '1';
-                               img.style.visibility = 'visible';
-                             }
-                           }}
                          />
                          {/* Gradient Overlay */}
                          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/5 z-10 pointer-events-none" />
@@ -432,6 +419,7 @@ const AboutCard = ({ title, description, icon, delay = 0 }: { title: string; des
 
 // --- Main Component ---
 export default function AboutUsSection() {
+  const { openModal } = useJoinCircle();
   return (
     <div className="w-full h-full antialiased text-gray-900 selection:bg-[#af2324] selection:text-white">
       <WavyBackground 
@@ -510,14 +498,19 @@ export default function AboutUsSection() {
                         Alpha Circle is the signal in the noise. We believe true power lies in precision, integrity, and the strength of one's circle.
                       </p>
                     </div>
-                    <a href="#contact" className="inline-flex items-center gap-2 px-8 py-4 bg-[#af2324] hover:bg-[#d12e2f] text-white font-bold rounded-full transition-all duration-300 transform hover:translate-x-1 font-sans tracking-wide">
+                    <button 
+                      onClick={openModal}
+                      className="inline-flex items-center gap-2 px-8 py-4 bg-[#af2324] hover:bg-[#d12e2f] text-white font-bold rounded-full transition-all duration-300 transform hover:translate-x-1 font-sans tracking-wide"
+                    >
                       Join the Circle <ArrowRight size={20} />
-                    </a>
+                    </button>
                   </div>
                   <div className="flex items-center justify-center">
-                     <div className="font-dm-serif text-[12rem] font-black text-white/5 select-none leading-none tracking-tighter">
-                        AC
-                     </div>
+                     <img 
+                       src="/Visiting Card (2).png"
+                       alt="The Alpha Circle"
+                       className="max-w-full h-auto"
+                     />
                   </div>
                </div>
             </div>

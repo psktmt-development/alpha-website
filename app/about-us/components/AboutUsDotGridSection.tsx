@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, useSpring, useInView } from "framer-motion";
 import { Quote, Sparkles, Network, TrendingUp, ArrowRight, Target, Users, Shield, Zap } from "lucide-react";
 import Image from "next/image";
+import { useJoinCircle } from "@/components/ui/join-circle-provider";
 
 // --- Utility Helper ---
 function cn(...classes: (string | undefined | null | false)[]) {
@@ -288,6 +289,7 @@ const TeamMemberCard = ({ name, role, image, delay = 0 }: { name: string, role: 
 
 // --- Main Application Component ---
 export default function AboutUsDotGridSection() {
+  const { openModal } = useJoinCircle();
   return (
     <div className="w-full h-full font-sans antialiased text-black selection:bg-[#af2324] selection:text-white" style={{ fontFamily: 'Lato, sans-serif' }}>
       <DotGridBackground 
@@ -455,7 +457,10 @@ export default function AboutUsDotGridSection() {
                         We believe that leadership, when united, can reshape industries and uplift economies.
                       </p>
                     </div>
-                    <button className="inline-flex items-center gap-3 px-10 py-5 bg-[#af2324] hover:bg-[#d12e2f] text-white font-bold rounded-full transition-all duration-300 transform hover:translate-x-1 font-sans tracking-wide shadow-[0_10px_40px_-10px_rgba(175,35,36,0.6)]">
+                    <button 
+                      onClick={openModal}
+                      className="inline-flex items-center gap-3 px-10 py-5 bg-[#af2324] hover:bg-[#d12e2f] text-white font-bold rounded-full transition-all duration-300 transform hover:translate-x-1 font-sans tracking-wide shadow-[0_10px_40px_-10px_rgba(175,35,36,0.6)]"
+                    >
                       Apply for Membership <ArrowRight size={20} />
                     </button>
                   </div>
