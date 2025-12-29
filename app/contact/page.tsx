@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { Mail, Phone, MapPin, Send, CheckCircle2, ArrowRight, ExternalLink, ChevronDown, User, MessageSquare, Info } from "lucide-react";
+import { Mail, Phone, MapPin, Send, CheckCircle2, ArrowRight, ExternalLink, ChevronDown, User, MessageSquare, Info, AlertCircle } from "lucide-react";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 
 export default function ContactPage() {
@@ -15,6 +15,7 @@ export default function ContactPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   
   // Google Maps embed URL - uses API key if available, otherwise uses standard embed
   const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '';
@@ -306,10 +307,25 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError("");
+    setIsSubmitted(false);
 
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || "Failed to submit form");
+      }
+
+      // Success
       setIsSubmitted(true);
       setFormData({
         name: "",
@@ -323,7 +339,16 @@ export default function ContactPage() {
       setTimeout(() => {
         setIsSubmitted(false);
       }, 5000);
-    }, 1000);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setSubmitError(
+        error instanceof Error 
+          ? error.message 
+          : "Something went wrong. Please try again later."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Scroll effect for map section
@@ -415,8 +440,8 @@ export default function ContactPage() {
                   value="admin@thealphacircle.world"
                   icon={Mail}
                   actionIcon={<Mail size={20} />}
-                  actionHref="mailto:admin@thealphacircle.world"
-                  actionType="copy"
+                  actionHref="https://mail.google.com/mail/?view=cm&to=admin@thealphacircle.world"
+                  actionType="link"
                   isRed={false}
                   delay={0.4}
                 />
@@ -533,6 +558,20 @@ export default function ContactPage() {
                     </button>
                 </motion.div>
               ) : (
+                  <>
+                  {submitError && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="bg-red-50 border-2 border-red-200 rounded-2xl p-6 flex items-start gap-4 mb-6"
+                    >
+                      <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <h3 className="text-red-900 font-semibold mb-1">Submission Failed</h3>
+                        <p className="text-red-700 text-sm">{submitError}</p>
+                      </div>
+                    </motion.div>
+                  )}
                   <motion.form
                     key="form"
                     initial={{ opacity: 0 }}
@@ -609,6 +648,7 @@ export default function ContactPage() {
                       </motion.button>
                     </div>
                   </motion.form>
+                  </>
               )}
               </AnimatePresence>
               </div>

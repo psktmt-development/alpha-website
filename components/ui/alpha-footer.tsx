@@ -50,7 +50,7 @@ export function AlphaFooter() {
                   About Us
                 </Link>
                 <Link 
-                  href="/#events" 
+                  href="/events" 
                   className="block text-gray-400 hover:text-[#af2324] transition-colors duration-300"
                 >
                   Events
@@ -112,7 +112,9 @@ export function AlphaFooter() {
                 <div className="flex items-center gap-3">
                   <Mail className="w-5 h-5 text-[#af2324] shrink-0" />
                   <a 
-                    href="mailto:admin@thealphacircle.world" 
+                    href="https://mail.google.com/mail/?view=cm&to=admin@thealphacircle.world" 
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-gray-400 hover:text-[#af2324] transition-colors duration-300 break-all text-sm"
                   >
                     admin@thealphacircle.world

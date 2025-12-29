@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, User, Mail, Phone, MapPin, Building2, Briefcase, Linkedin, TrendingUp, MessageSquare, Send, ChevronDown } from "lucide-react";
+import { X, User, Mail, Phone, MapPin, Building2, Briefcase, Linkedin, TrendingUp, MessageSquare, Send, ChevronDown, CheckCircle2, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface JoinCircleModalProps {
@@ -25,6 +25,8 @@ export function JoinCircleModal({ isOpen, onClose }: JoinCircleModalProps) {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   // Reset form when modal opens
   useEffect(() => {
@@ -41,6 +43,8 @@ export function JoinCircleModal({ isOpen, onClose }: JoinCircleModalProps) {
         motivation: "",
         expectations: "",
       });
+      setSubmitStatus("idle");
+      setErrorMessage("");
     }
   }, [isOpen]);
 
@@ -57,29 +61,55 @@ export function JoinCircleModal({ isOpen, onClose }: JoinCircleModalProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus("idle");
+    setErrorMessage("");
     
-    // TODO: Add API call to submit form data
-    console.log("Form submitted:", formData);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      alert("Thank you for your interest! We'll get back to you soon.");
-      onClose();
-      // Reset form
-      setFormData({
-        fullName: "",
-        email: "",
-        mobileNumber: "",
-        location: "",
-        companyName: "",
-        role: "",
-        linkedInProfile: "",
-        companyTurnover: "",
-        motivation: "",
-        expectations: "",
+    try {
+      const response = await fetch("/api/join-circle", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
-    }, 1000);
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || "Failed to submit form");
+      }
+
+      // Success
+      setSubmitStatus("success");
+      
+      // Reset form after showing success message
+      setTimeout(() => {
+        setFormData({
+          fullName: "",
+          email: "",
+          mobileNumber: "",
+          location: "",
+          companyName: "",
+          role: "",
+          linkedInProfile: "",
+          companyTurnover: "",
+          motivation: "",
+          expectations: "",
+        });
+        setIsSubmitting(false);
+        setSubmitStatus("idle");
+        onClose();
+      }, 2000);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setSubmitStatus("error");
+      setErrorMessage(
+        error instanceof Error 
+          ? error.message 
+          : "Something went wrong. Please try again later."
+      );
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -129,6 +159,35 @@ export function JoinCircleModal({ isOpen, onClose }: JoinCircleModalProps) {
 
               {/* Form */}
               <form onSubmit={handleSubmit} className="p-8 md:p-16 lg:p-20 space-y-6">
+                {/* Success Message */}
+                {submitStatus === "success" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-green-50 border-2 border-green-200 rounded-2xl p-6 flex items-start gap-4"
+                  >
+                    <CheckCircle2 className="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <h3 className="text-green-900 font-semibold mb-1">Thank you for your interest!</h3>
+                      <p className="text-green-700 text-sm">We've received your submission and will get back to you soon.</p>
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* Error Message */}
+                {submitStatus === "error" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-red-50 border-2 border-red-200 rounded-2xl p-6 flex items-start gap-4"
+                  >
+                    <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <h3 className="text-red-900 font-semibold mb-1">Submission Failed</h3>
+                      <p className="text-red-700 text-sm">{errorMessage || "Something went wrong. Please try again later."}</p>
+                    </div>
+                  </motion.div>
+                )}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <FloatingInput 
                     label="Full Name" 
