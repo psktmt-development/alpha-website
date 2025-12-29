@@ -340,32 +340,8 @@ export default function ContactPage() {
 
   return (
     <main className="min-h-screen pb-16 scroll-smooth">
-      {/* Hero Section with Shooting Stars Background */}
-      <section className="w-full bg-slate-950 py-12 px-4 md:px-8 relative overflow-hidden">
-        {/* Static Stars Background */}
-        {staticStars.map((star) => (
-          <div
-            key={star.id}
-            className="absolute bg-white rounded-full animate-pulse"
-            style={{
-              top: star.top,
-              left: star.left,
-              width: `${star.size}px`,
-              height: `${star.size}px`,
-              opacity: star.opacity,
-              animationDuration: `${star.duration}s`,
-            }}
-          />
-        ))}
-
-        {/* Shooting Stars Animation */}
-        <ShootingStars 
-          minSpeed={12} 
-          maxSpeed={25} 
-          starColor="#facc15" 
-          trailColor="#e879f9" 
-        />
-
+      {/* Hero Section with White Background */}
+      <section className="w-full bg-white py-12 px-4 md:px-8 relative overflow-hidden">
         <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -373,10 +349,10 @@ export default function ContactPage() {
             transition={{ duration: 0.6 }}
             className="mb-12"
           >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-4 leading-tight">
               Get In Touch
             </h1>
-            <p className="text-lg md:text-xl text-slate-300 max-w-3xl leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-600 max-w-3xl leading-relaxed">
               We'd love to hear from you! Whether you have questions, need support, or want to learn more about our services, our team is here to help.
             </p>
           </motion.div>

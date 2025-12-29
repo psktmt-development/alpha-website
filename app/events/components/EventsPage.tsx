@@ -324,7 +324,13 @@ export function EventsPage() {
 
       {/* Hero Section Wrapper */}
       <section className="hero-container px-6 md:px-12 pt-8 md:pt-12">
-        <div className="max-w-7xl mx-auto">
+        <motion.div 
+          className="max-w-7xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <div className="relative rounded-2xl overflow-hidden custom-shadow bg-white">
             {/* Hero Image */}
             <div className="relative w-full h-[300px] md:h-[550px]">
@@ -339,22 +345,40 @@ export function EventsPage() {
               <div className="absolute inset-0 bg-black/40"></div>
               
               {/* Upcoming Events Text */}
-              <div className="absolute top-6 left-6 md:top-8 md:left-8 text-white z-10">
+              <motion.div 
+                className="absolute top-6 left-6 md:top-8 md:left-8 text-white z-10"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
                 <h2 className="text-xl md:text-2xl lg:text-3xl font-bold">
                   Upcoming Events
                 </h2>
-              </div>
+              </motion.div>
               
               {/* Event Title on Image */}
-              <div className="absolute top-1/2 left-6 md:left-8 -translate-y-1/2 text-white z-10">
+              <motion.div 
+                className="absolute top-1/2 left-6 md:left-8 -translate-y-1/2 text-white z-10"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
                 <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
                   The Alpha Circle <br />
                   Speaker Session
                 </h3>
-              </div>
+              </motion.div>
               
               {/* Date Card overlaid at the bottom */}
-              <div className="absolute bottom-6 right-6 md:bottom-8 md:right-8 z-10">
+              <motion.div 
+                className="absolute bottom-6 right-6 md:bottom-8 md:right-8 z-10"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+              >
                 <div className="bg-white/95 backdrop-blur-sm rounded-lg border shadow-lg p-4 md:p-5">
                   <div className="flex items-center gap-3 md:gap-4">
                     <div className="text-3xl md:text-4xl font-bold text-[#BB2324] leading-none">
@@ -370,32 +394,62 @@ export function EventsPage() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
             {/* Red Accent Bar */}
             <div className="red-accent-bar"></div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Content Section */}
       <main className="max-w-7xl mx-auto px-6 md:px-12 py-16">
         {/* Description Section */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
-          <div className="md:col-span-6">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a1a1a] mb-4 md:mb-6">
+          <motion.div 
+            className="md:col-span-6"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <motion.h2 
+              className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#1a1a1a] mb-4 md:mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
               Transformative Experiences that Shape Industries
-            </h2>
-            <p className="text-lg md:text-xl lg:text-2xl font-semibold text-[#BB2324] mb-4 md:mb-6 leading-relaxed">
+            </motion.h2>
+            <motion.p 
+              className="text-lg md:text-xl lg:text-2xl font-semibold text-[#BB2324] mb-4 md:mb-6 leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
               Not Just an Event — A Movement in Motion
-            </p>
-            <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-4">
+            </motion.p>
+            <motion.p 
+              className="text-base md:text-lg text-gray-700 leading-relaxed mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
               At The Alpha Circle, events aren't just meetings — they're catalysts for transformation. From intimate leadership roundtables to grand summits in palaces and global business hubs, every Alpha Circle event is designed to spark real dialogue, meaningful relationships, and actionable outcomes.
-            </p>
-            <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+            </motion.p>
+            <motion.p 
+              className="text-base md:text-lg text-gray-700 leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
               Whether you're engaging with policymakers, global investors, or next-gen entrepreneurs, each gathering is a doorway to deeper growth, innovation, and collaboration.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
           <div className="md:col-span-6 flex items-center justify-center">
             <motion.div 
               className="relative w-full max-w-lg group"
@@ -432,16 +486,28 @@ export function EventsPage() {
         </div>
 
         {/* Timeline Section */}
-        <section className="w-full">
+        <motion.section 
+          className="w-full"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        >
           <TimelineDemo />
-        </section>
+        </motion.section>
 
         {/* Bento Grid Section */}
-        <section className="min-h-screen w-full px-4 md:px-6 lg:px-8 py-8 md:py-12 flex items-center">
+        <motion.section 
+          className="min-h-screen w-full px-4 md:px-6 lg:px-8 py-8 md:py-12 flex items-center"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+        >
           <div className="w-full">
             <BentoGridDemo />
           </div>
-        </section>
+        </motion.section>
       </main>
     </>
   );

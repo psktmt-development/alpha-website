@@ -131,12 +131,6 @@ export default function AlphaHeroSection() {
                  className="opacity-100"
                />
             </svg>
-            
-            {/* Floating Badge */}
-            <div className="absolute top-10 right-10 z-30 bg-[#af2324]/10 backdrop-blur-md border border-[#af2324]/20 p-4 rounded-2xl hidden md:block transform rotate-[-2deg]">
-               <div className="text-[#af2324] text-xs font-bold tracking-widest uppercase">Founded</div>
-               <div className="text-[#af2324] text-2xl font-dm-serif">2024</div>
-            </div>
           </div>
           
         </motion.div>
