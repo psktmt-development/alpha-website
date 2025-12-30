@@ -9,9 +9,6 @@ import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 // Data structure: Year → Event → Images
 const galleryData: Record<number, Record<string, string[]>> = {
   2025: {
-    "Book Launch": [
-      // No JPG files available (only ARW/CR3 raw formats)
-    ],
     "Circle 2 Launch": [
       "/gallery/2025/circle 2 launch/0B4A0369.JPG",
       "/gallery/2025/circle 2 launch/0B4A0567 (1).JPG",
@@ -107,22 +104,11 @@ interface ImageItem {
 
 export function GalleryMain() {
   const [selectedYear, setSelectedYear] = useState<Year>(2025);
-  const [selectedEvent, setSelectedEvent] = useState<EventName>(
-    Object.keys(galleryData[2025])[0]
-  );
+  const [selectedEvent, setSelectedEvent] = useState<EventName>("All Photos");
   const [lightboxImage, setLightboxImage] = useState<ImageItem | null>(null);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [navHidden, setNavHidden] = useState(false);
   const lastScrollY = useRef(0);
-
-  // Get current images based on selected year and event
-  const currentImages: ImageItem[] = (galleryData[selectedYear]?.[selectedEvent] || []).map(
-    (src: string) => ({
-      src,
-      event: selectedEvent,
-      year: selectedYear,
-    })
-  );
 
   // Get all images from the selected year for lightbox navigation
   const allYearImages: ImageItem[] = Object.keys(galleryData[selectedYear]).flatMap(
@@ -134,11 +120,32 @@ export function GalleryMain() {
       }))
   );
 
+  // Get all images from all years (2024 and 2025)
+  const allPhotosImages: ImageItem[] = Object.keys(galleryData).flatMap((year) =>
+    Object.keys(galleryData[Number(year)]).flatMap((event) =>
+      (galleryData[Number(year)]?.[event] || []).map((src: string) => ({
+        src,
+        event,
+        year: Number(year),
+      }))
+    )
+  );
+
+  // Get current images based on selected year and event
+  const currentImages: ImageItem[] = selectedEvent === "All Photos"
+    ? allPhotosImages
+    : (galleryData[selectedYear]?.[selectedEvent] || []).map(
+        (src: string) => ({
+          src,
+          event: selectedEvent,
+          year: selectedYear,
+        })
+      );
+
   const handleYearChange = (year: Year) => {
     setSelectedYear(year);
-    // Set first event of the new year
-    const firstEvent = Object.keys(galleryData[year])[0];
-    setSelectedEvent(firstEvent);
+    // Default to "All Photos" when year changes
+    setSelectedEvent("All Photos");
   };
 
   const openLightbox = (image: ImageItem, index: number) => {
@@ -154,16 +161,17 @@ export function GalleryMain() {
 
   const navigateLightbox = (direction: "prev" | "next") => {
     if (!lightboxImage) return;
-    const currentIdx = allYearImages.findIndex(
+    const allImages = selectedEvent === "All Photos" ? allPhotosImages : allYearImages;
+    const currentIdx = allImages.findIndex(
       (img) => img.src === lightboxImage.src
     );
     let newIdx;
     if (direction === "next") {
-      newIdx = (currentIdx + 1) % allYearImages.length;
+      newIdx = (currentIdx + 1) % allImages.length;
     } else {
-      newIdx = currentIdx - 1 < 0 ? allYearImages.length - 1 : currentIdx - 1;
+      newIdx = currentIdx - 1 < 0 ? allImages.length - 1 : currentIdx - 1;
     }
-    setLightboxImage(allYearImages[newIdx]);
+    setLightboxImage(allImages[newIdx]);
     setLightboxIndex(newIdx);
   };
 
@@ -240,25 +248,27 @@ export function GalleryMain() {
       if (e.key === "Escape") {
         setLightboxImage(null);
       } else if (e.key === "ArrowLeft") {
-        const currentIdx = allYearImages.findIndex(
+        const allImages = selectedEvent === "All Photos" ? allPhotosImages : allYearImages;
+        const currentIdx = allImages.findIndex(
           (img) => img.src === lightboxImage.src
         );
-        const newIdx = currentIdx - 1 < 0 ? allYearImages.length - 1 : currentIdx - 1;
-        setLightboxImage(allYearImages[newIdx]);
+        const newIdx = currentIdx - 1 < 0 ? allImages.length - 1 : currentIdx - 1;
+        setLightboxImage(allImages[newIdx]);
         setLightboxIndex(newIdx);
       } else if (e.key === "ArrowRight") {
-        const currentIdx = allYearImages.findIndex(
+        const allImages = selectedEvent === "All Photos" ? allPhotosImages : allYearImages;
+        const currentIdx = allImages.findIndex(
           (img) => img.src === lightboxImage.src
         );
-        const newIdx = (currentIdx + 1) % allYearImages.length;
-        setLightboxImage(allYearImages[newIdx]);
+        const newIdx = (currentIdx + 1) % allImages.length;
+        setLightboxImage(allImages[newIdx]);
         setLightboxIndex(newIdx);
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [lightboxImage, allYearImages]);
+  }, [lightboxImage, allYearImages, allPhotosImages, selectedEvent]);
 
   const currentYearEvents = Object.keys(galleryData[selectedYear]);
 
@@ -270,6 +280,22 @@ export function GalleryMain() {
           {/* Left Sidebar - Filters */}
           <aside className="lg:col-span-1 lg:border-r lg:border-black/10">
             <div className="sticky top-24 space-y-8 pr-8">
+              {/* All Photos Filter Section */}
+              <div>
+                <button
+                  onClick={() => setSelectedEvent("All Photos")}
+                  className={`
+                    text-left px-3 py-2.5 rounded-md text-sm font-medium transition-all duration-200 w-fit
+                    ${selectedEvent === "All Photos"
+                      ? "bg-[#af2324] text-white"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-[#af2324]"
+                    }
+                  `}
+                >
+                  All Photos
+                </button>
+              </div>
+
               {/* Year Filter Section */}
               <div>
                 <h3 className="text-sm font-semibold text-gray-900 mb-4 uppercase tracking-wide">
@@ -553,7 +579,7 @@ export function GalleryMain() {
                 transition={{ delay: 0.3 }}
                 className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[10001] bg-[#af2324]/90 backdrop-blur-md rounded-full px-6 py-2 text-white text-sm font-medium border border-[#af2324]/50 shadow-lg"
               >
-                {allYearImages.findIndex((img) => img.src === lightboxImage.src) + 1} / {allYearImages.length}
+                {(selectedEvent === "All Photos" ? allPhotosImages : allYearImages).findIndex((img) => img.src === lightboxImage.src) + 1} / {(selectedEvent === "All Photos" ? allPhotosImages : allYearImages).length}
               </motion.div>
             </motion.div>
           </motion.div>

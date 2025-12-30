@@ -472,7 +472,7 @@ export default function AboutUsDotGridSection() {
                      <div className="w-[480px] h-[320px] flex items-center justify-center relative">
                         <div className="relative w-full h-full">
                           <Image
-                            src="/Visiting Card (2).png"
+                            src="/home and about/Visiting Card (2).png"
                             alt="Alpha Circle Logo"
                             fill
                             className="object-contain"

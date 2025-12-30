@@ -235,7 +235,7 @@ export function EventsPage() {
             {/* Hero Image */}
             <div className="relative w-full h-[300px] md:h-[550px]">
               <Image
-                src="/image.png"
+                src="/home and about/image.png"
                 alt="Alpha Circle Event"
                 fill
                 className="object-cover brightness-75"
@@ -324,7 +324,7 @@ export function EventsPage() {
                 }}
               >
                 <Image
-                  src="/image copy.png"
+                  src="/home and about/image copy.png"
                   alt="Alpha Circle Event"
                   width={800}
                   height={600}
