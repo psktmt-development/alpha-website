@@ -309,7 +309,7 @@ export default function AboutUsDotGridSection() {
                 Welcome to The Alpha Circle
               </div>
             </PopUp>
-            <h1 className="text-5xl md:text-7xl lg:text-9xl text-black tracking-tight mb-8 leading-[0.9]" style={{ fontFamily: 'DM Serif Display, serif' }}>
+            <h1 className="text-6xl text-black tracking-tight mb-8 leading-[0.9]" style={{ fontFamily: 'DM Serif Display, serif' }}>
               <RevealText delay={0.2} priority={true}>
                 SHAPE THE FUTURE,
               </RevealText>
@@ -319,7 +319,7 @@ export default function AboutUsDotGridSection() {
             </h1>
             
             <PopUp delay={0.5} className="max-w-3xl mx-auto" priority={true}>
-              <p className="text-xl md:text-2xl text-gray-600 font-light leading-relaxed">
+              <p className="text-xl text-gray-600 font-light leading-relaxed">
                  Founded in 2024 by visionary entrepreneur <strong className="text-black font-semibold">Dr. Pulluri Srikanth</strong>, The Alpha Circle is a global, invite-only collective of industry leaders, second-generation entrepreneurs, changemakers, and innovators.
               </p>
             </PopUp>
@@ -333,7 +333,7 @@ export default function AboutUsDotGridSection() {
                     
                     <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
                         <div className="space-y-6">
-                            <h2 className="text-3xl md:text-5xl leading-tight" style={{ fontFamily: 'DM Serif Display, serif' }}>
+                            <h2 className="text-4xl leading-tight" style={{ fontFamily: 'DM Serif Display, serif' }}>
                                 A Transformative <br/><span className="text-[#af2324]">Leadership Ecosystem</span>
                             </h2>
                             <div className="h-1.5 w-24 bg-[#af2324] rounded-full" />
@@ -409,7 +409,7 @@ export default function AboutUsDotGridSection() {
           <div className="mb-32">
              <div className="flex flex-col items-center text-center mb-16">
                 <PopUp delay={0.1}>
-                    <h2 className="text-4xl md:text-6xl text-black mb-6" style={{ fontFamily: 'DM Serif Display, serif' }}>Meet The Team</h2>
+                    <h2 className="text-5xl text-black mb-6" style={{ fontFamily: 'DM Serif Display, serif' }}>Meet The Team</h2>
                     <div className="w-24 h-1.5 bg-[#af2324] mx-auto rounded-full" />
                 </PopUp>
              </div>
@@ -419,7 +419,7 @@ export default function AboutUsDotGridSection() {
                     <TeamMemberCard 
                         name="Dr. Srikanth Pulluri"
                         role="Founder"
-                        image="/Dr.-Pulluri-Srikanth-Founder.jpg"
+                        image="/home and about/Dr.-Pulluri-Srikanth-Founder.jpg"
                         delay={0.2}
                     />
                 </div>
@@ -428,13 +428,13 @@ export default function AboutUsDotGridSection() {
                     <TeamMemberCard 
                         name="Dr. Chandrashekar D P"
                         role="Director"
-                        image="/Chandrashekhar.jpg"
+                        image="/home and about/Chandrashekhar.jpg"
                         delay={0.3}
                     />
                     <TeamMemberCard 
                         name="Brigadier (Dr) Inder Sethi (R)"
                         role="Chief Strategy Officer"
-                        image="/Alpha-Sethi-sir.jpg"
+                        image="/home and about/Alpha-Sethi-sir.jpg"
                         delay={0.4}
                     />
                 </div>
@@ -449,7 +449,7 @@ export default function AboutUsDotGridSection() {
                
                <div className="relative z-10 flex flex-col md:flex-row gap-12 items-center justify-between">
                   <div className="space-y-8 max-w-2xl flex-1 min-w-0">
-                    <h2 className="text-4xl md:text-7xl tracking-tight leading-tight" style={{ fontFamily: 'DM Serif Display, serif' }}>
+                    <h2 className="text-5xl tracking-tight leading-tight" style={{ fontFamily: 'DM Serif Display, serif' }}>
                         <span className="inline-block px-0.5 md:px-1 py-2 md:py-3 border-l-4 border-r-4 border-transparent -mr-1 md:-mr-2">Join</span>
                         <span className="inline-block px-0.5 md:px-1 py-2 md:py-3 border-l-4 border-r-4 border-transparent -mr-1 md:-mr-2">the</span>
                         <span className="inline-block px-0.5 md:px-1 py-2 md:py-3 border-l-4 border-r-4 border-transparent -mr-1 md:-mr-2 text-transparent bg-clip-text bg-gradient-to-r from-[#af2324] to-[#ff4d4d]">Legacy</span>

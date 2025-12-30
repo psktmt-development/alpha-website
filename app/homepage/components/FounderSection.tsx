@@ -5,12 +5,10 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 
 export function FounderSection() {
   const images = [
-    "/xAlpha-Circle-World-Founder.jpg",
-    "/Dr.-Pulluri-Srikanth-Founder.jpg",
-    "/founder.JPG",
-    "/0Z0A2192.png",
-    "/Alpha Circle-47.jpg",
-    "/Alpha Circle-67.jpg"
+    "/home and about/xAlpha-Circle-World-Founder.jpg",
+    "/home and about/0Z0A2192.png",
+    "/home and about/Alpha Circle-47.jpg",
+    "/home and about/Alpha Circle-67.jpg"
   ];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
@@ -39,7 +37,7 @@ export function FounderSection() {
     <section 
       id="founder"
       ref={sectionRef}
-      className="min-h-screen w-full flex items-center justify-center bg-white py-16 px-4 md:px-8 lg:px-16 overflow-hidden scroll-mt-24"
+      className="relative min-h-screen w-full flex items-center justify-center bg-white py-16 px-4 md:px-8 lg:px-16 overflow-hidden scroll-mt-24"
     >
       <div className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
         
@@ -62,7 +60,7 @@ export function FounderSection() {
             <h2 className="font-dm-serif text-[#af2324] text-sm font-bold tracking-[0.2em] uppercase">
               THE ALPHA CIRCLE
             </h2>
-            <h1 className="font-dm-serif text-5xl md:text-6xl lg:text-7xl text-gray-900 leading-[1.1] font-normal">
+            <h1 className="font-dm-serif text-6xl text-gray-900 leading-[1.1] font-normal">
               Empowering <br className="hidden md:block"/>
               <span className="italic text-gray-500 font-normal text-[1em] leading-[0.9]">Visionaries</span> Everywhere.
             </h1>

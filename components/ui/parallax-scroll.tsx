@@ -28,7 +28,7 @@ export function ParallaxScroll({ images, className }: ParallaxScrollProps) {
 
   return (
     <div
-      className={cn("h-[40rem] w-full overflow-y-auto items-start", className)}
+      className={cn("relative h-[40rem] w-full overflow-y-auto items-start", className)}
       ref={gridRef}
     >
       <div className="mx-auto grid max-w-5xl grid-cols-1 items-start gap-10 px-6 py-20 md:grid-cols-2 lg:grid-cols-3 md:px-10">

@@ -80,10 +80,10 @@ export function AlphaPillarsHover() {
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h2 className="text-4xl md:text-6xl font-serif font-bold text-gray-900">
+          <h2 className="text-5xl font-serif font-bold text-gray-900">
             The Alpha Circle
           </h2>
-          <p className="text-[#af2324] text-xl md:text-2xl font-semibold">Our Pillars</p>
+          <p className="text-[#af2324] text-xl font-semibold">Our Pillars</p>
         </motion.div>
 
         <div className="flex justify-center">

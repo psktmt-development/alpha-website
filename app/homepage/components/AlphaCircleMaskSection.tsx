@@ -24,11 +24,15 @@ export function AlphaCircleMaskSection() {
 
     // start centered
     const rect = el.getBoundingClientRect();
-    setPos({ x: rect.width / 2, y: rect.height / 2 });
+    const centerX = rect.width / 2 || 0;
+    const centerY = rect.height / 2 || 0;
+    setPos({ x: centerX, y: centerY });
 
     const move = (e: MouseEvent) => {
       const r = el.getBoundingClientRect();
-      setPos({ x: e.clientX - r.left, y: e.clientY - r.top });
+      const x = e.clientX - r.left || 0;
+      const y = e.clientY - r.top || 0;
+      setPos({ x, y });
     };
     el.addEventListener("mousemove", move);
     return () => el.removeEventListener("mousemove", move);
@@ -57,11 +61,11 @@ export function AlphaCircleMaskSection() {
             <mask id="alpha-circle-mask">
               <rect width="100%" height="100%" fill="black" />
               <motion.circle
-                cx={pos.x}
-                cy={pos.y}
-                r={radius}
+                cx={pos.x || 0}
+                cy={pos.y || 0}
+                r={radius || idleRadius}
                 fill="white"
-                animate={{ r: radius, cx: pos.x, cy: pos.y }}
+                animate={{ r: radius || idleRadius, cx: pos.x || 0, cy: pos.y || 0 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
               />
             </mask>

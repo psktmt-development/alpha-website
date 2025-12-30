@@ -6,7 +6,7 @@ import { DirectionAwareHover } from "@/components/ui/direction-aware-hover";
 
 export function DirectionAwareHoverDemo() {
   const [currentImage, setCurrentImage] = useState(0);
-  const images = ["/hero-1.JPG", "/hero-2.JPG"];
+  const images = ["/home and about/hero-1.JPG", "/home and about/hero-2.JPG"];
   const captions = [
     { line1: "WHERE VISIONARIES", line2: "ALIGN GLOBALLY." },
     { line1: "GLOBAL GROUND FOR", line2: "VISIONARY MINDS." }
@@ -64,7 +64,7 @@ export function DirectionAwareHoverDemo() {
               transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             >
               <motion.p 
-                className="font-bodoni font-bold text-4xl md:text-6xl lg:text-7xl leading-tight text-center"
+                className="font-bodoni font-bold text-5xl leading-tight text-center"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}

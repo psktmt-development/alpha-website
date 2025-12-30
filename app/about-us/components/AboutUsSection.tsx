@@ -307,8 +307,8 @@ const FounderMessage = () => {
             </motion.div>
             
             <h2 
-              className="font-dm-serif text-4xl md:text-6xl lg:text-7xl xl:text-[7rem] font-bold leading-tight md:leading-[1.1] text-gray-900"
-              style={{ fontFamily: 'DM Serif Display, serif', fontSize: 'clamp(1.75rem, 4.5vw, 7rem)' }}
+              className="font-dm-serif text-5xl font-bold leading-tight text-gray-900"
+              style={{ fontFamily: 'DM Serif Display, serif' }}
             >
               <RevealText>
                 <span className="inline-block px-4 md:px-6 lg:px-8 py-2 md:py-3 border-l-4 border-r-4 border-transparent">
@@ -331,7 +331,7 @@ const FounderMessage = () => {
             
             {/* 2. The Narrative Body */}
             <div className="md:col-span-7 relative">
-              <div className="bg-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-3xl p-8 md:p-12 space-y-8 text-lg md:text-xl font-light text-gray-700 leading-relaxed text-justify md:text-left">
+              <div className="bg-white/40 backdrop-blur-xl border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-3xl p-8 md:p-12 space-y-8 text-lg font-light text-gray-700 leading-relaxed text-justify md:text-left">
                 <PopUp delay={0.1}>
                   <p>
                     When I started <strong className="text-gray-900 font-semibold relative inline-block">The Alpha Circle
@@ -371,7 +371,7 @@ const FounderMessage = () => {
                       <div className="h-[1px] w-12 bg-[#af2324]" />
                       <span className="text-xs tracking-[0.3em] uppercase text-[#af2324] font-bold font-sans">Founder</span>
                     </div>
-                    <h3 className="font-dm-serif text-3xl md:text-5xl italic text-gray-900 transform -rotate-1 origin-left whitespace-nowrap">
+                    <h3 className="font-dm-serif text-4xl italic text-gray-900 transform -rotate-1 origin-left whitespace-nowrap">
                       Dr. Pulluri Srikanth
                     </h3>
                 </motion.div>
@@ -390,7 +390,7 @@ const FounderMessage = () => {
                      <div className="relative w-full h-full bg-gray-50 overflow-hidden group z-20 border border-black/5 shadow-2xl rounded-sm">
                          {/* Founder Image */}
                          <img 
-                           src="/Alpha Circle-67.jpg"
+                           src="/home and about/founder.JPG"
                            alt="Dr. Pulluri Srikanth - Founder, The Alpha Circle"
                            className="w-full h-full object-cover"
                            loading="eager"
@@ -453,8 +453,8 @@ export default function AboutUsSection() {
               </div>
             </PopUp>
             <h1 
-              className="font-dm-serif text-5xl md:text-7xl lg:text-[8rem] xl:text-[10rem] font-bold text-gray-900 tracking-tight mb-8 leading-none"
-              style={{ fontFamily: 'DM Serif Display, serif', fontSize: 'clamp(2rem, 6vw, 10rem)' }}
+              className="font-dm-serif text-6xl font-bold text-gray-900 tracking-tight mb-8 leading-none"
+              style={{ fontFamily: 'DM Serif Display, serif' }}
             >
               <RevealText delay={0.2} priority={true}>
                 ALPHA <span className="text-[#af2324]">CIRCLE</span>
@@ -513,7 +513,7 @@ export default function AboutUsSection() {
                   </div>
                   <div className="flex items-center justify-center">
                      <img 
-                       src="/Visiting Card (2).png"
+                       src="/home and about/Visiting Card (2).png"
                        alt="The Alpha Circle"
                        className="max-w-full h-auto"
                      />

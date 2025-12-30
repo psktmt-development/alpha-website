@@ -67,12 +67,12 @@ export function UpcomingEventPopup() {
 
   // Event details - update these with actual upcoming event information
   const eventDetails = {
-    title: "Upcoming Event",
+    title: "Speaker Session",
     date: "January 9, 2026",
-    time: "6:00 PM",
-    location: "Falaknuma Palace, Hyderabad",
+    time: "7PM onwards",
+    location: "Leela Hyderabad Hotel",
     description: "Join us for an exclusive gathering of industry leaders and visionaries.",
-    image: "/launch/0Z0A3093.JPG", // Update with actual event image
+    image: "/alert poster /popup_poster.png", // Event poster
   };
 
   return (
@@ -97,34 +97,45 @@ export function UpcomingEventPopup() {
             className="fixed inset-0 z-[10001] flex items-center justify-center p-4 pointer-events-none"
           >
             <div
-              className="bg-white rounded-[2rem] border-2 border-[#af2324] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.12)] w-full max-w-4xl max-h-[90vh] overflow-hidden pointer-events-auto relative"
+              className="bg-white rounded-[2rem] border-2 border-[#af2324] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.12)] w-full max-w-5xl pointer-events-auto relative"
               onClick={(e) => e.stopPropagation()}
+              style={{ 
+                maxHeight: '95vh',
+                overflow: 'auto'
+              }}
             >
               {/* Close Button - Top Right */}
               <button
                 onClick={handleClose}
-                className="absolute top-4 right-4 z-20 p-2 hover:bg-neutral-100 rounded-full transition-colors"
+                className="absolute top-4 right-4 z-20 p-2 hover:bg-neutral-100 rounded-full transition-colors bg-white/80 backdrop-blur-sm"
                 aria-label="Close popup"
               >
                 <X className="h-5 w-5 text-neutral-500" />
               </button>
 
-              {/* Content */}
+              {/* Content - Grid Layout */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-                {/* Image Section */}
-                <div className="relative h-64 md:h-auto min-h-[300px]">
+                {/* Poster Image Section */}
+                <div className="relative w-full flex items-center justify-center p-2 md:p-4" style={{ height: 'auto' }}>
                   <Image
                     src={eventDetails.image}
                     alt={eventDetails.title}
-                    fill
-                    className="object-cover"
+                    width={1200}
+                    height={1600}
+                    className="h-auto object-contain rounded-l-[2rem]"
                     sizes="(max-width: 768px) 100vw, 50vw"
+                    priority
+                    style={{ 
+                      display: 'block',
+                      height: 'auto',
+                      width: '90%',
+                      maxWidth: '100%'
+                    }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                 </div>
 
-                {/* Text Section */}
-                <div className="p-8 md:p-12 flex flex-col justify-center space-y-6">
+                {/* Invitation Content Section */}
+                <div className="p-8 md:p-12 flex flex-col justify-center space-y-6 bg-gradient-to-br from-white to-gray-50/50 rounded-r-[2rem]">
                   <div>
                     <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-2">
                       {eventDetails.title}

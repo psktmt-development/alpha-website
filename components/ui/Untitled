@@ -1,0 +1,126 @@
+🎯 Cursor Prompt — Gallery Page with Left Sidebar Filter & Right Image Grid
+
+Context
+The current Gallery page shows Year and Event filters centered at the top, but this layout feels visually heavy and unbalanced.
+We want to redesign the Gallery page layout to match a sidebar-style filter pattern, similar to the Blog page UI.
+
+🔹 Objective
+
+Redesign the Gallery page so that:
+
+Filters live in a left sidebar
+
+Gallery images appear on the right side
+
+The layout feels clean, structured, and editorial (like a blog or magazine layout)
+
+🔹 Required Page Layout
+┌──────────────────────────────────────────────┐
+│ Sidebar (Filters) │ Gallery Images Grid      │
+│                   │                          │
+│ YEAR              │  [ Image ] [ Image ]    │
+│ 2024              │  [ Image ] [ Image ]    │
+│ 2025              │  [ Image ] [ Image ]    │
+│                   │  [ Image ] [ Image ]    │
+│ EVENTS            │                          │
+│ Falaknuma Launch  │                          │
+│ District 150      │                          │
+│ Speaker Sessions  │                          │
+└──────────────────────────────────────────────┘
+
+🔹 Sidebar Filter Requirements (Left Column)
+
+Fixed width (≈ 280–320px)
+
+Vertically stacked sections:
+
+Year filter (radio-style or pill buttons)
+
+Event filter (list or pill-style buttons)
+
+Clear section headings:
+
+“YEAR”
+
+“EVENTS”
+
+Filters should:
+
+Be left-aligned
+
+Feel lightweight and scannable
+
+Sidebar should:
+
+Stick while scrolling (position: sticky; top: navbarHeight)
+
+Scroll independently if content overflows
+
+🔹 Gallery Content Area (Right Column)
+
+Takes remaining width (flex-1)
+
+Displays:
+
+Image grid (2–4 columns depending on screen size)
+
+Masonry or uniform grid
+
+Filters should dynamically update images (existing logic stays intact)
+
+🔹 Layout Implementation Rules
+
+Use a two-column layout:
+
+display: grid or flex
+
+Suggested grid:
+
+grid-template-columns: 300px 1fr;
+
+
+Wrap both columns inside a max-w-7xl mx-auto container
+
+Maintain consistent spacing with the rest of the site
+
+🔹 Sticky Behaviour
+
+Sidebar:
+
+position: sticky
+
+top should account for navbar height
+
+Navbar behavior remains unchanged
+
+No overlap between sidebar and navbar
+
+🔹 Visual & UX Constraints
+
+Sidebar background: white or very light neutral
+
+Subtle divider between sidebar and gallery
+
+No shadows that feel “card-heavy”
+
+Clean, editorial look (similar to Blog page)
+
+❌ What NOT to Do
+
+❌ Do not keep filters centered above the gallery
+
+❌ Do not overlay filters on images
+
+❌ Do not collapse filters into dropdowns on desktop
+
+❌ Do not affect Blog page styles
+
+✅ Expected Result
+
+Filters feel like a navigation tool, not content
+
+Gallery images get full visual priority
+
+Page feels balanced, premium, and readable
+
+UX consistency with Blog layout

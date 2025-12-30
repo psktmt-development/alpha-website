@@ -106,7 +106,7 @@ export default function AlphaHeroSection() {
             {/* 3D MODEL */}
             <div className="absolute inset-0 z-10">
               <div className="w-full h-full">
-                <BrightModel3D stlUrl="/The_Alpha_Circle (1).stl" color="#af2324" />
+                <BrightModel3D stlUrl="/home and about/The_Alpha_Circle (1).stl" color="#af2324" />
               </div>
             </div>
             {/* INTERNAL DECORATIVE CURVES (Inside the 3D Model) 

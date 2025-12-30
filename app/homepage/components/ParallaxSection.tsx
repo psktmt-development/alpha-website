@@ -30,7 +30,7 @@ export function ParallaxSection({ id, className, children }: ParallaxSectionProp
     <motion.section
       id={id}
       ref={ref}
-      className={cn("scroll-mt-24", className)}
+      className={cn("relative scroll-mt-24", className)}
       style={{ y }}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}

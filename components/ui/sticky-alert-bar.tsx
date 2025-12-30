@@ -106,9 +106,8 @@ export function StickyAlertBar() {
 
   // Event information - update these with actual upcoming event details
   const eventInfo = {
-    eventName: "Alpha Circle Meet",
-    venue: "Taj Deccan",
-    city: "Hyderabad",
+    venue: "Leela Hyderabad Hotel",
+    time: "7PM onwards",
     ctaText: "View Details",
     ctaLink: "/events",
   };
@@ -136,7 +135,7 @@ export function StickyAlertBar() {
               Upcoming Event:
             </span>
             <span className="text-xs md:text-sm font-sans text-gray-700 truncate">
-              {eventInfo.eventName} — {eventInfo.venue}, {eventInfo.city}
+              {eventInfo.venue}, {eventInfo.time}
             </span>
           </div>
 

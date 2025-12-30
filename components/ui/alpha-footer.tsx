@@ -178,10 +178,6 @@ export function AlphaFooter() {
             <p className="text-gray-500 text-xs text-center md:text-left">
               © Copyright The Alpha Circle | All rights reserved.
             </p>
-            <div className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#af2324]"></div>
-              <span className="text-gray-500 text-xs">Built with purpose</span>
-            </div>
           </div>
         </motion.div>
       </div>

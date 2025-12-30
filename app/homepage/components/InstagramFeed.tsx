@@ -58,7 +58,7 @@ export function InstagramFeed() {
       <div className="w-full overflow-hidden rounded-xl border border-neutral-200 shadow-sm bg-white">
         <iframe
           src="https://www.instagram.com/the_alphacircle/embed"
-          allowTransparency={true}
+          allowtransparency="true"
           allow="encrypted-media"
           scrolling="no"
           className="w-full h-[550px] border-0"

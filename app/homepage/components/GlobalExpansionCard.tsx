@@ -29,7 +29,7 @@ export function GlobalExpansionCard({ inline = false }: Props) {
     return (
       <div className="relative w-full max-w-4xl mx-auto">
         <Image
-          src="/Coffe Book Trail 01.png"
+          src="/home and about/Coffe Book Trail 01.png"
           alt="Alpha's Footprint - Global Expansion Map"
           width={1200}
           height={800}
@@ -43,7 +43,7 @@ export function GlobalExpansionCard({ inline = false }: Props) {
     <ParallaxSection
       className="w-full bg-white px-4 md:px-8 lg:px-12"
     >
-      <div ref={sectionRef} className="max-w-7xl mx-auto">
+      <div ref={sectionRef} className="relative max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           {/* Heading on the left */}
           <motion.div 
@@ -57,10 +57,10 @@ export function GlobalExpansionCard({ inline = false }: Props) {
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
-            <h2 className="text-4xl md:text-6xl font-serif font-bold text-gray-900">
+            <h2 className="text-5xl font-serif font-bold text-gray-900">
               Our Global Expansion
             </h2>
-            <p className="text-lg md:text-xl text-neutral-600 max-w-xl">
+            <p className="text-lg text-neutral-600 max-w-xl">
               From our royal roots at Falaknuma Palace, we are now expanding globally.
             </p>
           </motion.div>
@@ -80,7 +80,7 @@ export function GlobalExpansionCard({ inline = false }: Props) {
           >
             <div className="relative w-full max-w-2xl" style={{ transformOrigin: 'right center' }}>
               <Image
-                src="/Coffe Book Trail 01.png"
+                src="/home and about/Coffe Book Trail 01.png"
                 alt="Alpha's Footprint - Global Expansion Map"
                 width={1200}
                 height={800}

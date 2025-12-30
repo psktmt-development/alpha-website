@@ -99,7 +99,7 @@ export function NewHeroSection() {
         <div className="flex-1 h-full max-h-[80vh] flex items-center justify-center w-full md:w-auto">
           <div className="w-full h-full max-w-[700px] max-h-[700px] min-h-[400px]">
             <Canvas camera={{ position: [0, 0, 5], fov: 50 }} gl={{ antialias: true }}>
-              <Scene stlUrl="/The_Alpha_Circle (1).stl" color="#B02425" />
+              <Scene stlUrl="/home and about/The_Alpha_Circle (1).stl" color="#B02425" />
             </Canvas>
           </div>
         </div>
