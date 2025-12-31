@@ -211,6 +211,9 @@ export default function BlogPage() {
                             alt={filteredPosts[0].title}
                             fill
                             className="object-cover group-hover:scale-105 transition-transform duration-300"
+                            priority
+                            quality={85}
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 50vw"
                           />
                         </div>
                       </div>
@@ -280,6 +283,9 @@ export default function BlogPage() {
                               alt={post.title}
                               fill
                               className="object-cover group-hover:scale-105 transition-transform duration-300"
+                              loading="lazy"
+                              quality={80}
+                              sizes="(max-width: 768px) 128px, 160px"
                             />
                           </div>
                         </div>

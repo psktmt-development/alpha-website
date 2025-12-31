@@ -448,6 +448,9 @@ export function GalleryMain() {
                             fill
                             className="object-cover transition-all duration-700 ease-out group-hover:scale-110"
                             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                            loading={index < 6 ? "eager" : "lazy"}
+                            priority={index < 3}
+                            quality={85}
                           />
                           {/* Gradient overlays */}
                           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -515,6 +518,8 @@ export function GalleryMain() {
                 fill
                 className="object-contain rounded-lg"
                 sizes="90vw"
+                priority
+                quality={90}
               />
               {/* Event name - Top Left */}
               <motion.div 

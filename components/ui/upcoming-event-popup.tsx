@@ -72,7 +72,7 @@ export function UpcomingEventPopup() {
     time: "7PM onwards",
     location: "Leela Hyderabad Hotel",
     description: "Join us for an exclusive gathering of industry leaders and visionaries.",
-    image: "/alert poster /popup_poster.png", // Event poster
+    image: "/alert/image.png", // Event poster
   };
 
   return (

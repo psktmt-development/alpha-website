@@ -34,15 +34,15 @@ export function FounderSection() {
   }, [images.length]);
 
   return (
-    <section 
+    <section
       id="founder"
       ref={sectionRef}
       className="relative min-h-screen w-full flex items-center justify-center bg-white py-16 px-4 md:px-8 lg:px-16 overflow-hidden scroll-mt-24"
     >
       <div className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
-        
+
         {/* Left Section - Text Content (Spans 7 columns on tablet+) */}
-        <motion.div 
+        <motion.div
           className="md:col-span-7 flex flex-col space-y-8 relative z-10"
           style={{ y: textY, opacity: textOpacity }}
           initial={{ opacity: 0, x: -40 }}
@@ -50,7 +50,7 @@ export function FounderSection() {
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
-          <motion.div 
+          <motion.div
             className="space-y-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -61,11 +61,11 @@ export function FounderSection() {
               THE ALPHA CIRCLE
             </h2>
             <h1 className="font-dm-serif text-6xl text-gray-900 leading-[1.1] font-normal">
-              Empowering <br className="hidden md:block"/>
+              Empowering <br className="hidden md:block" />
               <span className="italic text-gray-500 font-normal text-[1em] leading-[0.9]">Visionaries</span> Everywhere.
             </h1>
           </motion.div>
-          <motion.div 
+          <motion.div
             className="font-dm-serif space-y-6 text-gray-600 text-lg leading-relaxed max-w-2xl border-l-2 border-[#af2324]/20 pl-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -73,17 +73,17 @@ export function FounderSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <p className="font-dm-serif">
-              The Alpha Circle is an invite-only global industry leaders collective founded by Dr. Pulluri Srikanth. 
-              We unite industrialists, business pioneers, and generational entrepreneurs who share a vision for 
+              The Alpha Circle is an invite-only global industry leaders collective founded by Dr. Pulluri Srikanth.
+              We unite industrialists, business pioneers, and generational entrepreneurs who share a vision for
               transformative leadership.
             </p>
             <p className="font-dm-serif">
-              With a strong presence across India and our international launch in Dubai, The Alpha Circle serves 
+              With a strong presence across India and our international launch in Dubai, The Alpha Circle serves
               as a platform for collaboration, innovation, and meaningful impact across industries and borders.
             </p>
           </motion.div>
           {/* Founder Signature Block */}
-          <motion.div 
+          <motion.div
             className="pt-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -100,26 +100,26 @@ export function FounderSection() {
         </motion.div>
 
         {/* Right Section - Framed Image (Spans 5 columns on tablet+) */}
-        <motion.div 
+        <motion.div
           className="md:col-span-5 relative flex justify-center md:justify-end mt-12 md:mt-0"
           initial={{ opacity: 0, x: 40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
         >
-          
+
           {/* THE FRAME CONTAINER */}
           <div className="relative w-full max-w-md aspect-[3/4]">
-            
+
             {/* 1. The Decorative Frame (Behind) */}
-            <motion.div 
+            <motion.div
               style={{ y: frameY }}
               className="absolute -right-4 -bottom-4 w-full h-full border-2 border-[#af2324] rounded-sm z-0 hidden md:block"
             />
-            
+
             {/* 2. The Solid Background Block (For contrast) */}
             <div className="absolute -left-4 -top-4 w-full h-full bg-gray-50 rounded-sm -z-10 hidden md:block" />
-            
+
             {/* 3. The Image Mask/Container */}
             <div className="relative w-full h-full overflow-hidden rounded-sm shadow-2xl bg-gray-200 z-10">
               <AnimatePresence mode="popLayout">
@@ -128,13 +128,13 @@ export function FounderSection() {
                   src={images[currentImageIndex]}
                   alt="Dr. Pulluri Srikanth - Founder, The Alpha Circle"
                   className="absolute inset-0 w-full h-full object-cover"
-                  
+
                   // ANIMATION: Ken Burns Effect (Fade + Scale)
                   initial={{ opacity: 0, scale: 1.15 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 1 }} // Scale stays 1 on exit to prevent "zooming back"
-                  
-                  transition={{ 
+
+                  transition={{
                     opacity: { duration: 1.2, ease: "easeInOut" },
                     scale: { duration: 6, ease: "linear" } // Very slow zoom
                   }}
@@ -143,12 +143,14 @@ export function FounderSection() {
               {/* Optional: subtle gradient overlay for text readability if needed */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
             </div>
-            
+
             {/* 4. Decorative Corner Element */}
-            <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-[#af2324] hidden md:flex items-center justify-center text-white p-4 shadow-lg z-20">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5L19.5 4.5M19.5 4.5H8.25m11.25 0v11.25" />
-              </svg>
+            <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-[#af2324] hidden md:flex items-center justify-center shadow-lg z-20 overflow-hidden">
+              <img
+                src="/home and about/Visiting Card (2).png"
+                alt="Visiting Card"
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
         </motion.div>

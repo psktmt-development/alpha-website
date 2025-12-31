@@ -9,6 +9,7 @@ import { OurMembersSection } from "./homepage/components/OurMembersSection";
 import { AlphaLogosMarquee } from "./homepage/components/AlphaLogosMarquee";
 import { GlobalExpansionBento } from "./homepage/components/GlobalExpansionBento";
 import { GlobalExpansionCard } from "./homepage/components/GlobalExpansionCard";
+import { KnowledgeInsightsSection } from "./homepage/components/KnowledgeInsightsSection";
 import { UpcomingEventPopup } from "@/components/ui/upcoming-event-popup";
 
 
@@ -28,6 +29,7 @@ export default function Home() {
       <OurMembersSection />
       <GlobalExpansionCard />
       <GlobalExpansionBento />
+      <KnowledgeInsightsSection />
       {/* <AlphaLogosMarquee /> */}
     </main>
   );
