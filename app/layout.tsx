@@ -26,6 +26,28 @@ export const metadata: Metadata = {
       { url: "/favicon.png", sizes: "120x120", type: "image/png" },
     ],
   },
+  openGraph: {
+    title: "The Alpha Circle",
+    description: "An invite-only global collective uniting visionaries, and pioneers.",
+    url: "https://thealphacircle.world",
+    siteName: "The Alpha Circle",
+    images: [
+      {
+        url: "/favicon.png", // Or a larger specific OG image if available
+        width: 800,
+        height: 600,
+        alt: "The Alpha Circle Logo",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Alpha Circle",
+    description: "An invite-only global collective uniting visionaries, and pioneers.",
+    images: ["/favicon.png"], // Or a larger specific OG image
+  },
 };
 
 export default function RootLayout({
