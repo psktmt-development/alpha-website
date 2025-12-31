@@ -47,9 +47,6 @@ const galleryData: Record<number, Record<string, string[]>> = {
       "/gallery/2025/sailing club/Alpha-216.jpg",
       "/gallery/2025/sailing club/Alpha-221.jpg",
     ],
-    "Speaker Session-Vijay": [
-      "/gallery/2025/Speaker-vijay/DSC07774.JPG",
-    ],
     "Strategy Session-1": [
       "/gallery/2025/strategy session-1/8K6A1311.JPG",
       "/gallery/2025/strategy session-1/Aphla-29.JPG",
@@ -108,6 +105,12 @@ export function GalleryMain() {
   const [lightboxImage, setLightboxImage] = useState<ImageItem | null>(null);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [navHidden, setNavHidden] = useState(false);
+
+  // Pagination State
+  const [visibleCount, setVisibleCount] = useState(12);
+  const INITIAL_LOAD_COUNT = 12;
+  const LOAD_MORE_COUNT = 12;
+
   const lastScrollY = useRef(0);
 
   // Helper to get all images for a specific year
@@ -126,15 +129,15 @@ export function GalleryMain() {
     return Object.keys(galleryData).flatMap((year) => getYearImages(Number(year)));
   };
 
-  // Derive currentImages based on state
-  let currentImages: ImageItem[] = [];
+  // Derive all filtered images based on state
+  let allFilteredImages: ImageItem[] = [];
   if (selectedYear === null) {
-    currentImages = getAllImages();
+    allFilteredImages = getAllImages();
   } else {
     if (selectedEvent === null) {
-      currentImages = getYearImages(selectedYear);
+      allFilteredImages = getYearImages(selectedYear);
     } else {
-      currentImages = (galleryData[selectedYear]?.[selectedEvent] || []).map((src) => ({
+      allFilteredImages = (galleryData[selectedYear]?.[selectedEvent] || []).map((src) => ({
         src,
         event: selectedEvent,
         year: selectedYear,
@@ -142,18 +145,29 @@ export function GalleryMain() {
     }
   }
 
+  // Slice images for pagination - this reduces initial load latency
+  const currentImages = allFilteredImages.slice(0, visibleCount);
+  const hasMore = visibleCount < allFilteredImages.length;
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + LOAD_MORE_COUNT);
+  };
+
   const handleAllPhotosClick = () => {
     setSelectedYear(null);
     setSelectedEvent(null);
+    setVisibleCount(INITIAL_LOAD_COUNT);
   };
 
   const handleYearClick = (year: number) => {
     setSelectedYear(year);
     setSelectedEvent(null);
+    setVisibleCount(INITIAL_LOAD_COUNT);
   };
 
   const handleEventClick = (event: string) => {
     setSelectedEvent(event);
+    setVisibleCount(INITIAL_LOAD_COUNT);
   };
 
   const openLightbox = (image: ImageItem, index: number) => {
@@ -168,19 +182,19 @@ export function GalleryMain() {
   const navigateLightbox = (direction: "prev" | "next") => {
     if (!lightboxImage) return;
 
-    // Use currentImages for navigation context
-    const currentIdx = currentImages.findIndex(
+    // Use allFilteredImages for navigation context so we can navigate through ALL images
+    const currentIdx = allFilteredImages.findIndex(
       (img) => img.src === lightboxImage.src
     );
 
     let newIdx;
     if (direction === "next") {
-      newIdx = (currentIdx + 1) % currentImages.length;
+      newIdx = (currentIdx + 1) % allFilteredImages.length;
     } else {
-      newIdx = currentIdx - 1 < 0 ? currentImages.length - 1 : currentIdx - 1;
+      newIdx = currentIdx - 1 < 0 ? allFilteredImages.length - 1 : currentIdx - 1;
     }
 
-    setLightboxImage(currentImages[newIdx]);
+    setLightboxImage(allFilteredImages[newIdx]);
     setLightboxIndex(newIdx);
   };
 
@@ -255,7 +269,7 @@ export function GalleryMain() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [lightboxImage, currentImages]); // Added currentImages dependency
+  }, [lightboxImage, allFilteredImages]);
 
   // Events to show in sidebar
   const visibleEvents = selectedYear ? Object.keys(galleryData[selectedYear]) : [];
@@ -407,83 +421,97 @@ export function GalleryMain() {
               </motion.div>
             ) : (
               /* Bento Grid */
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={`${selectedYear}-${selectedEvent}`}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -30 }}
-                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                  className="relative"
-                >
-                  <BentoGrid className="w-full md:auto-rows-[24rem] lg:auto-rows-[28rem] gap-6 md:gap-8">
-                    {currentImages.map((image, index) => (
-                      <motion.div
-                        key={image.src}
-                        initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        transition={{
-                          duration: 0.5,
-                          delay: index * 0.08,
-                          ease: [0.22, 1, 0.36, 1]
-                        }}
-                        whileHover={{ y: -8, scale: 1.02 }}
-                        className={`${index === 3 || index === 6 ? "md:col-span-2" : ""}`}
-                      >
-                        <BentoGridItem
-                          title={image.event}
-                          description={`${image.year}`}
-                          header={
-                            <div
-                              className="relative w-full h-full min-h-[6rem] rounded-xl overflow-hidden group cursor-pointer border-2 border-transparent hover:border-[#af2324]/30 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-[#af2324]/20"
-                              onClick={() => openLightbox(image, index)}
-                            >
-                              <Image
-                                src={image.src}
-                                alt={`${image.event} - ${image.year}`}
-                                fill
-                                className="object-cover transition-all duration-700 ease-out group-hover:scale-110"
-                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                                loading={index < 6 ? "eager" : "lazy"}
-                                priority={index < 3}
-                                quality={85}
-                              />
-                              {/* Gradient overlays */}
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                              <div className="absolute inset-0 bg-[#af2324]/0 group-hover:bg-[#af2324]/20 transition-colors duration-500" />
+              <>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={`${selectedYear}-${selectedEvent}`}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -30 }}
+                    transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                    className="relative"
+                  >
+                    <BentoGrid className="w-full md:auto-rows-[24rem] lg:auto-rows-[28rem] gap-6 md:gap-8">
+                      {currentImages.map((image, index) => (
+                        <motion.div
+                          key={image.src}
+                          initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                          animate={{ opacity: 1, scale: 1, y: 0 }}
+                          transition={{
+                            duration: 0.5,
+                            delay: index * 0.08,
+                            ease: [0.22, 1, 0.36, 1]
+                          }}
+                          whileHover={{ y: -8, scale: 1.02 }}
+                          className={`${index === 3 || index === 6 ? "md:col-span-2" : ""}`}
+                        >
+                          <BentoGridItem
+                            title={image.event}
+                            description={`${image.year}`}
+                            header={
+                              <div
+                                className="relative w-full h-full min-h-[6rem] rounded-xl overflow-hidden group cursor-pointer border-2 border-transparent hover:border-[#af2324]/30 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-[#af2324]/20"
+                                onClick={() => openLightbox(image, index)}
+                              >
+                                <Image
+                                  src={image.src}
+                                  alt={`${image.event} - ${image.year}`}
+                                  fill
+                                  className="object-cover transition-all duration-700 ease-out group-hover:scale-110"
+                                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                  loading={index < 6 ? "eager" : "lazy"}
+                                  priority={index < 3}
+                                  quality={85}
+                                />
+                                {/* Gradient overlays */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                <div className="absolute inset-0 bg-[#af2324]/0 group-hover:bg-[#af2324]/20 transition-colors duration-500" />
 
-                              {/* Shine effect */}
-                              <motion.div
-                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12"
-                                initial={{ x: "-200%" }}
-                                whileHover={{ x: "200%" }}
-                                transition={{ duration: 0.8, ease: "easeInOut" }}
-                              />
+                                {/* Shine effect */}
+                                <motion.div
+                                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12"
+                                  initial={{ x: "-200%" }}
+                                  whileHover={{ x: "200%" }}
+                                  transition={{ duration: 0.8, ease: "easeInOut" }}
+                                />
 
-                              {/* Content overlay */}
-                              <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                                <div className="flex items-center gap-2 mb-2">
-                                  <div className="w-2 h-2 rounded-full bg-[#af2324] animate-pulse" />
-                                  <p className="text-white font-bold text-base drop-shadow-lg">
-                                    {image.event}
+                                {/* Content overlay */}
+                                <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                                  <div className="flex items-center gap-2 mb-2">
+                                    <div className="w-2 h-2 rounded-full bg-[#af2324] animate-pulse" />
+                                    <p className="text-white font-bold text-base drop-shadow-lg">
+                                      {image.event}
+                                    </p>
+                                  </div>
+                                  <p className="text-white/90 text-sm font-medium drop-shadow-md">
+                                    Click to view full image
                                   </p>
                                 </div>
-                                <p className="text-white/90 text-sm font-medium drop-shadow-md">
-                                  Click to view full image
-                                </p>
-                              </div>
 
-                              {/* Corner accent */}
-                              <div className="absolute top-4 right-4 w-12 h-12 border-t-2 border-r-2 border-[#af2324] opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-tr-xl" />
-                            </div>
-                          }
-                          className="h-full"
-                        />
-                      </motion.div>
-                    ))}
-                  </BentoGrid>
-                </motion.div>
-              </AnimatePresence>
+                                {/* Corner accent */}
+                                <div className="absolute top-4 right-4 w-12 h-12 border-t-2 border-r-2 border-[#af2324] opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-tr-xl" />
+                              </div>
+                            }
+                            className="h-full"
+                          />
+                        </motion.div>
+                      ))}
+                    </BentoGrid>
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Load More Button */}
+                {hasMore && (
+                  <div className="mt-12 flex justify-center">
+                    <button
+                      onClick={handleLoadMore}
+                      className="px-8 py-3 bg-white border-2 border-[#af2324] text-[#af2324] font-semibold rounded-full hover:bg-[#af2324] hover:text-white transition-all duration-300 shadow-md hover:shadow-lg"
+                    >
+                      Load More Photos
+                    </button>
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>
@@ -578,7 +606,7 @@ export function GalleryMain() {
 
             {/* Image counter - Bottom Center */}
             <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[10002] text-white/60 text-sm font-medium tracking-widest uppercase">
-              {currentImages.findIndex((img) => img.src === lightboxImage.src) + 1} <span className="mx-2 text-white/30">|</span> {currentImages.length}
+              {allFilteredImages.findIndex((img) => img.src === lightboxImage.src) + 1} <span className="mx-2 text-white/30">|</span> {allFilteredImages.length}
             </div>
           </motion.div>
         )}
