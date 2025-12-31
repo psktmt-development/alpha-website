@@ -7,8 +7,8 @@ import { JoinCircleProvider } from "@/components/ui/join-circle-provider";
 import { PopupProvider } from "@/components/ui/popup-context";
 
 export const metadata: Metadata = {
-  title: "Alpha Web",
-  description: "A modern website built with Next.js",
+  title: "The Alpha Circle",
+  description: "An invite-only global collective uniting visionaries, and pioneers.",
   icons: {
     icon: [
       { url: "/favicon.png", sizes: "any", type: "image/png" },
