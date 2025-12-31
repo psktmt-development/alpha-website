@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Timeline } from "@/components/ui/timeline";
+import { MapPin } from "lucide-react";
 
 const nextEvent = { day: "9", month: "JAN", year: "2026" };
 
@@ -264,33 +265,39 @@ export function EventsPage() {
           <div className="relative rounded-2xl overflow-hidden custom-shadow bg-white">
             {/* Hero Image */}
             <div className="relative w-full h-[300px] md:h-[550px]">
-            <Image
-              src="/home and about/image.png"
-              alt="Alpha Circle Event"
-              fill
-              className="object-cover brightness-75"
-              priority
-              quality={85}
-              sizes="100vw"
-            />
+              <Image
+                src="/home and about/image.png"
+                alt="Alpha Circle Event"
+                fill
+                className="object-cover brightness-75"
+                priority
+                quality={85}
+                sizes="100vw"
+              />
               {/* Dark Overlay */}
               <div className="absolute inset-0 bg-black/40"></div>
-              
+
               {/* Upcoming Events Text */}
               <div className="absolute top-6 left-6 md:top-8 md:left-8 text-white z-10">
                 <h2 className="text-xl md:text-2xl lg:text-3xl font-bold">
                   Upcoming Events
                 </h2>
               </div>
-              
+
               {/* Event Title on Image */}
               <div className="absolute top-1/2 left-6 md:left-8 -translate-y-1/2 text-white z-10">
                 <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
                   The Alpha Circle <br />
                   Speaker Session
                 </h3>
+
+                {/* Venue */}
+                <div className="flex items-center gap-2 mt-4 text-white/90">
+                  <MapPin className="w-5 h-5 text-[#af2324]" />
+                  <span className="text-lg md:text-xl font-medium">T-Hub, Hyderabad</span>
+                </div>
               </div>
-              
+
               {/* Date Card overlaid at the bottom */}
               <div className="absolute bottom-6 right-6 md:bottom-8 md:right-8 z-10">
                 <div className="bg-white/95 backdrop-blur-sm rounded-lg border shadow-lg p-4 md:p-5">
@@ -335,7 +342,7 @@ export function EventsPage() {
             </p>
           </div>
           <div className="md:col-span-6 flex items-center justify-center">
-            <motion.div 
+            <motion.div
               className="relative w-full max-w-lg group"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -343,7 +350,7 @@ export function EventsPage() {
               transition={{ duration: 0.6, ease: "easeOut" }}
             >
               <motion.div
-                whileHover={{ 
+                whileHover={{
                   scale: 1.05,
                   rotateY: 5,
                   rotateX: -5,
