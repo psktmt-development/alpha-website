@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { ParallaxSection } from "./ParallaxSection";
 
 const memberLogos: string[] = [
@@ -89,11 +90,9 @@ function Marquee({
         .map((_, i) => (
           <div
             key={i}
-            className={`flex shrink-0 justify-around [gap:var(--gap)] animate-marquee flex-row ${
-              reverse ? "[animation-direction:reverse]" : ""
-            } ${
-              pauseOnHover ? "group-hover:[animation-play-state:paused]" : ""
-            }`}
+            className={`flex shrink-0 justify-around [gap:var(--gap)] animate-marquee flex-row ${reverse ? "[animation-direction:reverse]" : ""
+              } ${pauseOnHover ? "group-hover:[animation-play-state:paused]" : ""
+              }`}
           >
             {children}
           </div>
@@ -120,12 +119,16 @@ const LogoItem = React.memo(function LogoItem({ src }: { src: string }) {
           transformStyle: "preserve-3d",
         }}
       >
-        <img
-          src={src}
-          alt="Member logo"
-          className="max-h-full max-w-full object-contain"
-          loading="lazy"
-        />
+        <div className="relative w-full h-full flex items-center justify-center">
+          <Image
+            src={src}
+            alt="Member logo"
+            fill
+            className="object-contain"
+            sizes="(max-width: 768px) 128px, 160px"
+            loading="lazy"
+          />
+        </div>
       </motion.div>
     </div>
   );
@@ -152,7 +155,7 @@ export function OurMembersSection() {
       `}</style>
 
       <div className="w-full max-w-7xl mx-auto space-y-8">
-        <motion.div 
+        <motion.div
           className="text-center space-y-2"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -181,4 +184,3 @@ export function OurMembersSection() {
     </ParallaxSection>
   );
 }
-

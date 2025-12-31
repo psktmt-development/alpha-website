@@ -103,56 +103,62 @@ interface ImageItem {
 }
 
 export function GalleryMain() {
-  const [selectedYear, setSelectedYear] = useState<Year>(2025);
-  const [selectedEvent, setSelectedEvent] = useState<EventName>("All Photos");
+  const [selectedYear, setSelectedYear] = useState<number | null>(null);
+  const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
   const [lightboxImage, setLightboxImage] = useState<ImageItem | null>(null);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [navHidden, setNavHidden] = useState(false);
   const lastScrollY = useRef(0);
 
-  // Get all images from the selected year for lightbox navigation
-  const allYearImages: ImageItem[] = Object.keys(galleryData[selectedYear]).flatMap(
-    (event) =>
-      (galleryData[selectedYear]?.[event] || []).map((src: string) => ({
+  // Helper to get all images for a specific year
+  const getYearImages = (year: number): ImageItem[] => {
+    return Object.keys(galleryData[year]).flatMap((event) =>
+      (galleryData[year][event] || []).map((src) => ({
         src,
         event,
+        year,
+      }))
+    );
+  };
+
+  // Helper to get ALL images
+  const getAllImages = (): ImageItem[] => {
+    return Object.keys(galleryData).flatMap((year) => getYearImages(Number(year)));
+  };
+
+  // Derive currentImages based on state
+  let currentImages: ImageItem[] = [];
+  if (selectedYear === null) {
+    currentImages = getAllImages();
+  } else {
+    if (selectedEvent === null) {
+      currentImages = getYearImages(selectedYear);
+    } else {
+      currentImages = (galleryData[selectedYear]?.[selectedEvent] || []).map((src) => ({
+        src,
+        event: selectedEvent,
         year: selectedYear,
-      }))
-  );
+      }));
+    }
+  }
 
-  // Get all images from all years (2024 and 2025)
-  const allPhotosImages: ImageItem[] = Object.keys(galleryData).flatMap((year) =>
-    Object.keys(galleryData[Number(year)]).flatMap((event) =>
-      (galleryData[Number(year)]?.[event] || []).map((src: string) => ({
-        src,
-        event,
-        year: Number(year),
-      }))
-    )
-  );
+  const handleAllPhotosClick = () => {
+    setSelectedYear(null);
+    setSelectedEvent(null);
+  };
 
-  // Get current images based on selected year and event
-  const currentImages: ImageItem[] = selectedEvent === "All Photos"
-    ? allPhotosImages
-    : (galleryData[selectedYear]?.[selectedEvent] || []).map(
-        (src: string) => ({
-          src,
-          event: selectedEvent,
-          year: selectedYear,
-        })
-      );
-
-  const handleYearChange = (year: Year) => {
+  const handleYearClick = (year: number) => {
     setSelectedYear(year);
-    // Default to "All Photos" when year changes
-    setSelectedEvent("All Photos");
+    setSelectedEvent(null);
+  };
+
+  const handleEventClick = (event: string) => {
+    setSelectedEvent(event);
   };
 
   const openLightbox = (image: ImageItem, index: number) => {
-    // Find the index in allYearImages for proper navigation
-    const allYearIdx = allYearImages.findIndex((img) => img.src === image.src);
     setLightboxImage(image);
-    setLightboxIndex(allYearIdx >= 0 ? allYearIdx : index);
+    setLightboxIndex(index);
   };
 
   const closeLightbox = () => {
@@ -161,43 +167,40 @@ export function GalleryMain() {
 
   const navigateLightbox = (direction: "prev" | "next") => {
     if (!lightboxImage) return;
-    const allImages = selectedEvent === "All Photos" ? allPhotosImages : allYearImages;
-    const currentIdx = allImages.findIndex(
+
+    // Use currentImages for navigation context
+    const currentIdx = currentImages.findIndex(
       (img) => img.src === lightboxImage.src
     );
+
     let newIdx;
     if (direction === "next") {
-      newIdx = (currentIdx + 1) % allImages.length;
+      newIdx = (currentIdx + 1) % currentImages.length;
     } else {
-      newIdx = currentIdx - 1 < 0 ? allImages.length - 1 : currentIdx - 1;
+      newIdx = currentIdx - 1 < 0 ? currentImages.length - 1 : currentIdx - 1;
     }
-    setLightboxImage(allImages[newIdx]);
+
+    setLightboxImage(currentImages[newIdx]);
     setLightboxIndex(newIdx);
   };
-
 
   // Hide navbar when lightbox is open
   useEffect(() => {
     if (lightboxImage) {
-      // Hide navbar
       const navbar = document.querySelector('nav');
       if (navbar) {
         (navbar as HTMLElement).style.display = 'none';
       }
-      // Prevent body scroll
       document.body.style.overflow = 'hidden';
     } else {
-      // Show navbar
       const navbar = document.querySelector('nav');
       if (navbar) {
         (navbar as HTMLElement).style.display = '';
       }
-      // Restore body scroll
       document.body.style.overflow = '';
     }
 
     return () => {
-      // Cleanup: restore navbar and scroll
       const navbar = document.querySelector('nav');
       if (navbar) {
         (navbar as HTMLElement).style.display = '';
@@ -216,12 +219,9 @@ export function GalleryMain() {
           const currentScrollY = window.scrollY;
           const previousScrollY = lastScrollY.current;
 
-          // Show selector bar when scrolling down past 80px
           if (currentScrollY > 80 && currentScrollY > previousScrollY) {
             setNavHidden(true);
-          } 
-          // Hide selector bar when scrolling up
-          else if (currentScrollY < previousScrollY || currentScrollY < 80) {
+          } else if (currentScrollY < previousScrollY || currentScrollY < 80) {
             setNavHidden(false);
           }
 
@@ -232,7 +232,6 @@ export function GalleryMain() {
       }
     };
 
-    // Initialize
     lastScrollY.current = window.scrollY;
     setNavHidden(window.scrollY > 80);
 
@@ -248,29 +247,18 @@ export function GalleryMain() {
       if (e.key === "Escape") {
         setLightboxImage(null);
       } else if (e.key === "ArrowLeft") {
-        const allImages = selectedEvent === "All Photos" ? allPhotosImages : allYearImages;
-        const currentIdx = allImages.findIndex(
-          (img) => img.src === lightboxImage.src
-        );
-        const newIdx = currentIdx - 1 < 0 ? allImages.length - 1 : currentIdx - 1;
-        setLightboxImage(allImages[newIdx]);
-        setLightboxIndex(newIdx);
+        navigateLightbox("prev");
       } else if (e.key === "ArrowRight") {
-        const allImages = selectedEvent === "All Photos" ? allPhotosImages : allYearImages;
-        const currentIdx = allImages.findIndex(
-          (img) => img.src === lightboxImage.src
-        );
-        const newIdx = (currentIdx + 1) % allImages.length;
-        setLightboxImage(allImages[newIdx]);
-        setLightboxIndex(newIdx);
+        navigateLightbox("next");
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [lightboxImage, allYearImages, allPhotosImages, selectedEvent]);
+  }, [lightboxImage, currentImages]); // Added currentImages dependency
 
-  const currentYearEvents = Object.keys(galleryData[selectedYear]);
+  // Events to show in sidebar
+  const visibleEvents = selectedYear ? Object.keys(galleryData[selectedYear]) : [];
 
   return (
     <div className="min-h-screen bg-white">
@@ -283,10 +271,10 @@ export function GalleryMain() {
               {/* All Photos Filter Section */}
               <div>
                 <button
-                  onClick={() => setSelectedEvent("All Photos")}
+                  onClick={handleAllPhotosClick}
                   className={`
                     text-left px-3 py-2.5 rounded-md text-sm font-medium transition-all duration-200 w-fit
-                    ${selectedEvent === "All Photos"
+                    ${selectedYear === null
                       ? "bg-[#af2324] text-white"
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-[#af2324]"
                     }
@@ -302,10 +290,10 @@ export function GalleryMain() {
                   YEAR
                 </h3>
                 <div className="flex flex-col gap-2">
-                  {(Object.keys(galleryData).map(Number) as unknown as Year[]).map((year) => (
+                  {(Object.keys(galleryData).map(Number) as unknown as number[]).map((year) => (
                     <button
                       key={year}
-                      onClick={() => handleYearChange(year)}
+                      onClick={() => handleYearClick(year)}
                       className={`
                         text-left px-3 py-2.5 rounded-md text-sm font-medium transition-all duration-200 w-fit
                         ${selectedYear === year
@@ -320,175 +308,183 @@ export function GalleryMain() {
                 </div>
               </div>
 
-              {/* Event Filter Section */}
-              <div>
-                <h3 className="text-sm font-semibold text-gray-900 mb-4 uppercase tracking-wide">
-                  EVENTS
-                </h3>
-                <div className="flex flex-col gap-2">
-                  {currentYearEvents.map((event) => (
-                    <button
-                      key={event}
-                      onClick={() => setSelectedEvent(event)}
-                      className={`
-                        text-left px-3 py-2.5 rounded-md text-sm font-medium transition-all duration-200 w-fit
-                        ${selectedEvent === event
-                          ? "bg-[#af2324] text-white"
-                          : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-[#af2324]"
-                        }
-                      `}
-                    >
-                      {event}
-                    </button>
-                  ))}
-                </div>
-              </div>
+              {/* Event Filter Section - Only visible if a year is selected */}
+              <AnimatePresence>
+                {selectedYear && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="overflow-hidden"
+                  >
+                    <h3 className="text-sm font-semibold text-gray-900 mb-4 uppercase tracking-wide pt-4 border-t border-gray-100">
+                      EVENTS ({selectedYear})
+                    </h3>
+                    <div className="flex flex-col gap-2">
+                      {visibleEvents.map((event) => (
+                        <button
+                          key={event}
+                          onClick={() => handleEventClick(event)}
+                          className={`
+                            text-left px-3 py-2.5 rounded-md text-sm font-medium transition-all duration-200 w-fit
+                            ${selectedEvent === event
+                              ? "bg-[#af2324] text-white"
+                              : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-[#af2324]"
+                            }
+                          `}
+                        >
+                          {event}
+                        </button>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </aside>
 
           {/* Right Column - Gallery Images */}
           <div className="lg:col-span-1">
-        {/* Empty State */}
-        {currentImages.length === 0 ? (
-          <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="text-center py-24 relative"
-          >
-            {/* Decorative circles */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#af2324]/5 rounded-full blur-2xl" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-[#af2324]/10 rounded-full blur-xl" />
-            
-            <motion.div
-              initial={{ scale: 0, rotate: -180 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="inline-flex items-center justify-center w-24 h-24 rounded-2xl bg-gradient-to-br from-[#af2324]/20 to-[#af2324]/5 mb-8 relative z-10 border-2 border-[#af2324]/20 shadow-lg"
-            >
-              <svg
-                className="w-12 h-12 text-[#af2324]"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-              {/* Animated pulse */}
+            {/* Empty State */}
+            {currentImages.length === 0 ? (
               <motion.div
-                className="absolute inset-0 rounded-2xl border-2 border-[#af2324]"
-                animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-            </motion.div>
-            <motion.h3 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-4xl font-bold text-gray-900 mb-3 relative z-10"
-            >
-              Images Coming Soon
-            </motion.h3>
-            <motion.p 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="text-gray-600 text-lg relative z-10"
-            >
-              Images for <span className="font-bold text-[#af2324] px-2 py-1 bg-[#af2324]/10 rounded-md">{selectedEvent}</span> will be added soon.
-            </motion.p>
-            <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: "200px" }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-              className="mx-auto mt-8 h-1 bg-gradient-to-r from-transparent via-[#af2324] to-transparent rounded-full"
-            />
-          </motion.div>
-        ) : (
-          /* Bento Grid */
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`${selectedYear}-${selectedEvent}`}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="relative"
-            >
-              <BentoGrid className="w-full md:auto-rows-[24rem] lg:auto-rows-[28rem] gap-6 md:gap-8">
-                {currentImages.map((image, index) => (
-                  <motion.div
-                    key={image.src}
-                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    transition={{ 
-                      duration: 0.5, 
-                      delay: index * 0.08,
-                      ease: [0.22, 1, 0.36, 1]
-                    }}
-                    whileHover={{ y: -8, scale: 1.02 }}
-                    className={`${index === 3 || index === 6 ? "md:col-span-2" : ""}`}
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="text-center py-24 relative"
+              >
+                {/* ... (Keep existing empty state UI) ... */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#af2324]/5 rounded-full blur-2xl" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-[#af2324]/10 rounded-full blur-xl" />
+
+                <motion.div
+                  initial={{ scale: 0, rotate: -180 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                  className="inline-flex items-center justify-center w-24 h-24 rounded-2xl bg-gradient-to-br from-[#af2324]/20 to-[#af2324]/5 mb-8 relative z-10 border-2 border-[#af2324]/20 shadow-lg"
+                >
+                  <svg
+                    className="w-12 h-12 text-[#af2324]"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
                   >
-                    <BentoGridItem
-                      title={image.event}
-                      description={`${image.year}`}
-                      header={
-                        <div 
-                          className="relative w-full h-full min-h-[6rem] rounded-xl overflow-hidden group cursor-pointer border-2 border-transparent hover:border-[#af2324]/30 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-[#af2324]/20"
-                          onClick={() => openLightbox(image, index)}
-                        >
-                          <Image
-                            src={image.src}
-                            alt={`${image.event} - ${image.year}`}
-                            fill
-                            className="object-cover transition-all duration-700 ease-out group-hover:scale-110"
-                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                            loading={index < 6 ? "eager" : "lazy"}
-                            priority={index < 3}
-                            quality={85}
-                          />
-                          {/* Gradient overlays */}
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                          <div className="absolute inset-0 bg-[#af2324]/0 group-hover:bg-[#af2324]/20 transition-colors duration-500" />
-                          
-                          {/* Shine effect */}
-                          <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12"
-                            initial={{ x: "-200%" }}
-                            whileHover={{ x: "200%" }}
-                            transition={{ duration: 0.8, ease: "easeInOut" }}
-                          />
-                          
-                          {/* Content overlay */}
-                          <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                            <div className="flex items-center gap-2 mb-2">
-                              <div className="w-2 h-2 rounded-full bg-[#af2324] animate-pulse" />
-                              <p className="text-white font-bold text-base drop-shadow-lg">
-                                {image.event}
-                              </p>
-                            </div>
-                            <p className="text-white/90 text-sm font-medium drop-shadow-md">
-                              Click to view full image
-                            </p>
-                          </div>
-                          
-                          {/* Corner accent */}
-                          <div className="absolute top-4 right-4 w-12 h-12 border-t-2 border-r-2 border-[#af2324] opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-tr-xl" />
-                        </div>
-                      }
-                      className="h-full"
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                     />
-                  </motion.div>
-                ))}
-              </BentoGrid>
+                  </svg>
+                  <motion.div
+                    className="absolute inset-0 rounded-2xl border-2 border-[#af2324]"
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0, 0.5] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
+                </motion.div>
+                <motion.h3
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="text-4xl font-bold text-gray-900 mb-3 relative z-10"
+                >
+                  Images Coming Soon
+                </motion.h3>
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                  className="text-gray-600 text-lg relative z-10"
+                >
+                  Images for <span className="font-bold text-[#af2324] px-2 py-1 bg-[#af2324]/10 rounded-md">{selectedEvent || selectedYear}</span> will be added soon.
+                </motion.p>
+                <motion.div
+                  initial={{ width: 0 }}
+                  animate={{ width: "200px" }}
+                  transition={{ delay: 0.5, duration: 0.8 }}
+                  className="mx-auto mt-8 h-1 bg-gradient-to-r from-transparent via-[#af2324] to-transparent rounded-full"
+                />
               </motion.div>
-            </AnimatePresence>
-        )}
+            ) : (
+              /* Bento Grid */
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`${selectedYear}-${selectedEvent}`}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -30 }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  className="relative"
+                >
+                  <BentoGrid className="w-full md:auto-rows-[24rem] lg:auto-rows-[28rem] gap-6 md:gap-8">
+                    {currentImages.map((image, index) => (
+                      <motion.div
+                        key={image.src}
+                        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        transition={{
+                          duration: 0.5,
+                          delay: index * 0.08,
+                          ease: [0.22, 1, 0.36, 1]
+                        }}
+                        whileHover={{ y: -8, scale: 1.02 }}
+                        className={`${index === 3 || index === 6 ? "md:col-span-2" : ""}`}
+                      >
+                        <BentoGridItem
+                          title={image.event}
+                          description={`${image.year}`}
+                          header={
+                            <div
+                              className="relative w-full h-full min-h-[6rem] rounded-xl overflow-hidden group cursor-pointer border-2 border-transparent hover:border-[#af2324]/30 transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-[#af2324]/20"
+                              onClick={() => openLightbox(image, index)}
+                            >
+                              <Image
+                                src={image.src}
+                                alt={`${image.event} - ${image.year}`}
+                                fill
+                                className="object-cover transition-all duration-700 ease-out group-hover:scale-110"
+                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                loading={index < 6 ? "eager" : "lazy"}
+                                priority={index < 3}
+                                quality={85}
+                              />
+                              {/* Gradient overlays */}
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                              <div className="absolute inset-0 bg-[#af2324]/0 group-hover:bg-[#af2324]/20 transition-colors duration-500" />
+
+                              {/* Shine effect */}
+                              <motion.div
+                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-12"
+                                initial={{ x: "-200%" }}
+                                whileHover={{ x: "200%" }}
+                                transition={{ duration: 0.8, ease: "easeInOut" }}
+                              />
+
+                              {/* Content overlay */}
+                              <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                                <div className="flex items-center gap-2 mb-2">
+                                  <div className="w-2 h-2 rounded-full bg-[#af2324] animate-pulse" />
+                                  <p className="text-white font-bold text-base drop-shadow-lg">
+                                    {image.event}
+                                  </p>
+                                </div>
+                                <p className="text-white/90 text-sm font-medium drop-shadow-md">
+                                  Click to view full image
+                                </p>
+                              </div>
+
+                              {/* Corner accent */}
+                              <div className="absolute top-4 right-4 w-12 h-12 border-t-2 border-r-2 border-[#af2324] opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-tr-xl" />
+                            </div>
+                          }
+                          className="h-full"
+                        />
+                      </motion.div>
+                    ))}
+                  </BentoGrid>
+                </motion.div>
+              </AnimatePresence>
+            )}
           </div>
         </div>
       </div>
@@ -500,93 +496,90 @@ export function GalleryMain() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[10000] bg-black/95 backdrop-blur-sm flex items-center justify-center p-4"
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[10000] bg-black/95 backdrop-blur-md flex items-center justify-center"
             onClick={closeLightbox}
           >
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.8, opacity: 0, y: 20 }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="relative max-w-6xl max-h-[90vh] w-full h-full"
+            {/* Close button - Top Right */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                closeLightbox();
+              }}
+              className="fixed top-6 right-6 z-[10002] p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-full transition-all duration-200"
+              aria-label="Close"
+            >
+              <X size={32} />
+            </button>
+
+            {/* Event name - Top Left */}
+            <div className="fixed top-8 left-8 z-[10002] text-left pointer-events-none">
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                key={lightboxImage.src} // Animate text when image changes
+                transition={{ duration: 0.3 }}
+              >
+                <h2 className="text-2xl md:text-3xl font-serif font-medium text-white drop-shadow-lg tracking-wide">
+                  {lightboxImage.event}
+                </h2>
+                <p className="text-base md:text-lg text-white/80 font-medium drop-shadow-md mt-1">
+                  {lightboxImage.year}
+                </p>
+              </motion.div>
+            </div>
+
+            {/* Navigation Buttons */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                navigateLightbox("prev");
+              }}
+              className="fixed left-4 md:left-8 top-1/2 -translate-y-1/2 z-[10002] p-3 text-white/50 hover:text-white hover:bg-white/10 rounded-full transition-all duration-200"
+              aria-label="Previous image"
+            >
+              <ChevronLeft size={48} strokeWidth={1.5} />
+            </button>
+
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                navigateLightbox("next");
+              }}
+              className="fixed right-4 md:right-8 top-1/2 -translate-y-1/2 z-[10002] p-3 text-white/50 hover:text-white hover:bg-white/10 rounded-full transition-all duration-200"
+              aria-label="Next image"
+            >
+              <ChevronRight size={48} strokeWidth={1.5} />
+            </button>
+
+            {/* Main Image Container */}
+            <div
+              className="relative w-full h-full max-w-7xl max-h-[85vh] p-4 md:p-8 flex items-center justify-center"
               onClick={(e) => e.stopPropagation()}
             >
-              <Image
-                src={lightboxImage.src}
-                alt={`${lightboxImage.event} - ${lightboxImage.year}`}
-                fill
-                className="object-contain rounded-lg"
-                sizes="90vw"
-                priority
-                quality={90}
-              />
-              {/* Event name - Top Left */}
-              <motion.div 
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 }}
-                className="fixed top-6 left-6 z-[10001] bg-black/60 backdrop-blur-md rounded-lg px-4 py-3 border border-[#af2324]/30"
-              >
-                <p className="text-lg font-semibold text-white">{lightboxImage.event}</p>
-                <p className="text-sm text-[#af2324] font-medium">{lightboxImage.year}</p>
-              </motion.div>
-              
-              {/* Close button - Top Right */}
-              <motion.button
-                initial={{ opacity: 0, scale: 0.8 }}
+              <motion.div
+                key={lightboxImage.src}
+                initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2 }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  closeLightbox();
-                }}
-                className="fixed top-6 right-6 z-[10001] bg-[#af2324] hover:bg-[#8f1d1e] rounded-full p-3 text-white transition-all duration-300 shadow-lg shadow-[#af2324]/50 hover:scale-110"
-                aria-label="Close"
+                transition={{ duration: 0.15, ease: "easeOut" }} // Fast transition
+                className="relative w-full h-full"
               >
-                <X size={20} />
-              </motion.button>
-              
-              {/* Previous button - Left */}
-              <motion.button
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  navigateLightbox("prev");
-                }}
-                className="fixed left-6 top-1/2 -translate-y-1/2 z-[10001] bg-[#af2324]/90 hover:bg-[#af2324] rounded-full p-4 text-white transition-all duration-300 shadow-lg shadow-[#af2324]/50 hover:scale-110 backdrop-blur-sm"
-                aria-label="Previous image"
-              >
-                <ChevronLeft size={24} />
-              </motion.button>
-              
-              {/* Next button - Right */}
-              <motion.button
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  navigateLightbox("next");
-                }}
-                className="fixed right-6 top-1/2 -translate-y-1/2 z-[10001] bg-[#af2324]/90 hover:bg-[#af2324] rounded-full p-4 text-white transition-all duration-300 shadow-lg shadow-[#af2324]/50 hover:scale-110 backdrop-blur-sm"
-                aria-label="Next image"
-              >
-                <ChevronRight size={24} />
-              </motion.button>
-              
-              {/* Image counter - Bottom Center */}
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[10001] bg-[#af2324]/90 backdrop-blur-md rounded-full px-6 py-2 text-white text-sm font-medium border border-[#af2324]/50 shadow-lg"
-              >
-                {(selectedEvent === "All Photos" ? allPhotosImages : allYearImages).findIndex((img) => img.src === lightboxImage.src) + 1} / {(selectedEvent === "All Photos" ? allPhotosImages : allYearImages).length}
+                <Image
+                  src={lightboxImage.src}
+                  alt={`${lightboxImage.event} - ${lightboxImage.year}`}
+                  fill
+                  className="object-contain drop-shadow-2xl"
+                  sizes="100vw"
+                  priority
+                  quality={95}
+                />
               </motion.div>
-            </motion.div>
+            </div>
+
+            {/* Image counter - Bottom Center */}
+            <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[10002] text-white/60 text-sm font-medium tracking-widest uppercase">
+              {currentImages.findIndex((img) => img.src === lightboxImage.src) + 1} <span className="mx-2 text-white/30">|</span> {currentImages.length}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

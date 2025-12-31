@@ -134,7 +134,7 @@ export function MembershipIdentitySection() {
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
               transition={{ delay: 0.6, duration: 0.6 }}
             >
-              The Alpha Circle brings together accomplished leaders who have demonstrated 
+              The Alpha Circle brings together accomplished leaders who have demonstrated
               exceptional commitment to building lasting enterprises and meaningful impact.
             </motion.p>
             <motion.p
@@ -142,7 +142,7 @@ export function MembershipIdentitySection() {
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
               transition={{ delay: 0.7, duration: 0.6 }}
             >
-              Our members share a common understanding: that strategic relationships, 
+              Our members share a common understanding: that strategic relationships,
               thoughtful dialogue, and collaborative vision drive transformative outcomes.
             </motion.p>
             <motion.p
@@ -151,7 +151,7 @@ export function MembershipIdentitySection() {
               animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
               transition={{ delay: 0.8, duration: 0.6 }}
             >
-              Membership is extended to those who have reached a level where 
+              Membership is extended to those who have reached a level where
               strategic thinking, discretion, and long-term perspective define their approach.
             </motion.p>
           </motion.div>
@@ -208,19 +208,7 @@ export function MembershipIdentitySection() {
 
                 {/* Content */}
                 <div className="relative z-10">
-                  {/* Number Badge */}
-                  <motion.div
-                    className="absolute -top-3 -left-3 w-10 h-10 bg-[#BB2324] text-white rounded-full flex items-center justify-center font-bold text-sm shadow-lg"
-                    initial={{ scale: 0, rotate: -180 }}
-                    animate={isInView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -180 }}
-                    transition={{
-                      delay: index * 0.12 + 0.3,
-                      duration: 0.5,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                  >
-                    {index + 1}
-                  </motion.div>
+
 
                   <motion.h4
                     className="text-2xl font-serif font-semibold text-neutral-900 mb-4 leading-tight group-hover:text-[#BB2324] transition-colors duration-300"
@@ -241,18 +229,7 @@ export function MembershipIdentitySection() {
                     {card.text}
                   </motion.p>
 
-                  {/* Arrow Indicator */}
-                  <motion.div
-                    className="mt-6 flex items-center gap-2 text-[#BB2324] opacity-0 group-hover:opacity-100"
-                    animate={{
-                      opacity: isHovered ? 1 : 0,
-                      x: isHovered ? 0 : -10,
-                    }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <span className="text-sm font-medium">Learn more</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </motion.div>
+
                 </div>
 
                 {/* Shine Effect */}
@@ -310,20 +287,7 @@ export function MembershipIdentitySection() {
             , The Alpha Circle offers a platform for genuine collaboration and shared growth.
           </motion.p>
 
-          {/* Optional Link */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-            transition={{ delay: 1.4 }}
-          >
-            <Link
-              href="#membership-benefits"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-[#BB2324]/20 hover:border-[#BB2324] text-[#BB2324] hover:bg-[#BB2324] hover:text-white font-medium transition-all duration-300 group mt-4"
-            >
-              <span>Explore what membership unlocks</span>
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </motion.div>
+
         </motion.div>
       </div>
     </section>

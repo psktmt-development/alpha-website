@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 interface InstagramPost {
   id: string;
@@ -23,7 +24,7 @@ export function InstagramFeed() {
       try {
         const response = await fetch('/api/instagram');
         const data = await response.json();
-        
+
         if (data.data && Array.isArray(data.data) && data.data.length > 0) {
           setPosts(data.data);
         } else {
@@ -58,11 +59,12 @@ export function InstagramFeed() {
       <div className="w-full overflow-hidden rounded-xl border border-neutral-200 shadow-sm bg-white">
         <iframe
           src="https://www.instagram.com/the_alphacircle/embed"
-          allowtransparency="true"
+          allowTransparency="true"
           allow="encrypted-media"
           scrolling="no"
           className="w-full h-[550px] border-0"
           title="Instagram Feed - The Alpha Circle"
+          loading="lazy"
         />
       </div>
     );
@@ -85,10 +87,12 @@ export function InstagramFeed() {
           >
             {post.media_type === 'VIDEO' ? (
               <div className="relative w-full h-full">
-                <img
+                <Image
                   src={post.thumbnail_url || post.media_url}
                   alt={post.caption || 'Instagram post'}
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 33vw"
                 />
                 <div className="absolute inset-0 flex items-center justify-center bg-black/20">
                   <svg
@@ -101,10 +105,12 @@ export function InstagramFeed() {
                 </div>
               </div>
             ) : (
-              <img
+              <Image
                 src={post.media_url}
                 alt={post.caption || 'Instagram post'}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                fill
+                className="object-cover group-hover:scale-110 transition-transform duration-300"
+                sizes="(max-width: 768px) 50vw, 33vw"
               />
             )}
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
@@ -114,4 +120,3 @@ export function InstagramFeed() {
     </div>
   );
 }
-

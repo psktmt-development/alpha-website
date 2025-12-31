@@ -2,6 +2,8 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
 
 export function FounderSection() {
   const images = [
@@ -123,34 +125,34 @@ export function FounderSection() {
             {/* 3. The Image Mask/Container */}
             <div className="relative w-full h-full overflow-hidden rounded-sm shadow-2xl bg-gray-200 z-10">
               <AnimatePresence mode="popLayout">
-                <motion.img
+                <motion.div
                   key={currentImageIndex}
-                  src={images[currentImageIndex]}
-                  alt="Dr. Pulluri Srikanth - Founder, The Alpha Circle"
-                  className="absolute inset-0 w-full h-full object-cover"
-
-                  // ANIMATION: Ken Burns Effect (Fade + Scale)
+                  className="absolute inset-0 w-full h-full"
                   initial={{ opacity: 0, scale: 1.15 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 1 }} // Scale stays 1 on exit to prevent "zooming back"
-
+                  exit={{ opacity: 0, scale: 1 }}
                   transition={{
                     opacity: { duration: 1.2, ease: "easeInOut" },
-                    scale: { duration: 6, ease: "linear" } // Very slow zoom
+                    scale: { duration: 6, ease: "linear" }
                   }}
-                />
+                >
+                  <Image
+                    src={images[currentImageIndex]}
+                    alt="Dr. Pulluri Srikanth - Founder, The Alpha Circle"
+                    fill
+                    className="object-cover"
+                    priority
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </motion.div>
               </AnimatePresence>
               {/* Optional: subtle gradient overlay for text readability if needed */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
             </div>
 
             {/* 4. Decorative Corner Element */}
-            <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-[#af2324] hidden md:flex items-center justify-center shadow-lg z-20 overflow-hidden">
-              <img
-                src="/home and about/Visiting Card (2).png"
-                alt="Visiting Card"
-                className="w-full h-full object-cover"
-              />
+            <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-[#af2324] hidden md:flex items-center justify-center shadow-lg z-20">
+              <ArrowUpRight className="text-white w-12 h-12" />
             </div>
           </div>
         </motion.div>
