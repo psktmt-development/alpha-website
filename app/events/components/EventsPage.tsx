@@ -291,10 +291,20 @@ export function EventsPage() {
                   Speaker Session
                 </h3>
 
-                {/* Venue */}
-                <div className="flex items-center gap-2 mt-4 text-white/90">
-                  <MapPin className="w-5 h-5 text-[#af2324]" />
-                  <span className="text-lg md:text-xl font-medium">T-Hub, Hyderabad</span>
+                {/* Venue & Time */}
+                <div className="flex flex-col gap-2 mt-4 text-white/90">
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-5 h-5 text-[#af2324]" />
+                    <span className="text-lg md:text-xl font-medium">The Leela Hyderabad</span>
+                    <span className="text-white/60 mx-2">|</span>
+                    <span className="text-lg md:text-xl font-medium">7 PM</span>
+                  </div>
+
+                  {/* Speaker */}
+                  <div className="text-base md:text-lg font-light mt-1">
+                    Speaker: <span className="font-semibold text-white">Shri Chinnakanna Sivasankaran</span>
+                    <span className="block text-sm text-white/70">(Founder - Aircel)</span>
+                  </div>
                 </div>
               </div>
 
