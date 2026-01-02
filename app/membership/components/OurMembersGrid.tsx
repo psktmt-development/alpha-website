@@ -9,63 +9,63 @@ interface Member {
     id: number;
     name: string;
     personImage: string;
-    logoImage?: string;
 }
 
-// Member data with actual images and names
+// Member data with actual images and names - using "members and logo" folder
 const membersData: Member[] = [
-    { id: 1, name: "Dilip Chakravarthy Byra", personImage: "/members/1.png", logoImage: "/member logos/The-Alpha-Circle-06.png" },
-    { id: 2, name: "Sudhakar Reddy", personImage: "/members/2.png", logoImage: "/member logos/The-Alpha-Circle-27.png" },
-    { id: 3, name: "Shiven Gaggar", personImage: "/members/3.png", logoImage: "/member logos/The-Alpha-Circle-40.png" },
-    { id: 4, name: "Sunil Gandhe", personImage: "/members/4.png", logoImage: "/member logos/The-Alpha-Circle-39.png" },
-    { id: 5, name: "A. Srinivas Rao", personImage: "/members/5.png", logoImage: "/member logos/The-Alpha-Circle-01.png" },
-    { id: 6, name: "Gopi Krishna Manepally", personImage: "/members/6.png", logoImage: "/member logos/The-Alpha-Circle-56.png" },
-    { id: 7, name: "Prakash Kancham", personImage: "/members/7.png", logoImage: "/member logos/The-Alpha-Circle-20.png" },
-    { id: 8, name: "Jai Choudhary", personImage: "/members/8.png", logoImage: "/member logos/The-Alpha-Circle-18.png" },
-    { id: 9, name: "Abhishek Chanda", personImage: "/members/9.png", logoImage: "/member logos/The-Alpha-Circle-08.png" },
-    { id: 10, name: "Neeraj Goenka", personImage: "/members/10.png", logoImage: "/member logos/The-Alpha-Circle-50.png" },
-    { id: 11, name: "Suresh Bhavani", personImage: "/members/11.png", logoImage: "/member logos/The-Alpha-Circle-34.png" },
-    { id: 12, name: "Sumanth Palabatla", personImage: "/members/12.png", logoImage: "/member logos/The-Alpha-Circle-25.png" },
-    { id: 13, name: "Alekh Barli", personImage: "/members/13.png", logoImage: "/member logos/The-Alpha-Circle-43.png" },
-    { id: 14, name: "Manideep Yechuri", personImage: "/members/14.png", logoImage: "/member logos/582697826_18068062949613998_1850375943596812759_n.jpg" },
-    { id: 16, name: "Nandini Mallu", personImage: "/members/16.png" },
-    { id: 17, name: "Sunny Khandelwal", personImage: "/members/17.png", logoImage: "/member logos/The-Alpha-Circle-60.png" },
-    { id: 18, name: "Sirish Kothapally", personImage: "/members/18.png", logoImage: "/member logos/Untitled-2.png" },
-    { id: 20, name: "Neeraj Lakhotia", personImage: "/members/20.png", logoImage: "/member logos/The-Alpha-Circle-36.png" },
-    { id: 21, name: "Bharath Reddy", personImage: "/members/21.png", logoImage: "/member logos/The-Alpha-Circle-11.png" },
-    { id: 22, name: "Ravi Kumar Kolipara", personImage: "/members/22.png", logoImage: "/member logos/The-Alpha-Circle-29.png" },
-    { id: 23, name: "DR. Preeti Adusumilli", personImage: "/members/23.png", logoImage: "/member logos/The-Alpha-Circle-37.png" },
-    { id: 24, name: "Balakrishna Yerram", personImage: "/members/24.png", logoImage: "/member logos/The-Alpha-Circle-07.png" },
-    { id: 25, name: "Sree Harsha Soma", personImage: "/members/25.png", logoImage: "/member logos/The-Alpha-Circle-23.png" },
-    { id: 26, name: "Sampath Kumar", personImage: "/members/26.png", logoImage: "/member logos/The-Alpha-Circle-26.png" },
-    { id: 27, name: "Rudraraju Sunita Varma", personImage: "/members/27.png", logoImage: "/member logos/The-Alpha-Circle-17.png" },
-    { id: 28, name: "Akash Raj Jain", personImage: "/members/28.png", logoImage: "/member logos/Untitled design (3).png" },
-    { id: 30, name: "Bala Krishna Raju K", personImage: "/members/30.png", logoImage: "/member logos/The-Alpha-Circle-05.png" },
-    { id: 31, name: "R. C. Ratul", personImage: "/members/31.png", logoImage: "/member logos/The-Alpha-Circle-30.png" },
-    { id: 32, name: "Susheel Kumar", personImage: "/members/32.png", logoImage: "/member logos/The-Alpha-Circle-41.png" },
-    { id: 33, name: "Rajamouli Seerna", personImage: "/members/33.png", logoImage: "/member logos/The-Alpha-Circle-33.png" },
-    { id: 34, name: "Nagaraju Bandaru", personImage: "/members/34.png", logoImage: "/member logos/The-Alpha-Circle-22.png" },
-    { id: 35, name: "Praveen Agarwal", personImage: "/members/35.png", logoImage: "/member logos/The-Alpha-Circle-04.png" },
-    { id: 36, name: "Pawan Goel", personImage: "/members/36.png", logoImage: "/member logos/The-Alpha-Circle-31.png" },
-    { id: 37, name: "Kavitha Rudrangi", personImage: "/members/37.png", logoImage: "/member logos/The-Alpha-Circle-15.png" },
-    { id: 38, name: "Rajkumar Kacharla", personImage: "/members/38.png", logoImage: "/member logos/The-Alpha-Circle-32.png" },
-    { id: 39, name: "Abhilekh Puttagunta", personImage: "/members/39.png", logoImage: "/member logos/The-Alpha-Circle-16.png" },
-    { id: 40, name: "Dr. Spandana Muddula", personImage: "/members/40.png", logoImage: "/member logos/The-Alpha-Circle-03.png" },
-    { id: 41, name: "Raviteja Ganta", personImage: "/members/41.png", logoImage: "/member logos/The-Alpha-Circle-09.png" },
-    { id: 42, name: "Harika Puvvadi", personImage: "/members/42.png", logoImage: "/member logos/Untitled-1.png" },
-    { id: 43, name: "Dr. Rohit Morlawar", personImage: "/members/43.png", logoImage: "/member logos/The-Alpha-Circle-44.png" },
-    { id: 45, name: "Praneeth Chandra Ponakala", personImage: "/members/45.png", logoImage: "/member logos/The-Alpha-Circle-45.png" },
-    { id: 46, name: "Narendra Goud", personImage: "/members/46.png", logoImage: "/member logos/The-Alpha-Circle-59.png" },
-    { id: 47, name: "Vamsi Udayagiri", personImage: "/members/47.png", logoImage: "/member logos/The-Alpha-Circle-51.png" },
-    { id: 48, name: "Kiranjot Kaur", personImage: "/members/48.png", logoImage: "/member logos/The-Alpha-Circle-24.png" },
-    { id: 49, name: "Divya Cherkuri", personImage: "/members/49.png", logoImage: "/member logos/The-Alpha-Circle-28.png" },
-    { id: 50, name: "Sunil Daga", personImage: "/members/50.png", logoImage: "/member logos/The-Alpha-Circle-47.png" },
-    { id: 51, name: "Vykunta Rao", personImage: "/members/51.png", logoImage: "/member logos/The-Alpha-Circle-46.png" },
-    { id: 52, name: "Vinay Kumar Kabra", personImage: "/members/52.png", logoImage: "/member logos/The-Alpha-Circle-31.png" },
-    { id: 53, name: "Naresh Velaga", personImage: "/members/53.png", logoImage: "/member logos/The-Alpha-Circle-63.png" },
-    { id: 54, name: "Chandra Mouli Tippala", personImage: "/members/54.png", logoImage: "/member logos/The-Alpha-Circle-52.png" },
-    { id: 55, name: "Ajay Kumar Agarwal", personImage: "/members/55.png", logoImage: "/member logos/The-Alpha-Circle-38.png" },
-    { id: 56, name: "Raviteja Mattapalli", personImage: "/members/56.png", logoImage: "/member logos/The-Alpha-Circle-58.png" },
+    { id: 0, name: "Dr. Srikanth Pulluri", personImage: "/members and logo/0.png" },
+    { id: 1, name: "Dilip Chakravarthy Byra", personImage: "/members and logo/1.png" },
+    { id: 2, name: "Sudhakar Reddy", personImage: "/members and logo/2.png" },
+    { id: 3, name: "Shiven Gaggar", personImage: "/members and logo/3.png" },
+    { id: 4, name: "Sunil Gandhe", personImage: "/members and logo/4.png" },
+    { id: 5, name: "A. Srinivas Rao", personImage: "/members and logo/5.png" },
+    { id: 6, name: "Gopi Krishna Manepally", personImage: "/members and logo/6.png" },
+    { id: 7, name: "Prakash Kancham", personImage: "/members and logo/7.png" },
+    { id: 8, name: "Jai Choudhary", personImage: "/members and logo/8.png" },
+    { id: 9, name: "Abhishek Chanda", personImage: "/members and logo/9.png" },
+    { id: 10, name: "Neeraj Goenka", personImage: "/members and logo/10.png" },
+    { id: 11, name: "Suresh Bhavani", personImage: "/members and logo/11.png" },
+    { id: 12, name: "Sumanth Palabatla", personImage: "/members and logo/12.png" },
+    { id: 13, name: "Alekh Barli", personImage: "/members and logo/13.png" },
+    { id: 14, name: "Manideep Yechuri", personImage: "/members and logo/14.png" },
+    { id: 15, name: "Nandini Mallu", personImage: "/members and logo/15.png" },
+    { id: 16, name: "Sunny Khandelwal", personImage: "/members and logo/16.png" },
+    { id: 17, name: "Sirish Kothapally", personImage: "/members and logo/17.png" },
+    { id: 18, name: "Neeraj Lakhotia", personImage: "/members and logo/18.png" },
+    { id: 19, name: "Bharath Reddy", personImage: "/members and logo/19.png" },
+    { id: 20, name: "Ravi Kumar Kolipara", personImage: "/members and logo/20.png" },
+    { id: 21, name: "DR. Preeti Adusumilli", personImage: "/members and logo/21.png" },
+    { id: 22, name: "Balakrishna Yerram", personImage: "/members and logo/22.png" },
+    { id: 23, name: "Sree Harsha Soma", personImage: "/members and logo/23.png" },
+    { id: 24, name: "Sampath Kumar", personImage: "/members and logo/24.png" },
+    { id: 25, name: "Rudraraju Sunita Varma", personImage: "/members and logo/25.png" },
+    { id: 26, name: "Akash Raj Jain", personImage: "/members and logo/26.png" },
+    { id: 27, name: "Bala Kishan Raju K", personImage: "/members and logo/27.png" },
+    { id: 28, name: "R. C. Ratul", personImage: "/members and logo/28.png" },
+    { id: 29, name: "Susheel Kumar", personImage: "/members and logo/29.png" },
+    { id: 30, name: "Rajamouli Seerna", personImage: "/members and logo/30.png" },
+    { id: 31, name: "Nagaraju Bandaru", personImage: "/members and logo/31.png" },
+    { id: 32, name: "Praveen Agarwal", personImage: "/members and logo/32.png" },
+    { id: 33, name: "Pawan Goel", personImage: "/members and logo/33.png" },
+    { id: 34, name: "Kavitha Rudrangi", personImage: "/members and logo/34.png" },
+    { id: 35, name: "Rajkumar Kacharla", personImage: "/members and logo/35.png" },
+    { id: 36, name: "Abhilekh Puttagunta", personImage: "/members and logo/36.png" },
+    { id: 37, name: "Dr. Spandana Muddula", personImage: "/members and logo/37.png" },
+    { id: 38, name: "Raviteja Ganta", personImage: "/members and logo/38.png" },
+    { id: 39, name: "Harika Puvvadi", personImage: "/members and logo/39.png" },
+    { id: 40, name: "Dr. Rohit Morlawar", personImage: "/members and logo/40.png" },
+    { id: 41, name: "Praneeth Chandra Ponakala", personImage: "/members and logo/41.png" },
+    { id: 42, name: "Narendra Goud", personImage: "/members and logo/42.png" },
+    { id: 43, name: "Vamsi Udayagiri", personImage: "/members and logo/43.png" },
+    { id: 44, name: "Kiranjot Kaur", personImage: "/members and logo/44.png" },
+    { id: 45, name: "Divya Cherkuri", personImage: "/members and logo/45.png" },
+    { id: 46, name: "Sunil Daga", personImage: "/members and logo/46.png" },
+    { id: 47, name: "Vykunta Rao", personImage: "/members and logo/47.png" },
+    { id: 48, name: "Vinay Kumar Kabra", personImage: "/members and logo/48.png" },
+    { id: 49, name: "Naresh Velaga", personImage: "/members and logo/49.png" },
+    { id: 50, name: "Chandra Mouli Tippala", personImage: "/members and logo/50.png" },
+    { id: 51, name: "Ajay Kumar Agarwal", personImage: "/members and logo/51.png" },
+    { id: 52, name: "Raviteja Mattapalli", personImage: "/members and logo/52.png" },
 ];
 
 const containerVariants = {
@@ -145,12 +145,10 @@ export function OurMembersGrid() {
                         <motion.div
                             key={member.id}
                             variants={itemVariants}
-                            className="flex justify-center"
                         >
                             <ProfileCard
                                 name={member.name}
                                 personImage={member.personImage}
-                                logoImage={member.logoImage}
                             />
                         </motion.div>
                     ))}

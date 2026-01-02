@@ -6,17 +6,16 @@ import { User } from 'lucide-react';
 
 interface ProfileCardProps {
     personImage?: string;
-    logoImage?: string;
     name: string;
 }
 
 /**
  * A minimalist Profile Card component for displaying member information.
  */
-const ProfileCard: React.FC<ProfileCardProps> = ({ personImage, logoImage, name }) => {
+const ProfileCard: React.FC<ProfileCardProps> = ({ personImage, name }) => {
     return (
-        <div className="relative w-full max-w-[320px] mx-auto group">
-            <div className="relative bg-white rounded-[2rem] md:rounded-[2.5rem] shadow-xl overflow-hidden border border-slate-100 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl">
+        <div className="relative w-full group">
+            <div className="relative bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-md transition-all duration-300 hover:shadow-xl hover:border-slate-300">
 
                 {/* Image Container */}
                 <div className="relative aspect-[4/5] overflow-hidden">
@@ -28,7 +27,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ personImage, logoImage, name 
                                 alt={name || "Profile Photo"}
                                 fill
                                 className="object-cover"
-                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
+                                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                             />
                         ) : (
                             <div className="w-full h-full flex flex-col items-center justify-center text-slate-300">
@@ -37,24 +36,11 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ personImage, logoImage, name 
                             </div>
                         )}
                     </div>
-
-                    {/* Company Logo Overlay - No box, larger size */}
-                    {logoImage && (
-                        <div className="absolute top-4 right-4 md:top-5 md:right-5">
-                            <Image
-                                src={logoImage}
-                                alt="Company Logo"
-                                width={112}
-                                height={112}
-                                className="w-[90px] h-[90px] md:w-28 md:h-28 object-contain drop-shadow-lg"
-                            />
-                        </div>
-                    )}
                 </div>
 
                 {/* Text Section */}
-                <div className="bg-white p-4 md:p-6 pb-5 md:pb-8">
-                    <h3 className="text-slate-900 text-lg md:text-xl font-bold tracking-tight text-center" style={{ fontFamily: 'DM Serif Display, serif' }}>
+                <div className="bg-white p-4 md:p-5">
+                    <h3 className="text-slate-900 text-base md:text-lg font-bold tracking-tight text-center" style={{ fontFamily: 'DM Serif Display, serif' }}>
                         {name || "Full Name"}
                     </h3>
                 </div>
