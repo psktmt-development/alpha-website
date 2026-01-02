@@ -1,6 +1,7 @@
 import { MembershipHero } from "./components/MembershipHero";
 import { MembershipBenefitsSection } from "./components/MembershipBenefitsSection";
 import { MemberBenefitsSection } from "./components/MemberBenefitsSection";
+import { OurMembersGrid } from "./components/OurMembersGrid";
 
 export default function MembershipPage() {
   return (
@@ -8,6 +9,7 @@ export default function MembershipPage() {
       <MembershipHero />
       <MembershipBenefitsSection />
       <MemberBenefitsSection />
+      <OurMembersGrid />
     </main>
   );
 }
