@@ -1,6 +1,6 @@
 "use client";
 
-import { MembersGrid } from "./components/MembersGrid";
+import { OurMembersGrid } from "../membership/components/OurMembersGrid";
 import { MembershipHero } from "../membership/components/MembershipHero";
 import { MembershipBenefitsSection } from "../membership/components/MembershipBenefitsSection";
 import { MembershipIdentitySection } from "../membership/components/MembershipIdentitySection";
@@ -13,7 +13,7 @@ export default function MembersPage() {
       <MembershipIdentitySection />
       <MemberBenefitsSection />
       <MembershipBenefitsSection />
-      <MembersGrid />
+      <OurMembersGrid />
     </main>
   );
 }

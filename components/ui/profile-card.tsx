@@ -18,10 +18,10 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ personImage, name }) => {
             <div className="relative bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-md transition-all duration-300 hover:shadow-xl hover:border-slate-300">
 
                 {/* Image Container */}
-                <div className="relative aspect-[4/5] overflow-hidden">
-                    {/* Main Person Image */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-slate-50 to-slate-100">
-                        {personImage ? (
+                {personImage && (
+                    <div className="relative aspect-[4/5] overflow-hidden">
+                        {/* Main Person Image */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-slate-50 to-slate-100">
                             <Image
                                 src={personImage}
                                 alt={name || "Profile Photo"}
@@ -29,18 +29,13 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ personImage, name }) => {
                                 className="object-cover"
                                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                             />
-                        ) : (
-                            <div className="w-full h-full flex flex-col items-center justify-center text-slate-300">
-                                <User size={64} strokeWidth={1} />
-                                <span className="text-xs font-medium mt-2 uppercase tracking-widest">No Photo</span>
-                            </div>
-                        )}
+                        </div>
                     </div>
-                </div>
+                )}
 
                 {/* Text Section */}
                 <div className="bg-white p-4 md:p-5">
-                    <h3 className="text-slate-900 text-base md:text-lg font-bold tracking-tight text-center" style={{ fontFamily: 'DM Serif Display, serif' }}>
+                    <h3 className="text-slate-900 text-base md:text-lg font-bold tracking-tight text-center font-dm-serif">
                         {name || "Full Name"}
                     </h3>
                 </div>
