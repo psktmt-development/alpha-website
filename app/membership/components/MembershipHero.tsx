@@ -43,7 +43,7 @@ export function MembershipHero() {
           transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         />
 
-        <div 
+        <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
             backgroundImage: `radial-gradient(#BB2324 0.5px, transparent 0.5px)`,
@@ -58,7 +58,7 @@ export function MembershipHero() {
         className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8 lg:px-16 pt-16 md:pt-20 lg:pt-24 pb-24"
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          
+
           {/* Left Content - Headline & CTA (7 Cols) */}
           <div className="lg:col-span-7 space-y-8">
             <motion.h1
@@ -70,8 +70,8 @@ export function MembershipHero() {
               A Private Circle for{" "}
               <span className="italic text-[#BB2324] relative inline-block">
                 Leaders
-                <motion.svg 
-                  viewBox="0 0 200 20" 
+                <motion.svg
+                  viewBox="0 0 200 20"
                   className="absolute -bottom-2 left-0 w-full h-3 text-[#BB2324]/20"
                   initial={{ pathLength: 0 }}
                   animate={{ pathLength: 1 }}
@@ -129,12 +129,12 @@ export function MembershipHero() {
               }}
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-[#BB2324]/5 rounded-bl-full pointer-events-none" />
-              
+
               <div className="space-y-6 relative z-10 flex flex-col justify-center h-full">
                 <h3 className="text-3xl md:text-4xl font-serif font-medium text-neutral-900 leading-tight">
                   A Private Circle for Leaders Who Build Legacy.
                 </h3>
-                
+
                 <div className="space-y-4">
                   <p className="text-neutral-500 text-lg leading-relaxed">
                     The Alpha Circle is an invite-only collective of founders, family business leaders, HNIs, and decision-makers who value depth over noise and impact over attention.
@@ -148,7 +148,7 @@ export function MembershipHero() {
             </motion.div>
 
             {/* Background floating elements for depth */}
-            <motion.div 
+            <motion.div
               className="absolute -top-12 -right-12 w-48 h-48 bg-[#BB2324]/10 rounded-full blur-3xl"
               animate={{ y: [0, 20, 0] }}
               transition={{ duration: 5, repeat: Infinity }}

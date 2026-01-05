@@ -37,44 +37,44 @@ export function AlphaFooter() {
             >
               <h3 className="text-sm font-semibold mb-2 uppercase tracking-wider">Explore</h3>
               <nav className="space-y-1.5">
-                <Link 
-                  href="/" 
+                <Link
+                  href="/"
                   className="block text-gray-400 hover:text-[#af2324] transition-colors duration-300"
                 >
                   Home
                 </Link>
-                <Link 
-                  href="/about-us" 
+                <Link
+                  href="/about-us"
                   className="block text-gray-400 hover:text-[#af2324] transition-colors duration-300"
                 >
                   About Us
                 </Link>
-                <Link 
-                  href="/events" 
+                <Link
+                  href="/events"
                   className="block text-gray-400 hover:text-[#af2324] transition-colors duration-300"
                 >
                   Events
                 </Link>
-                <Link 
-                  href="/gallery" 
+                <Link
+                  href="/gallery"
                   className="block text-gray-400 hover:text-[#af2324] transition-colors duration-300"
                 >
                   Gallery
                 </Link>
-                <Link 
-                  href="/members" 
+                <Link
+                  href="/members"
                   className="block text-gray-400 hover:text-[#af2324] transition-colors duration-300"
                 >
                   Membership
                 </Link>
-                <Link 
-                  href="/blog" 
+                <Link
+                  href="/blog"
                   className="block text-gray-400 hover:text-[#af2324] transition-colors duration-300"
                 >
                   Blogs
                 </Link>
-                <Link 
-                  href="/contact" 
+                <Link
+                  href="/contact"
                   className="block text-gray-400 hover:text-[#af2324] transition-colors duration-300"
                 >
                   Contact Us
@@ -102,8 +102,8 @@ export function AlphaFooter() {
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone className="w-5 h-5 text-[#af2324] shrink-0" />
-                  <a 
-                    href="tel:+919133383399" 
+                  <a
+                    href="tel:+919133383399"
                     className="text-gray-400 hover:text-[#af2324] transition-colors duration-300 text-sm"
                   >
                     91333 83399
@@ -111,8 +111,8 @@ export function AlphaFooter() {
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail className="w-5 h-5 text-[#af2324] shrink-0" />
-                  <a 
-                    href="https://mail.google.com/mail/?view=cm&to=admin@thealphacircle.world" 
+                  <a
+                    href="https://mail.google.com/mail/?view=cm&to=admin@thealphacircle.world"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-[#af2324] transition-colors duration-300 break-all text-sm"

@@ -21,7 +21,7 @@ export function GlobalExpansionCard({ inline = false }: Props) {
   const imageY = useTransform(scrollYProgress, [0, 1], [50, -50]);
   const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 1.1]);
   const imageOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0.9]);
-  
+
   const headingY = useTransform(scrollYProgress, [0, 1], [-30, 30]);
   const headingOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0.9]);
 
@@ -29,7 +29,7 @@ export function GlobalExpansionCard({ inline = false }: Props) {
     return (
       <div className="relative w-full max-w-4xl mx-auto">
         <Image
-          src="/home and about/Coffe Book Trail 01.png"
+          src="/home_and_about/Coffe Book Trail 01.png"
           alt="Alpha's Footprint - Global Expansion Map"
           width={1200}
           height={800}
@@ -46,7 +46,7 @@ export function GlobalExpansionCard({ inline = false }: Props) {
       <div ref={sectionRef} className="relative max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           {/* Heading on the left */}
-          <motion.div 
+          <motion.div
             className="text-left space-y-3 order-1 md:order-1"
             style={{
               y: headingY,
@@ -66,7 +66,7 @@ export function GlobalExpansionCard({ inline = false }: Props) {
           </motion.div>
 
           {/* Image on the right */}
-          <motion.div 
+          <motion.div
             className="flex justify-end order-2 md:order-2"
             style={{
               y: imageY,
@@ -80,7 +80,7 @@ export function GlobalExpansionCard({ inline = false }: Props) {
           >
             <div className="relative w-full max-w-2xl" style={{ transformOrigin: 'right center' }}>
               <Image
-                src="/home and about/Coffe Book Trail 01.png"
+                src="/home_and_about/Coffe Book Trail 01.png"
                 alt="Alpha's Footprint - Global Expansion Map"
                 width={1200}
                 height={800}

@@ -24,13 +24,13 @@ export function UpcomingEventPopup() {
 
     /**
      * Why sessionStorage instead of localStorage?
-     * 
+     *
      * sessionStorage persists data only for the current browser tab/window session.
      * When a user opens a NEW tab/window, sessionStorage is empty, so the popup will show again.
-     * 
+     *
      * localStorage would persist across all tabs/windows, meaning the popup would never
      * show again once dismissed, even in a new tab.
-     * 
+     *
      * This ensures:
      * - Popup shows on new tab/window ✅
      * - Popup does NOT show on page refresh ✅
@@ -39,13 +39,13 @@ export function UpcomingEventPopup() {
      */
     hasCheckedRef.current = true;
     const hasSeenPopup = sessionStorage.getItem("entry_popup_seen");
-    
+
     if (!hasSeenPopup) {
       // Show popup after a short delay for better UX
       const timer = setTimeout(() => {
         setIsOpen(true);
       }, 1000);
-      
+
       return () => clearTimeout(timer);
     }
   }, [hasMounted]);
@@ -55,7 +55,7 @@ export function UpcomingEventPopup() {
     /**
      * Store flag in sessionStorage to prevent popup from showing again
      * in the current browser tab/window session.
-     * 
+     *
      * This flag will be cleared when:
      * - User closes the tab/window
      * - User opens website in a new tab/window (new sessionStorage)
@@ -99,7 +99,7 @@ export function UpcomingEventPopup() {
             <div
               className="bg-white rounded-[2rem] border-2 border-[#af2324] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.12)] w-full max-w-5xl pointer-events-auto relative"
               onClick={(e) => e.stopPropagation()}
-              style={{ 
+              style={{
                 maxHeight: '95vh',
                 overflow: 'auto'
               }}
@@ -125,7 +125,7 @@ export function UpcomingEventPopup() {
                     className="h-auto object-contain rounded-l-[2rem]"
                     sizes="(max-width: 768px) 100vw, 50vw"
                     priority
-                    style={{ 
+                    style={{
                       display: 'block',
                       height: 'auto',
                       width: '90%',

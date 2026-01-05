@@ -49,7 +49,7 @@ export function WhoWeAreSection() {
     <section id="about" className="w-full bg-white py-16 px-4 md:px-8 lg:px-12 flex flex-col justify-center scroll-mt-24">
       <div className="max-w-7xl w-full mx-auto space-y-8">
         {/* Header - Compact */}
-        <motion.div 
+        <motion.div
           className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b-2 border-[#af2324]/10 pb-6"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -87,9 +87,9 @@ export function WhoWeAreSection() {
                 initial={{ opacity: 0, y: 40, scale: 0.9 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ 
+                transition={{
                   layout: { type: "spring", stiffness: 200, damping: 25 },
-                  duration: 0.5, 
+                  duration: 0.5,
                   delay: index * 0.1,
                   ease: [0.22, 1, 0.36, 1]
                 }}
@@ -110,7 +110,7 @@ export function WhoWeAreSection() {
                         0{index + 1}
                       </div>
                     </div>
-                    
+
                     <div className="relative z-10 max-w-lg mt-auto">
                     <h3 className="text-2xl md:text-3xl font-serif text-[#af2324] mb-3">
                       {item.title}

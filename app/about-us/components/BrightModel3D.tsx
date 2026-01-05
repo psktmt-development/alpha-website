@@ -20,13 +20,13 @@ function STLModel({ url, color }: { url: string; color: string }) {
   geometry.computeBoundingBox();
   const center = new Vector3();
   const size = new Vector3();
-  
+
   if (geometry.boundingBox) {
     geometry.boundingBox.getCenter(center);
     geometry.boundingBox.getSize(size);
     const maxDim = Math.max(size.x, size.y, size.z);
     const scale = 3 / maxDim; // Scale to fit nicely
-    
+
     return (
       <mesh
         ref={meshRef}

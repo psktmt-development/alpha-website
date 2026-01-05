@@ -25,7 +25,7 @@ const blogPosts: Record<string, BlogPost> = {
     author: "Dr Pulluri Srikanth",
     date: "December 4, 2025",
     readTime: "6 min read",
-    heroImage: "/home and about/hero-1.JPG",
+    heroImage: "/home_and_about/hero-1.JPG",
     category: "Networking",
     content: `In today's fast-moving business world, success is no longer just about what you know — it's about who you can reach, collaborate with, and learn from. This is where elite networking becomes a powerful accelerator for entrepreneurs. Unlike traditional networking, where connections are random and conversations are surface-level, elite networking is intentional, curated, and designed to build high-impact relationships that open doors.
 
@@ -115,7 +115,7 @@ Join the Circle. Elevate your journey. Be Alpha.`,
     author: "The Alpha Circle",
     date: "December 1, 2024",
     readTime: "5 min read",
-    heroImage: "/home and about/hero-2.JPG",
+    heroImage: "/home_and_about/hero-2.JPG",
     category: "Community",
     content: `In an age where networking is easier than ever, meaningful connection has become surprisingly rare. Events are crowded, conversations are transactional, and introductions often end where they begin. For accomplished entrepreneurs and business leaders, this model quickly loses relevance.
 
@@ -171,7 +171,7 @@ Because the right relationships don't just open doors. They shape the journey be
     author: "Sarah Johnson",
     date: "November 28, 2024",
     readTime: "7 min read",
-    heroImage: "/home and about/image.png",
+    heroImage: "/home_and_about/image.png",
     category: "Leadership",
     content: `Leadership today looks very different from what it did even a decade ago. The pace of change is faster, decisions carry greater complexity, and the consequences of leadership choices extend far beyond balance sheets. In this environment, leadership can be isolating — especially for founders, entrepreneurs, and business leaders operating at scale.
 
@@ -242,7 +242,7 @@ It's about who walks the journey with you.`,
     author: "Michael Chen",
     date: "November 25, 2024",
     readTime: "8 min read",
-    heroImage: "/home and about/image copy.png",
+    heroImage: "/home_and_about/image copy.png",
     category: "Entrepreneurship",
     content: `Success in entrepreneurship is often attributed to timing, capital, or access to the right opportunities. While these factors matter, they rarely explain why some founders consistently build enduring businesses while others struggle to sustain momentum. More often, the difference lies in mindset.
 
@@ -368,7 +368,7 @@ Building a global community is less about expansion and more about intention. By
     author: "Rachel Thompson",
     date: "November 18, 2024",
     readTime: "6 min read",
-    heroImage: "/home and about/hero-1.JPG",
+    heroImage: "/home_and_about/hero-1.JPG",
     category: "Innovation",
     content: `## Innovation Is Rarely Created in Isolation
 

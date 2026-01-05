@@ -11,7 +11,7 @@ export default function GalleryPage() {
         backgroundImage: `radial-gradient(circle at 2px 2px, #af2324 1px, transparent 0)`,
         backgroundSize: '40px 40px'
       }} />
-      
+
       <div className="relative z-10">
         <GalleryMarquee />
         <GalleryMain />

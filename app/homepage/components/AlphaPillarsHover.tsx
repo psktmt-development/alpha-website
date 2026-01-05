@@ -73,7 +73,7 @@ export function AlphaPillarsHover() {
       className="w-full bg-white py-12 px-4 md:px-8 lg:px-12"
     >
       <div className="max-w-6xl mx-auto space-y-8">
-        <motion.div 
+        <motion.div
           className="text-center space-y-2"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

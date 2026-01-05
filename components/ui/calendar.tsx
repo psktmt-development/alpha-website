@@ -124,11 +124,11 @@ export function Calendar({
           <div key={`empty-${idx}`} className="aspect-square" />
         ))}
         {Array.from({ length: daysInMonth }, (_, i) => i + 1).map((day) => {
-          const isSelected = selectedDate && 
+          const isSelected = selectedDate &&
             selectedDate.getDate() === day &&
             selectedDate.getMonth() === currentDate.getMonth() &&
             selectedDate.getFullYear() === currentDate.getFullYear()
-          
+
           return (
             <button
               key={day}

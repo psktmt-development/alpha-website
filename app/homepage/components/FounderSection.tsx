@@ -7,10 +7,10 @@ import Image from "next/image";
 
 export function FounderSection() {
   const images = [
-    "/home and about/xAlpha-Circle-World-Founder.jpg",
-    "/home and about/0Z0A2192.png",
-    "/home and about/Alpha Circle-47.jpg",
-    "/home and about/Alpha Circle-67.jpg"
+    "/home_and_about/xAlpha-Circle-World-Founder.jpg",
+    "/home_and_about/0Z0A2192.png",
+    "/home_and_about/Alpha Circle-47.jpg",
+    "/home_and_about/Alpha Circle-67.jpg"
   ];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);

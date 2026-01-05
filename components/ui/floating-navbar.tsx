@@ -41,7 +41,7 @@ export const FloatingNav = ({
         window.requestAnimationFrame(() => {
           const currentScroll = window.scrollY;
           const previous = lastScrollY.current;
-          
+
           // Always show at the very top (first 10px)
           if (currentScroll < 10) {
             setVisible(true);
@@ -56,7 +56,7 @@ export const FloatingNav = ({
             }
             // If equal (no scroll change), maintain current state
           }
-          
+
           lastScrollY.current = currentScroll;
           ticking.current = false;
         });

@@ -63,7 +63,7 @@ export function JoinCircleModal({ isOpen, onClose }: JoinCircleModalProps) {
     setIsSubmitting(true);
     setSubmitStatus("idle");
     setErrorMessage("");
-    
+
     try {
       const response = await fetch("/api/join-circle", {
         method: "POST",
@@ -81,7 +81,7 @@ export function JoinCircleModal({ isOpen, onClose }: JoinCircleModalProps) {
 
       // Success
       setSubmitStatus("success");
-      
+
       // Reset form after showing success message
       setTimeout(() => {
         setFormData({
@@ -104,8 +104,8 @@ export function JoinCircleModal({ isOpen, onClose }: JoinCircleModalProps) {
       console.error("Error submitting form:", error);
       setSubmitStatus("error");
       setErrorMessage(
-        error instanceof Error 
-          ? error.message 
+        error instanceof Error
+          ? error.message
           : "Something went wrong. Please try again later."
       );
       setIsSubmitting(false);
@@ -144,7 +144,7 @@ export function JoinCircleModal({ isOpen, onClose }: JoinCircleModalProps) {
                     Join <span className="italic text-[#BB2324]">Alpha Circle</span>
                   </h2>
                   <p className="text-lg md:text-xl text-neutral-500 max-w-2xl leading-relaxed">
-                    Experience the power of Alpha Circle. Our specialists will reach out to provide a 
+                    Experience the power of Alpha Circle. Our specialists will reach out to provide a
                     tailored walkthrough of our ecosystem.
                   </p>
                 </div>
@@ -189,97 +189,97 @@ export function JoinCircleModal({ isOpen, onClose }: JoinCircleModalProps) {
                   </motion.div>
                 )}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <FloatingInput 
-                    label="Full Name" 
-                    name="fullName" 
+                  <FloatingInput
+                    label="Full Name"
+                    name="fullName"
                     icon={<User size={18} />}
-                    value={formData.fullName} 
-                    onChange={handleChange} 
-                    required 
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    required
                   />
-                  <FloatingInput 
-                    label="Email ID" 
-                    name="email" 
-                    type="email" 
+                  <FloatingInput
+                    label="Email ID"
+                    name="email"
+                    type="email"
                     icon={<Mail size={18} />}
-                    value={formData.email} 
-                    onChange={handleChange} 
-                    required 
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
                   />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <FloatingInput 
-                    label="Mobile Number" 
-                    name="mobileNumber" 
+                  <FloatingInput
+                    label="Mobile Number"
+                    name="mobileNumber"
                     icon={<Phone size={18} />}
-                    value={formData.mobileNumber} 
-                    onChange={handleChange} 
+                    value={formData.mobileNumber}
+                    onChange={handleChange}
                     required
                   />
-                  <FloatingInput 
-                    label="Location" 
-                    name="location" 
+                  <FloatingInput
+                    label="Location"
+                    name="location"
                     icon={<MapPin size={18} />}
-                    value={formData.location} 
-                    onChange={handleChange} 
+                    value={formData.location}
+                    onChange={handleChange}
                     required
                   />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <FloatingInput 
-                    label="Your Company Name" 
-                    name="companyName" 
+                  <FloatingInput
+                    label="Your Company Name"
+                    name="companyName"
                     icon={<Building2 size={18} />}
-                    value={formData.companyName} 
-                    onChange={handleChange} 
+                    value={formData.companyName}
+                    onChange={handleChange}
                     required
                   />
-                  <FloatingInput 
-                    label="Your Role" 
-                    name="role" 
+                  <FloatingInput
+                    label="Your Role"
+                    name="role"
                     icon={<Briefcase size={18} />}
-                    value={formData.role} 
-                    onChange={handleChange} 
+                    value={formData.role}
+                    onChange={handleChange}
                     required
                   />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <FloatingInput 
-                    label="LinkedIn Profile" 
-                    name="linkedInProfile" 
+                  <FloatingInput
+                    label="LinkedIn Profile"
+                    name="linkedInProfile"
                     type="url"
                     icon={<Linkedin size={18} />}
-                    value={formData.linkedInProfile} 
+                    value={formData.linkedInProfile}
                     onChange={handleChange}
                   />
-                  <FloatingSelect 
-                    label="Company Turnover" 
-                    name="companyTurnover" 
+                  <FloatingSelect
+                    label="Company Turnover"
+                    name="companyTurnover"
                     icon={<TrendingUp size={18} />}
-                    value={formData.companyTurnover} 
-                    onChange={handleChange} 
+                    value={formData.companyTurnover}
+                    onChange={handleChange}
                     required
                   />
                 </div>
 
-                <FloatingTextarea 
-                  label="What motivates you to join The Alpha Circle?" 
-                  name="motivation" 
+                <FloatingTextarea
+                  label="What motivates you to join The Alpha Circle?"
+                  name="motivation"
                   icon={<MessageSquare size={18} />}
-                  value={formData.motivation} 
-                  onChange={handleChange} 
+                  value={formData.motivation}
+                  onChange={handleChange}
                   required
                 />
 
-                <FloatingTextarea 
-                  label="What expectations do you have from being part of The Alpha Circle?" 
-                  name="expectations" 
+                <FloatingTextarea
+                  label="What expectations do you have from being part of The Alpha Circle?"
+                  name="expectations"
                   icon={<MessageSquare size={18} />}
-                  value={formData.expectations} 
-                  onChange={handleChange} 
+                  value={formData.expectations}
+                  onChange={handleChange}
                   required
                 />
 
@@ -325,10 +325,10 @@ function FloatingInput({ label, icon, ...props }: any) {
       <div className={`absolute left-5 top-1/2 -translate-y-1/2 transition-colors duration-300 ${isFocused ? 'text-[#BB2324]' : 'text-neutral-400 group-hover:text-neutral-500'}`}>
         {icon}
       </div>
-      <label 
+      <label
         className={`absolute left-12 transition-all duration-300 pointer-events-none
-          ${(isFocused || hasValue) 
-            ? 'top-2 text-[10px] font-bold text-[#BB2324] uppercase tracking-wider' 
+          ${(isFocused || hasValue)
+            ? 'top-2 text-[10px] font-bold text-[#BB2324] uppercase tracking-wider'
             : 'top-1/2 -translate-y-1/2 text-neutral-400 text-base'}`}
       >
         {label}
@@ -338,8 +338,8 @@ function FloatingInput({ label, icon, ...props }: any) {
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         className={`w-full pl-12 pr-5 pt-6 pb-2 bg-neutral-50 border-2 rounded-2xl outline-none transition-all duration-300
-          ${isFocused 
-            ? 'border-[#BB2324] bg-white ring-4 ring-[#BB2324]/5 shadow-sm' 
+          ${isFocused
+            ? 'border-[#BB2324] bg-white ring-4 ring-[#BB2324]/5 shadow-sm'
             : 'border-neutral-100 group-hover:border-neutral-200'}`}
       />
     </div>
@@ -355,10 +355,10 @@ function FloatingSelect({ label, icon, ...props }: any) {
       <div className={`absolute left-5 top-1/2 -translate-y-1/2 transition-colors duration-300 ${isFocused ? 'text-[#BB2324]' : 'text-neutral-400 group-hover:text-neutral-500'}`}>
         {icon}
       </div>
-      <label 
+      <label
         className={`absolute left-12 transition-all duration-300 pointer-events-none
-          ${(isFocused || hasValue) 
-            ? 'top-2 text-[10px] font-bold text-[#BB2324] uppercase tracking-wider' 
+          ${(isFocused || hasValue)
+            ? 'top-2 text-[10px] font-bold text-[#BB2324] uppercase tracking-wider'
             : 'top-1/2 -translate-y-1/2 text-neutral-400 text-base'}`}
       >
         {label}
@@ -368,8 +368,8 @@ function FloatingSelect({ label, icon, ...props }: any) {
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         className={`w-full pl-12 pr-12 pt-6 pb-2 bg-neutral-50 border-2 rounded-2xl outline-none transition-all duration-300 appearance-none cursor-pointer
-          ${isFocused 
-            ? 'border-[#BB2324] bg-white ring-4 ring-[#BB2324]/5 shadow-sm' 
+          ${isFocused
+            ? 'border-[#BB2324] bg-white ring-4 ring-[#BB2324]/5 shadow-sm'
             : 'border-neutral-100 group-hover:border-neutral-200'}`}
       >
         <option value="" hidden></option>
@@ -404,10 +404,10 @@ function FloatingTextarea({ label, icon, ...props }: any) {
       <div className={`absolute left-5 top-5 transition-colors duration-300 ${isFocused ? 'text-[#BB2324]' : 'text-neutral-400 group-hover:text-neutral-500'}`}>
         {icon}
       </div>
-      <label 
+      <label
         className={`absolute left-12 transition-all duration-300 pointer-events-none
-          ${(isFocused || hasValue) 
-            ? 'top-2 text-[10px] font-bold text-[#BB2324] uppercase tracking-wider' 
+          ${(isFocused || hasValue)
+            ? 'top-2 text-[10px] font-bold text-[#BB2324] uppercase tracking-wider'
             : 'top-5 text-neutral-400 text-base'}`}
       >
         {label}
@@ -419,8 +419,8 @@ function FloatingTextarea({ label, icon, ...props }: any) {
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         className={`w-full pl-12 pr-5 pt-6 pb-3 bg-neutral-50 border-2 rounded-2xl outline-none transition-all duration-300 resize-none overflow-hidden
-          ${isFocused 
-            ? 'border-[#BB2324] bg-white ring-4 ring-[#BB2324]/5 shadow-sm' 
+          ${isFocused
+            ? 'border-[#BB2324] bg-white ring-4 ring-[#BB2324]/5 shadow-sm'
             : 'border-neutral-100 group-hover:border-neutral-200'}`}
         style={{ minHeight: '60px' }}
       />

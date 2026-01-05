@@ -21,13 +21,13 @@ function STLModel({ url, color }: { url: string; color: string }) {
   geometry.computeBoundingBox();
   const center = new Vector3();
   const size = new Vector3();
-  
+
   if (geometry.boundingBox) {
     geometry.boundingBox.getCenter(center);
     geometry.boundingBox.getSize(size);
     const maxDim = Math.max(size.x, size.y, size.z);
     const scale = 3 / maxDim; // Scale to fit nicely
-    
+
     return (
       <mesh
         ref={meshRef}
@@ -99,7 +99,7 @@ export function NewHeroSection() {
         <div className="flex-1 h-full max-h-[80vh] flex items-center justify-center w-full md:w-auto">
           <div className="w-full h-full max-w-[700px] max-h-[700px] min-h-[400px]">
             <Canvas camera={{ position: [0, 0, 5], fov: 50 }} gl={{ antialias: true }}>
-              <Scene stlUrl="/home and about/The_Alpha_Circle (1).stl" color="#B02425" />
+              <Scene stlUrl="/home_and_about/The_Alpha_Circle (1).stl" color="#B02425" />
             </Canvas>
           </div>
         </div>

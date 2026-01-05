@@ -125,7 +125,7 @@ export function AlphaAdvantageMarquee() {
       `}</style>
 
       <div className="w-full max-w-6xl mx-auto space-y-6">
-        <motion.div 
+        <motion.div
           className="text-center space-y-2"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -148,7 +148,7 @@ export function AlphaAdvantageMarquee() {
         </div>
 
         {/* Instagram feed - Centered */}
-        <motion.div 
+        <motion.div
           className="mt-10 flex justify-center items-center"
           initial={{ opacity: 0, y: 40, scale: 0.95 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}

@@ -96,7 +96,7 @@ export function AlphaNavbar() {
             {/* Logo/Brand */}
             <Link href="/" className="flex items-center">
               <Image
-                src="/home and about/xAlpha-Circle.png.pagespeed.ic.iNmpDHM9GE.png"
+                src="/home_and_about/xAlpha-Circle.png.pagespeed.ic.iNmpDHM9GE.png"
                 alt="The Alpha Circle Logo"
                 width={200}
                 height={60}

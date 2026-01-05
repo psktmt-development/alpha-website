@@ -6,12 +6,12 @@ import { DirectionAwareHover } from "@/components/ui/direction-aware-hover";
 
 export function DirectionAwareHoverDemo() {
   const [currentImage, setCurrentImage] = useState(0);
-  const images = ["/home and about/hero-1.JPG", "/home and about/hero-2.JPG"];
+  const images = ["/home_and_about/hero-1.JPG", "/home_and_about/hero-2.JPG"];
   const captions = [
     { line1: "WHERE VISIONARIES", line2: "ALIGN GLOBALLY." },
     { line1: "GLOBAL GROUND FOR", line2: "VISIONARY MINDS." }
   ];
-  
+
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -22,7 +22,7 @@ export function DirectionAwareHoverDemo() {
   // Parallax effect for background image
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.8, 0]);
-  
+
   // Parallax effect for text (moves slower)
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7], [1, 1, 0]);
@@ -56,14 +56,14 @@ export function DirectionAwareHoverDemo() {
             className="h-full w-full rounded-none"
             childrenClassName="text-white"
           >
-            <motion.div 
+            <motion.div
               className="flex flex-col items-center justify-center text-center w-full max-w-full px-4"
               style={{ y: textY, opacity: textOpacity }}
               initial={{ opacity: 0, y: 30, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             >
-              <motion.p 
+              <motion.p
                 className="font-bodoni font-bold text-5xl leading-tight text-center"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}

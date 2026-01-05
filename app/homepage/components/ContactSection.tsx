@@ -10,7 +10,7 @@ export function ContactSection() {
       id="contact"
       className="w-full bg-[#0f0f0f] text-white py-14 px-4 md:px-8 lg:px-12"
     >
-      <motion.div 
+      <motion.div
         className="mx-auto flex max-w-6xl flex-col gap-6 rounded-2xl border border-white/10 bg-white/5 p-8 shadow-lg backdrop-blur"
         initial={{ opacity: 0, y: 40, scale: 0.95 }}
         whileInView={{ opacity: 1, y: 0, scale: 1 }}

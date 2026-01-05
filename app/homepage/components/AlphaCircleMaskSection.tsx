@@ -50,7 +50,7 @@ export function AlphaCircleMaskSection() {
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
-        transition={{ 
+        transition={{
           backgroundColor: { duration: 0.35, ease: "easeInOut" },
           opacity: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
           y: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }

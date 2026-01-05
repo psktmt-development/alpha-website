@@ -106,7 +106,7 @@ function TimelineDemo() {
           </p>
           <div className="grid grid-cols-2 gap-4">
             <Image
-              src="/events/speaker sessions /DSC06503.jpeg"
+              src="/events/speaker sessions/DSC06503.jpeg"
               alt="Speaker session"
               width={500}
               height={500}
@@ -115,7 +115,7 @@ function TimelineDemo() {
               quality={80}
             />
             <Image
-              src="/events/speaker sessions /DSCF6433.JPG"
+              src="/events/speaker sessions/DSCF6433.JPG"
               alt="Speaker session"
               width={500}
               height={500}
@@ -124,7 +124,7 @@ function TimelineDemo() {
               quality={80}
             />
             <Image
-              src="/events/speaker sessions /DSCF6411.JPG"
+              src="/events/speaker sessions/DSCF6411.JPG"
               alt="Speaker session"
               width={500}
               height={500}
@@ -133,7 +133,7 @@ function TimelineDemo() {
               quality={80}
             />
             <Image
-              src="/events/speaker sessions /DSCF6379.JPG"
+              src="/events/speaker sessions/DSCF6379.JPG"
               alt="Speaker session"
               width={500}
               height={500}
@@ -154,7 +154,7 @@ function TimelineDemo() {
           </p>
           <div className="grid grid-cols-2 gap-4">
             <Image
-              src="/events/strategy_session_event_page /DSC02703.JPG"
+              src="/events/strategy_session_event_page/DSC02703.JPG"
               alt="Strategy session"
               width={500}
               height={500}
@@ -163,7 +163,7 @@ function TimelineDemo() {
               quality={80}
             />
             <Image
-              src="/events/strategy_session_event_page /Alpha Circle-90.jpg"
+              src="/events/strategy_session_event_page/Alpha Circle-90.jpg"
               alt="Strategy session"
               width={500}
               height={500}
@@ -172,7 +172,7 @@ function TimelineDemo() {
               quality={80}
             />
             <Image
-              src="/events/strategy_session_event_page /8K6A1402.JPG"
+              src="/events/strategy_session_event_page/8K6A1402.JPG"
               alt="Strategy session"
               width={500}
               height={500}
@@ -181,7 +181,7 @@ function TimelineDemo() {
               quality={80}
             />
             <Image
-              src="/events/strategy_session_event_page /8K6A1385.JPG"
+              src="/events/strategy_session_event_page/8K6A1385.JPG"
               alt="Strategy session"
               width={500}
               height={500}
@@ -266,7 +266,7 @@ export function EventsPage() {
             {/* Hero Image */}
             <div className="relative w-full h-[300px] md:h-[550px]">
               <Image
-                src="/home and about/image.png"
+                src="/home_and_about/image.png"
                 alt="Alpha Circle Event"
                 fill
                 className="object-cover brightness-75"
@@ -373,7 +373,7 @@ export function EventsPage() {
                 }}
               >
                 <Image
-                  src="/home and about/image copy.png"
+                  src="/home_and_about/image copy.png"
                   alt="Alpha Circle Event"
                   width={800}
                   height={600}

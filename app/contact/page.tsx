@@ -16,12 +16,12 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState("");
-  
+
   // Google Maps embed URL - uses API key if available, otherwise uses standard embed
   const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '';
   // Place coordinates: 17.4565963, 78.3762464
   // Place ID: ChIJN1t_tDeuEjsRQ-Ry7D0K8YQ (from the URL)
-  const mapEmbedUrl = googleMapsApiKey 
+  const mapEmbedUrl = googleMapsApiKey
     ? `https://www.google.com/maps/embed/v1/place?key=${googleMapsApiKey}&q=place_id:ChIJN1t_tDeuEjsRQ-Ry7D0K8YQ`
     : `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.1234567890123!2d78.3762464!3d17.4565963!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9379d66ca8e5%3A0xb5df3a81cb333e18!2sThe%20Alpha%20Circle%20Hyderabad!5e0!3m2!1sen!2sin!4v1703123456789!5m2!1sen!2sin`;
   const [staticStars, setStaticStars] = useState<Array<{
@@ -87,7 +87,7 @@ export default function ContactPage() {
 
     useEffect(() => {
       let timeoutId: NodeJS.Timeout;
-      
+
       const spawnStar = () => {
         const { x, y, angle } = getRandomStartPoint();
         const newStar = {
@@ -101,7 +101,7 @@ export default function ContactPage() {
         };
 
         setStars((prev) => [...prev, newStar]);
-        
+
         const nextDelay = Math.random() * (maxDelay - minDelay) + minDelay;
         timeoutId = setTimeout(spawnStar, nextDelay);
       };
@@ -118,7 +118,7 @@ export default function ContactPage() {
             const newX = star.x + star.speed * Math.cos(rad);
             const newY = star.y + star.speed * Math.sin(rad);
             const newDistance = star.distance + star.speed;
-            
+
             return {
               ...star,
               x: newX,
@@ -211,12 +211,12 @@ export default function ContactPage() {
   };
 
   // Card component with glassmorphism and hover effects
-  const Card = ({ 
-    title, 
-    icon: IconComponent, 
-    subtitle, 
-    value, 
-    actionIcon, 
+  const Card = ({
+    title,
+    icon: IconComponent,
+    subtitle,
+    value,
+    actionIcon,
     actionHref,
     actionType,
     isRed = false,
@@ -243,8 +243,8 @@ export default function ContactPage() {
         transition={{ duration: 0.8, delay }}
         whileHover={{ y: -10 }}
         className={`relative group p-10 md:p-12 rounded-3xl h-[450px] flex flex-col justify-between items-center overflow-hidden transition-all duration-500 max-w-sm w-full mx-auto ${
-          isRed 
-            ? "bg-[#BB2324] text-white shadow-[0_20px_50px_rgba(187,35,36,0.3)]" 
+          isRed
+            ? "bg-[#BB2324] text-white shadow-[0_20px_50px_rgba(187,35,36,0.3)]"
             : "bg-white border border-[#BB2324] shadow-xl shadow-slate-200/50"
         }`}
       >
@@ -269,7 +269,7 @@ export default function ContactPage() {
           }`}>
             {subtitle}
           </span>
-          
+
           <h3 className={`text-2xl font-semibold leading-relaxed whitespace-pre-line font-serif ${
             isRed ? "text-white" : "text-gray-900"
           }`}>
@@ -284,8 +284,8 @@ export default function ContactPage() {
           rel={actionType === "link" ? "noopener noreferrer" : undefined}
           whileTap={{ scale: 0.95 }}
           className={`inline-flex items-center justify-center w-12 h-12 rounded-xl transition-all duration-300 z-10 ${
-            isRed 
-              ? "bg-white text-[#BB2324] hover:shadow-[0_0_20px_rgba(255,255,255,0.5)]" 
+            isRed
+              ? "bg-white text-[#BB2324] hover:shadow-[0_0_20px_rgba(255,255,255,0.5)]"
               : "bg-slate-900 text-white hover:bg-[#BB2324]"
           }`}
         >
@@ -334,7 +334,7 @@ export default function ContactPage() {
         subject: "",
         message: "",
       });
-      
+
       // Reset success message after 5 seconds
       setTimeout(() => {
         setIsSubmitted(false);
@@ -342,8 +342,8 @@ export default function ContactPage() {
     } catch (error) {
       console.error("Error submitting form:", error);
       setSubmitError(
-        error instanceof Error 
-          ? error.message 
+        error instanceof Error
+          ? error.message
           : "Something went wrong. Please try again later."
       );
     } finally {
@@ -383,7 +383,7 @@ export default function ContactPage() {
           </motion.div>
 
           {/* Contact Information Cards */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -396,8 +396,8 @@ export default function ContactPage() {
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <Card 
-                  title="Physical" 
+                <Card
+                  title="Physical"
                   subtitle="Meet Us"
                   value={`206 Buziness Square Building,\nJubilee Enclave, Hi-Tech City\nHyderabad - 500081`}
                   icon={MapPin}
@@ -408,15 +408,15 @@ export default function ContactPage() {
                   delay={0.2}
                 />
               </motion.div>
-              
+
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <Card 
-                  title="Telephony" 
+                <Card
+                  title="Telephony"
                   subtitle="Let's Connect"
                   value={`91333 83399\n91333 83381\n91333 73344`}
                   icon={Phone}
@@ -434,8 +434,8 @@ export default function ContactPage() {
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                <Card 
-                  title="Electronic" 
+                <Card
+                  title="Electronic"
                   subtitle="Email Us"
                   value="admin@thealphacircle.world"
                   icon={Mail}
@@ -451,7 +451,7 @@ export default function ContactPage() {
       </section>
 
       {/* Map Section with Scroll Effects */}
-      <motion.section 
+      <motion.section
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, margin: "-100px" }}
@@ -461,9 +461,9 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto">
           <div ref={mapRef} className="mb-12 relative">
             <motion.div
-              style={{ 
+              style={{
                 opacity: mapOpacity,
-                y: mapY, 
+                y: mapY,
                 scale: mapScale
               }}
               className="relative z-10"
@@ -499,7 +499,7 @@ export default function ContactPage() {
           <ContainerScroll
             titleComponent={
               <>
-                <motion.span 
+                <motion.span
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.2 }}
@@ -511,7 +511,7 @@ export default function ContactPage() {
                   Request a <span className="italic text-[#BB2324]">Personalized</span> Demo
               </h2>
                 <p className="text-lg md:text-xl text-neutral-500 max-w-2xl leading-relaxed">
-                  Experience the power of Alpha Circle. Our specialists will reach out to provide a 
+                  Experience the power of Alpha Circle. Our specialists will reach out to provide a
                   tailored walkthrough of our ecosystem.
                 </p>
               </>
@@ -530,7 +530,7 @@ export default function ContactPage() {
                     className="flex flex-col items-center justify-center py-20 text-center"
                   >
                     <div className="relative mb-8">
-                      <motion.div 
+                      <motion.div
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         transition={{ type: "spring", damping: 12, stiffness: 200 }}
@@ -538,7 +538,7 @@ export default function ContactPage() {
                 >
                         <CheckCircle2 className="w-12 h-12 text-green-500" />
                       </motion.div>
-                      <motion.div 
+                      <motion.div
                         animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0, 0.5] }}
                         transition={{ duration: 2, repeat: Infinity }}
                         className="absolute inset-0 bg-green-200 rounded-full -z-10"
@@ -550,7 +550,7 @@ export default function ContactPage() {
                     <p className="text-neutral-500 text-lg max-w-sm">
                       Thank you for your interest. A member of our concierge team will contact you within 24 hours.
                   </p>
-                    <button 
+                    <button
                       onClick={() => setIsSubmitted(false)}
                       className="mt-10 text-neutral-400 hover:text-neutral-900 transition-colors text-sm font-medium underline underline-offset-4"
                     >
@@ -581,17 +581,17 @@ export default function ContactPage() {
                     className="space-y-6"
                   >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <FloatingInput 
-                        label="Full Name" 
+                      <FloatingInput
+                        label="Full Name"
                         name="name"
                         icon={<User size={18} />}
                         value={formData.name}
                         onChange={handleChange}
                         required
                       />
-                      <FloatingInput 
-                        label="Email Address" 
-                        name="email" 
+                      <FloatingInput
+                        label="Email Address"
+                        name="email"
                         type="email"
                         icon={<Mail size={18} />}
                         value={formData.email}
@@ -601,15 +601,15 @@ export default function ContactPage() {
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <FloatingInput 
-                        label="Phone Number" 
+                      <FloatingInput
+                        label="Phone Number"
                         name="phone"
                         icon={<Phone size={18} />}
                         value={formData.phone}
                         onChange={handleChange}
                       />
-                      <FloatingSelect 
-                        label="Inquiry Type" 
+                      <FloatingSelect
+                        label="Inquiry Type"
                         name="subject"
                         icon={<Info size={18} />}
                         value={formData.subject}
@@ -617,8 +617,8 @@ export default function ContactPage() {
                       />
                   </div>
 
-                    <FloatingTextarea 
-                      label="Message" 
+                    <FloatingTextarea
+                      label="Message"
                       name="message"
                       icon={<MessageSquare size={18} />}
                       value={formData.message}
@@ -671,10 +671,10 @@ function FloatingInput({ label, icon, ...props }: any) {
       <div className={`absolute left-5 top-1/2 -translate-y-1/2 transition-colors duration-300 ${isFocused ? 'text-[#BB2324]' : 'text-neutral-400 group-hover:text-neutral-500'}`}>
         {icon}
       </div>
-      <label 
+      <label
         className={`absolute left-12 transition-all duration-300 pointer-events-none
-          ${(isFocused || hasValue) 
-            ? 'top-2 text-[10px] font-bold text-[#BB2324] uppercase tracking-wider' 
+          ${(isFocused || hasValue)
+            ? 'top-2 text-[10px] font-bold text-[#BB2324] uppercase tracking-wider'
             : 'top-1/2 -translate-y-1/2 text-neutral-400 text-base'}`}
       >
         {label}
@@ -684,8 +684,8 @@ function FloatingInput({ label, icon, ...props }: any) {
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         className={`w-full pl-12 pr-5 pt-6 pb-2 bg-neutral-50 border-2 rounded-2xl outline-none transition-all duration-300
-          ${isFocused 
-            ? 'border-[#BB2324] bg-white ring-4 ring-[#BB2324]/5 shadow-sm' 
+          ${isFocused
+            ? 'border-[#BB2324] bg-white ring-4 ring-[#BB2324]/5 shadow-sm'
             : 'border-neutral-100 group-hover:border-neutral-200'}`}
       />
     </div>
@@ -701,10 +701,10 @@ function FloatingSelect({ label, icon, ...props }: any) {
       <div className={`absolute left-5 top-1/2 -translate-y-1/2 transition-colors duration-300 ${isFocused ? 'text-[#BB2324]' : 'text-neutral-400 group-hover:text-neutral-500'}`}>
         {icon}
       </div>
-      <label 
+      <label
         className={`absolute left-12 transition-all duration-300 pointer-events-none
-          ${(isFocused || hasValue) 
-            ? 'top-2 text-[10px] font-bold text-[#BB2324] uppercase tracking-wider' 
+          ${(isFocused || hasValue)
+            ? 'top-2 text-[10px] font-bold text-[#BB2324] uppercase tracking-wider'
             : 'top-1/2 -translate-y-1/2 text-neutral-400 text-base'}`}
       >
         {label}
@@ -714,8 +714,8 @@ function FloatingSelect({ label, icon, ...props }: any) {
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         className={`w-full pl-12 pr-12 pt-6 pb-2 bg-neutral-50 border-2 rounded-2xl outline-none transition-all duration-300 appearance-none cursor-pointer
-          ${isFocused 
-            ? 'border-[#BB2324] bg-white ring-4 ring-[#BB2324]/5 shadow-sm' 
+          ${isFocused
+            ? 'border-[#BB2324] bg-white ring-4 ring-[#BB2324]/5 shadow-sm'
             : 'border-neutral-100 group-hover:border-neutral-200'}`}
       >
         <option value="" hidden></option>
@@ -738,10 +738,10 @@ function FloatingTextarea({ label, icon, ...props }: any) {
       <div className={`absolute left-5 top-7 transition-colors duration-300 ${isFocused ? 'text-[#BB2324]' : 'text-neutral-400 group-hover:text-neutral-500'}`}>
         {icon}
       </div>
-      <label 
+      <label
         className={`absolute left-12 transition-all duration-300 pointer-events-none
-          ${(isFocused || hasValue) 
-            ? 'top-2 text-[10px] font-bold text-[#BB2324] uppercase tracking-wider' 
+          ${(isFocused || hasValue)
+            ? 'top-2 text-[10px] font-bold text-[#BB2324] uppercase tracking-wider'
             : 'top-7 text-neutral-400 text-base'}`}
       >
         {label}
@@ -752,8 +752,8 @@ function FloatingTextarea({ label, icon, ...props }: any) {
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         className={`w-full pl-12 pr-5 pt-7 pb-4 bg-neutral-50 border-2 rounded-2xl outline-none transition-all duration-300 resize-none
-          ${isFocused 
-            ? 'border-[#BB2324] bg-white ring-4 ring-[#BB2324]/5 shadow-sm' 
+          ${isFocused
+            ? 'border-[#BB2324] bg-white ring-4 ring-[#BB2324]/5 shadow-sm'
             : 'border-neutral-100 group-hover:border-neutral-200'}`}
       />
     </div>

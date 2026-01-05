@@ -166,9 +166,9 @@ ${expectations}
   } catch (error) {
     console.error("Error sending email:", error);
     return NextResponse.json(
-      { 
-        success: false, 
-        error: error instanceof Error ? error.message : "Failed to send email" 
+      {
+        success: false,
+        error: error instanceof Error ? error.message : "Failed to send email"
       },
       { status: 500 }
     );

@@ -9,10 +9,10 @@ export async function GET() {
     // Instagram Basic Display API endpoint
     const INSTAGRAM_ACCESS_TOKEN = process.env.INSTAGRAM_ACCESS_TOKEN;
     const INSTAGRAM_USER_ID = process.env.INSTAGRAM_USER_ID || 'the_alphacircle';
-    
+
     if (!INSTAGRAM_ACCESS_TOKEN) {
       // Fallback: Return empty data so component can use embed fallback
-      return NextResponse.json({ 
+      return NextResponse.json({
         data: [],
         error: 'Instagram access token not configured',
         message: 'Using embed fallback'
@@ -29,13 +29,13 @@ export async function GET() {
     }
 
     const data = await response.json();
-    
+
     return NextResponse.json(data);
   } catch (error) {
     console.error('Instagram API Error:', error);
-    
+
     // Fallback: Return empty array or use embed method
-    return NextResponse.json({ 
+    return NextResponse.json({
       data: [],
       error: 'Failed to fetch Instagram feed'
     });

@@ -8,9 +8,9 @@ import { usePopup } from "./popup-context";
 
 /**
  * StickyAlertBar Component
- * 
+ *
  * Displays a persistent alert bar on the home page with upcoming event information.
- * 
+ *
  * Behavior:
  * - Only appears AFTER popup is closed
  * - Only visible on home page (/)

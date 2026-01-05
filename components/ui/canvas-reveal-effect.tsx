@@ -58,7 +58,7 @@ export const CanvasRevealEffect = ({
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
+
       particles.forEach(p => {
         p.x += p.vx;
         p.y += p.vy;
